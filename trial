@@ -1,0 +1,18 @@
+from bs4 import BeautifulSoup
+import requests
+
+# Get the list of keywords
+url = "https://github.com/vpofsales/testfan/blob/main/testkeyword"
+response = requests.get(url).text
+soup = BeautifulSoup(response, 'lxml')
+words = soup.find_all("td")
+keywords = []
+for word in words:
+    keywords.append(word.text)
+
+# Check if .btc name is available
+for keyword in keywords:
+    url = "https://gamma.io/collections/bns/" + keyword + ".btc"
+    response = requests.get(url)
+    if response.status_code == 404:
+        print(keyword + ".btc is available!")
