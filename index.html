@@ -1,124 +1,680 @@
-<!DOCTYPE html>
-<html>
+import React from 'react'
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link id="main-sheet" rel="stylesheet" href="https://app.saul.angry.ventures/themes/default/stylesheet.css">
-</head>
+import Script from 'dangerous-html/react'
 
-<body class="" style="position: relative;">
+import styles from './home.module.css'
 
-    <!--HOME SECTION START  -->
-    <div id="home">
+const Home = (props) => {
+  return (
+    <div className={styles['container']}>
+      <section className={styles['hero']}>
+        <div className={styles['heading']}>
+          <h1 className={styles['header']}>Bel Frens</h1>
+          <p className={styles['caption']}>
+            A unique collection of 25 frens, based off the history of $BEL
+          </p>
+        </div>
+        <div className={styles['buttons']}></div>
+      </section>
+      <section className={styles['collection']}>
+        <div className={styles['content']}>
+          <span className={styles['caption01']}>collection</span>
+          <div className={styles['heading1']}></div>
+        </div>
+        <div className={styles['main']}>
+          <div className={styles['card']}>
+            <div className={styles['image']}>
+              <img
+                alt="image"
+                src="/ac1-500h.png"
+                className={styles['image01']}
+              />
+            </div>
+            <div className={styles['content01']}>
+              <span className={styles['caption02']}>Inscription:</span>
+              <h3 className={styles['title']}>#2458579</h3>
+            </div>
+          </div>
+          <div className={styles['card01']}>
+            <div className={styles['image02']}>
+              <img
+                alt="image"
+                src="/ac5-500h.png"
+                className={styles['image03']}
+              />
+            </div>
+            <div className={styles['content02']}>
+              <span className={styles['caption03']}>Inscription:</span>
+              <h3 className={styles['title01']}>#2736230</h3>
+            </div>
+          </div>
+          <div className={styles['card02']}>
+            <div className={styles['image04']}>
+              <img
+                alt="image"
+                src="/ac3-500h.png"
+                className={styles['image05']}
+              />
+            </div>
+            <div className={styles['content03']}>
+              <span className={styles['caption04']}>Inscription:</span>
+              <h3 className={styles['title02']}>#2736231</h3>
+            </div>
+          </div>
+          <div className={styles['card03']}>
+            <div className={styles['image06']}>
+              <img
+                alt="image"
+                src="/ac2-500h.png"
+                className={styles['image07']}
+              />
+            </div>
+            <div className={styles['content04']}>
+              <span className={styles['caption05']}>Inscription:</span>
+              <h3 className={styles['title03']}>#2736232</h3>
+            </div>
+          </div>
+          <div className={styles['card04']}>
+            <div className={styles['image08']}>
+              <img
+                alt="image"
+                src="/ac7-500h.png"
+                className={styles['image09']}
+              />
+            </div>
+            <div className={styles['content05']}>
+              <span className={styles['caption06']}>Inscription:</span>
+              <h3 className={styles['title04']}>#2742287</h3>
+            </div>
+          </div>
+          <div className={styles['card05']}>
+            <div className={styles['image10']}>
+              <img
+                alt="image"
+                src="/ac6-500h.png"
+                className={styles['image11']}
+              />
+            </div>
+            <div className={styles['content06']}>
+              <span className={styles['caption07']}>Inscription:</span>
+              <h3 className={styles['title05']}>#2742288</h3>
+            </div>
+          </div>
+          <section className={styles['collection1']}>
+            <div className={styles['content07']}>
+              <div className={styles['heading2']}></div>
+            </div>
+          </section>
+          <div>
+            <div className={styles['container02']}>
+              <Script
+                html={`<script>
+ /*
+  Accordion - Code Embed
+  */
+  const accordionContainers = document.querySelectorAll('[data-role="accordion-container"]'); // All accordion containers
+  const accordionContents = document.querySelectorAll('[data-role="accordion-content"]'); // All accordion content
+  const accordionIconsClosed = document.querySelectorAll('[data-role="accordion-icon-closed"]'); // All accordion closed icons
+  const accordionIconsOpen = document.querySelectorAll('[data-role="accordion-icon-open"]'); // All accordion open icons
 
+  accordionContents.forEach((accordionContent) => {
+      accordionContent.style.display = "none"; //Hides all accordion contents
+  });
 
+  accordionIconsClosed.forEach((icon) => {
+    icon.style.display = "flex"
+  })
+
+  accordionIconsOpen.forEach((icon) => {
+    icon.style.display = "none"
+  })
+
+  accordionContainers.forEach((accordionContainer, index) => {
+      accordionContainer.addEventListener("click", () => {
+          if (accordionContents[index].style.display === "flex") {
+              // If the accordion is already open, close it
+              accordionContents[index].style.display = "none";
+              accordionIconsClosed[index].style.display = "flex";
+              accordionIconsOpen[index].style.display = "none"
+          } else {
+              // If the accordion is closed, open it
+              accordionContents.forEach((accordionContent) => {
+                  accordionContent.style.display = "none"; //Hides all accordion contents
+              });
+
+              accordionIconsClosed.forEach((accordionIcon) => {
+                  accordionIcon.style.display = "flex"; // Resets all icon transforms to 0deg (default)
+              });
+
+              accordionIconsOpen.forEach((accordionIcon) => {
+                accordionIcon.style.display = "none";
+              })
+              
+              accordionContents[index].style.display = "flex"; // Shows accordion content
+              accordionIconsClosed[index].style.display = "none"; // Rotates accordion icon 180deg
+              accordionIconsOpen[index].style.display = "flex";
+          }
+      });
+  });
+</script>
+`}
+              ></Script>
+            </div>
+          </div>
+          <div className={styles['card06']}>
+            <div className={styles['image12']}>
+              <img
+                alt="image"
+                src="/ac4-500h.png"
+                className={styles['image13']}
+              />
+            </div>
+            <div className={styles['content08']}>
+              <span className={styles['caption08']}>Inscription:</span>
+              <h3 className={styles['title06']}>#2736233</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className={styles['collection2']}>
+        <div className={styles['content09']}>
+          <div className={styles['heading3']}></div>
+        </div>
+        <div className={styles['main1']}>
+          <div className={styles['card07']}>
+            <div className={styles['image14']}>
+              <img
+                alt="image"
+                src="/ac8-400h.png"
+                className={styles['image15']}
+              />
+            </div>
+            <div className={styles['content10']}>
+              <span className={styles['caption09']}>Inscription:</span>
+              <h3 className={styles['title07']}>#2743324</h3>
+            </div>
+          </div>
+          <div className={styles['card08']}>
+            <div className={styles['image16']}>
+              <img
+                alt="image"
+                src="/ac9-400h.png"
+                className={styles['image17']}
+              />
+            </div>
+            <div className={styles['content11']}>
+              <span className={styles['caption10']}>Inscription:</span>
+              <h3 className={styles['title08']}>#2743325</h3>
+            </div>
+          </div>
+          <div className={styles['card09']}>
+            <div className={styles['image18']}>
+              <img
+                alt="image"
+                src="/ac10-400h.png"
+                className={styles['image19']}
+              />
+            </div>
+            <div className={styles['content12']}>
+              <span className={styles['caption11']}>Inscription:</span>
+              <h3 className={styles['title09']}>#2744839</h3>
+            </div>
+          </div>
+          <div className={styles['card10']}>
+            <div className={styles['image20']}>
+              <img
+                alt="image"
+                src="/ac11-400h.png"
+                className={styles['image21']}
+              />
+            </div>
+            <div className={styles['content13']}>
+              <span className={styles['caption12']}>Inscription:</span>
+              <h3 className={styles['title10']}>#2746328</h3>
+            </div>
+          </div>
+          <div className={styles['card11']}>
+            <div className={styles['image22']}>
+              <img
+                alt="image"
+                src="/ac12-400h.png"
+                className={styles['image23']}
+              />
+            </div>
+            <div className={styles['content14']}>
+              <span className={styles['caption13']}>Inscription:</span>
+              <h3 className={styles['title11']}>#2746329</h3>
+            </div>
+          </div>
+          <div className={styles['card12']}>
+            <div className={styles['image24']}>
+              <img
+                alt="image"
+                src="/ac14-400h.png"
+                className={styles['image25']}
+              />
+            </div>
+            <div className={styles['content15']}>
+              <span className={styles['caption14']}>Inscription:</span>
+              <h3 className={styles['title12']}>#2750079</h3>
+            </div>
+          </div>
+          <div className={styles['card13']}>
+            <div className={styles['image26']}>
+              <img
+                alt="image"
+                src="/ac15-400h.png"
+                className={styles['image27']}
+              />
+            </div>
+            <div className={styles['content16']}>
+              <span className={styles['caption15']}>Inscription:</span>
+              <h3 className={styles['title13']}>#2750080</h3>
+            </div>
+          </div>
+          <section className={styles['collection3']}>
+            <div className={styles['content17']}>
+              <span className={styles['caption16']}>collection</span>
+              <div className={styles['heading4']}></div>
+            </div>
+          </section>
+          <div>
+            <div className={styles['container04']}>
+              <Script
+                html={`<script>
+ /*
+  Accordion - Code Embed
+  */
+  const accordionContainers = document.querySelectorAll('[data-role="accordion-container"]'); // All accordion containers
+  const accordionContents = document.querySelectorAll('[data-role="accordion-content"]'); // All accordion content
+  const accordionIconsClosed = document.querySelectorAll('[data-role="accordion-icon-closed"]'); // All accordion closed icons
+  const accordionIconsOpen = document.querySelectorAll('[data-role="accordion-icon-open"]'); // All accordion open icons
+
+  accordionContents.forEach((accordionContent) => {
+      accordionContent.style.display = "none"; //Hides all accordion contents
+  });
+
+  accordionIconsClosed.forEach((icon) => {
+    icon.style.display = "flex"
+  })
+
+  accordionIconsOpen.forEach((icon) => {
+    icon.style.display = "none"
+  })
+
+  accordionContainers.forEach((accordionContainer, index) => {
+      accordionContainer.addEventListener("click", () => {
+          if (accordionContents[index].style.display === "flex") {
+              // If the accordion is already open, close it
+              accordionContents[index].style.display = "none";
+              accordionIconsClosed[index].style.display = "flex";
+              accordionIconsOpen[index].style.display = "none"
+          } else {
+              // If the accordion is closed, open it
+              accordionContents.forEach((accordionContent) => {
+                  accordionContent.style.display = "none"; //Hides all accordion contents
+              });
+
+              accordionIconsClosed.forEach((accordionIcon) => {
+                  accordionIcon.style.display = "flex"; // Resets all icon transforms to 0deg (default)
+              });
+
+              accordionIconsOpen.forEach((accordionIcon) => {
+                accordionIcon.style.display = "none";
+              })
+              
+              accordionContents[index].style.display = "flex"; // Shows accordion content
+              accordionIconsClosed[index].style.display = "none"; // Rotates accordion icon 180deg
+              accordionIconsOpen[index].style.display = "flex";
+          }
+      });
+  });
+</script>
+`}
+              ></Script>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className={styles['collection4']}>
+        <div className={styles['content18']}>
+          <div className={styles['heading5']}></div>
+        </div>
+        <div className={styles['main2']}>
+          <div className={styles['card14']}>
+            <div className={styles['image28']}>
+              <img
+                alt="image"
+                src="/ac16-400h.png"
+                className={styles['image29']}
+              />
+            </div>
+            <div className={styles['content19']}>
+              <span className={styles['caption17']}>Inscription:</span>
+              <h3 className={styles['title14']}>#2750081</h3>
+            </div>
+          </div>
+          <div className={styles['card15']}>
+            <div className={styles['image30']}>
+              <img
+                alt="image"
+                src="/ac13-400h.png"
+                className={styles['image31']}
+              />
+            </div>
+            <div className={styles['content20']}>
+              <span className={styles['caption18']}>Inscription:</span>
+              <h3 className={styles['title15']}>#2750082</h3>
+            </div>
+          </div>
+          <div className={styles['card16']}>
+            <div className={styles['image32']}>
+              <img
+                alt="image"
+                src="/ac17-400h.png"
+                className={styles['image33']}
+              />
+            </div>
+            <div className={styles['content21']}>
+              <span className={styles['caption19']}>Inscription:</span>
+              <h3 className={styles['title16']}>#2752332</h3>
+            </div>
+          </div>
+          <div className={styles['card17']}>
+            <div className={styles['image34']}>
+              <img
+                alt="image"
+                src="/ac18-400h.png"
+                className={styles['image35']}
+              />
+            </div>
+            <div className={styles['content22']}>
+              <span className={styles['caption20']}>Inscription:</span>
+              <h3 className={styles['title17']}>#2752333</h3>
+            </div>
+          </div>
+          <div className={styles['card18']}>
+            <div className={styles['image36']}>
+              <img
+                alt="image"
+                src="/ac19-400h.png"
+                className={styles['image37']}
+              />
+            </div>
+            <div className={styles['content23']}>
+              <span className={styles['caption21']}>Inscription:</span>
+              <h3 className={styles['title18']}>#2753552</h3>
+            </div>
+          </div>
+          <div className={styles['card19']}>
+            <div className={styles['image38']}>
+              <img
+                alt="image"
+                src="/ac20-400h.png"
+                className={styles['image39']}
+              />
+            </div>
+            <div className={styles['content24']}>
+              <span className={styles['caption22']}>Inscription:</span>
+              <h3 className={styles['title19']}>#2753553</h3>
+            </div>
+          </div>
+          <div className={styles['card20']}>
+            <div className={styles['image40']}>
+              <img
+                alt="image"
+                src="/ac21-400h.png"
+                className={styles['image41']}
+              />
+            </div>
+            <div className={styles['content25']}>
+              <span className={styles['caption23']}>Inscription:</span>
+              <h3 className={styles['title20']}>#2753554</h3>
+            </div>
+          </div>
+          <section className={styles['collection5']}>
+            <div className={styles['content26']}>
+              <span className={styles['caption24']}>collection</span>
+              <div className={styles['heading6']}></div>
+            </div>
+          </section>
+          <div>
+            <div className={styles['container06']}>
+              <Script
+                html={`<script>
+ /*
+  Accordion - Code Embed
+  */
+  const accordionContainers = document.querySelectorAll('[data-role="accordion-container"]'); // All accordion containers
+  const accordionContents = document.querySelectorAll('[data-role="accordion-content"]'); // All accordion content
+  const accordionIconsClosed = document.querySelectorAll('[data-role="accordion-icon-closed"]'); // All accordion closed icons
+  const accordionIconsOpen = document.querySelectorAll('[data-role="accordion-icon-open"]'); // All accordion open icons
+
+  accordionContents.forEach((accordionContent) => {
+      accordionContent.style.display = "none"; //Hides all accordion contents
+  });
+
+  accordionIconsClosed.forEach((icon) => {
+    icon.style.display = "flex"
+  })
+
+  accordionIconsOpen.forEach((icon) => {
+    icon.style.display = "none"
+  })
+
+  accordionContainers.forEach((accordionContainer, index) => {
+      accordionContainer.addEventListener("click", () => {
+          if (accordionContents[index].style.display === "flex") {
+              // If the accordion is already open, close it
+              accordionContents[index].style.display = "none";
+              accordionIconsClosed[index].style.display = "flex";
+              accordionIconsOpen[index].style.display = "none"
+          } else {
+              // If the accordion is closed, open it
+              accordionContents.forEach((accordionContent) => {
+                  accordionContent.style.display = "none"; //Hides all accordion contents
+              });
+
+              accordionIconsClosed.forEach((accordionIcon) => {
+                  accordionIcon.style.display = "flex"; // Resets all icon transforms to 0deg (default)
+              });
+
+              accordionIconsOpen.forEach((accordionIcon) => {
+                accordionIcon.style.display = "none";
+              })
+              
+              accordionContents[index].style.display = "flex"; // Shows accordion content
+              accordionIconsClosed[index].style.display = "none"; // Rotates accordion icon 180deg
+              accordionIconsOpen[index].style.display = "flex";
+          }
+      });
+  });
+</script>
+`}
+              ></Script>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className={styles['collection6']}>
+        <div className={styles['content27']}>
+          <div className={styles['heading7']}></div>
+        </div>
+        <div className={styles['main3']}>
+          <div className={styles['card21']}>
+            <div className={styles['image42']}>
+              <img
+                alt="image"
+                src="/ac24-400h.png"
+                className={styles['image43']}
+              />
+            </div>
+            <div className={styles['content28']}>
+              <span className={styles['caption25']}>Inscription:</span>
+              <h3 className={styles['title21']}>#2757022</h3>
+            </div>
+          </div>
+          <div className={styles['card22']}>
+            <div className={styles['image44']}>
+              <img
+                alt="image"
+                src="/ac22-400h.png"
+                className={styles['image45']}
+              />
+            </div>
+            <div className={styles['content29']}>
+              <span className={styles['caption26']}>Inscription:</span>
+              <h3 className={styles['title22']}>#2756741</h3>
+            </div>
+          </div>
+          <div className={styles['card23']}>
+            <div className={styles['image46']}>
+              <img
+                alt="image"
+                src="/ac25-400h.png"
+                className={styles['image47']}
+              />
+            </div>
+            <div className={styles['content30']}>
+              <span className={styles['caption27']}>Inscription:</span>
+              <h3 className={styles['title23']}>#2756742</h3>
+            </div>
+          </div>
+          <div className={styles['card24']}>
+            <div className={styles['image48']}>
+              <img
+                alt="image"
+                src="/ac23-400h.png"
+                className={styles['image49']}
+              />
+            </div>
+            <div className={styles['content31']}>
+              <span className={styles['caption28']}>Inscription:</span>
+              <h3 className={styles['title24']}>#2756743</h3>
+            </div>
+          </div>
+          <section className={styles['collection7']}>
+            <div className={styles['content32']}>
+              <span className={styles['caption29']}>collection</span>
+              <div className={styles['heading8']}></div>
+            </div>
+          </section>
+          <div>
+            <div className={styles['container08']}>
+              <Script
+                html={`<script>
+ /*
+  Accordion - Code Embed
+  */
+  const accordionContainers = document.querySelectorAll('[data-role="accordion-container"]'); // All accordion containers
+  const accordionContents = document.querySelectorAll('[data-role="accordion-content"]'); // All accordion content
+  const accordionIconsClosed = document.querySelectorAll('[data-role="accordion-icon-closed"]'); // All accordion closed icons
+  const accordionIconsOpen = document.querySelectorAll('[data-role="accordion-icon-open"]'); // All accordion open icons
+
+  accordionContents.forEach((accordionContent) => {
+      accordionContent.style.display = "none"; //Hides all accordion contents
+  });
+
+  accordionIconsClosed.forEach((icon) => {
+    icon.style.display = "flex"
+  })
+
+  accordionIconsOpen.forEach((icon) => {
+    icon.style.display = "none"
+  })
+
+  accordionContainers.forEach((accordionContainer, index) => {
+      accordionContainer.addEventListener("click", () => {
+          if (accordionContents[index].style.display === "flex") {
+              // If the accordion is already open, close it
+              accordionContents[index].style.display = "none";
+              accordionIconsClosed[index].style.display = "flex";
+              accordionIconsOpen[index].style.display = "none"
+          } else {
+              // If the accordion is closed, open it
+              accordionContents.forEach((accordionContent) => {
+                  accordionContent.style.display = "none"; //Hides all accordion contents
+              });
+
+              accordionIconsClosed.forEach((accordionIcon) => {
+                  accordionIcon.style.display = "flex"; // Resets all icon transforms to 0deg (default)
+              });
+
+              accordionIconsOpen.forEach((accordionIcon) => {
+                accordionIcon.style.display = "none";
+              })
+              
+              accordionContents[index].style.display = "flex"; // Shows accordion content
+              accordionIconsClosed[index].style.display = "none"; // Rotates accordion icon 180deg
+              accordionIconsOpen[index].style.display = "flex";
+          }
+      });
+  });
+</script>
+`}
+              ></Script>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div>
+        <div className={styles['container10']}>
+          <Script
+            html={`<script>
+ /*
+  Accordion - Code Embed
+  */
+  const accordionContainers = document.querySelectorAll('[data-role="accordion-container"]'); // All accordion containers
+  const accordionContents = document.querySelectorAll('[data-role="accordion-content"]'); // All accordion content
+  const accordionIconsClosed = document.querySelectorAll('[data-role="accordion-icon-closed"]'); // All accordion closed icons
+  const accordionIconsOpen = document.querySelectorAll('[data-role="accordion-icon-open"]'); // All accordion open icons
+
+  accordionContents.forEach((accordionContent) => {
+      accordionContent.style.display = "none"; //Hides all accordion contents
+  });
+
+  accordionIconsClosed.forEach((icon) => {
+    icon.style.display = "flex"
+  })
+
+  accordionIconsOpen.forEach((icon) => {
+    icon.style.display = "none"
+  })
+
+  accordionContainers.forEach((accordionContainer, index) => {
+      accordionContainer.addEventListener("click", () => {
+          if (accordionContents[index].style.display === "flex") {
+              // If the accordion is already open, close it
+              accordionContents[index].style.display = "none";
+              accordionIconsClosed[index].style.display = "flex";
+              accordionIconsOpen[index].style.display = "none"
+          } else {
+              // If the accordion is closed, open it
+              accordionContents.forEach((accordionContent) => {
+                  accordionContent.style.display = "none"; //Hides all accordion contents
+              });
+
+              accordionIconsClosed.forEach((accordionIcon) => {
+                  accordionIcon.style.display = "flex"; // Resets all icon transforms to 0deg (default)
+              });
+
+              accordionIconsOpen.forEach((accordionIcon) => {
+                accordionIcon.style.display = "none";
+              })
+              
+              accordionContents[index].style.display = "flex"; // Shows accordion content
+              accordionIconsClosed[index].style.display = "none"; // Rotates accordion icon 180deg
+              accordionIconsOpen[index].style.display = "flex";
+          }
+      });
+  });
+</script>
+`}
+          ></Script>
+        </div>
+      </div>
     </div>
-    <!--HOME SECTION END  -->
-    <!-- HOME-BELOW SECTION START-->
-    <div class="jumbotron ui-draggable-handle" style="position: relative; height: 491px; overflow: hidden; left: 3px; top: 1px;" id="">
-        <div class="container" style="position: relative; left: -0.5px; top: 0px;">
-            <h1 class="" style="position: relative; left: -10px; top: 5px;">Welcome to Fandom Finder</h1>
-            <p class="" style="position: relative; left: -5px; top: 11px;">We'll bring the top Fandom ENS Domains to the forefront. We'll do the digging so you don't have to.</p>
-            <p class="" style="position: relative;">
-            </p>
-        </div>
-        <img src="https://app.saul.angry.ventures/assets/images/uploads/KJ1OZjOe08UCNGM.jpeg" class="img-responsive" style="position: relative;">
-    </div>
-    <section id="home-below" class="ui-draggable-handle" style="position: relative; left: 2px; top: -32px; height: 716px; overflow: hidden; width: 1045px;">
-        <table class="table" style="position: relative;">
-            <thead class="" style="position: relative;">
+  )
+}
 
-            </thead>
-            <tbody>
-                <tr class="" style="position: relative;">
-                    <td class="" style="position: relative;">Star Wars</td>
-                    <td class="" style="position: relative; left: 0px; top: 1px;">One-Man Punch
-                        <br>
-                    </td>
-                    <td class="" style="position: relative;">Dragon Ball</td>
-                    <td class="" style="position: relative;">Pokémon</td>
-                </tr>
-                <tr>
-                    <td class="" style="position: relative;">Marvel/DC</td>
-                    <td class="" style="position: relative;">Harry Potter</td>
-                    <td class="" style="position: relative;">Pop Culture Movies</td>
-                    <td class="" style="position: relative;">My Hero Academia</td>
-                </tr>
-                <tr>
-                    <td class="" style="position: relative;">Popular Games/Characters</td>
-                    <td class="" style="position: relative;">LOTR</td>
-                    <td class="" style="position: relative;">GoT</td>
-                    <td class="" style="position: relative;">And Much More!</td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="container">
-
-            <div class="row text-center" style="position: relative; height: 525px; overflow: hidden;" id="">
-
-                <div class="col-lg-4 col-md-4  col-sm-4 col-xs-12">
-                    <h2 class="" style="position: relative; left: 7px; top: 152px;">Fandoms, Aseemble!<img src="https://app.saul.angry.ventures/assets/images/uploads/Io2KEYpq8g6NKR9.png" class="img-responsive" style="position: relative; left: -6px; top: -1px;" id=""></h2>
-
-
-                </div>
-                <div class="col-lg-4 col-md-4  col-sm-4 col-xs-12" style="left: -3px; top: 118px;">
-                    <h2 class="" style="position: relative; left: 4px; top: 33px;">Gotta Find 'em All<img src="https://app.saul.angry.ventures/assets/images/uploads/YwEqC9RvjhKwgEw.png" class="img-responsive" style="position: relative;" id=""></h2>
-
-
-                </div>
-                <div class="col-lg-4 col-md-4  col-sm-4 col-xs-12" id="">
-                    <h2 class="" style="position: relative; left: 2px; top: 149px;">I Am Your Finder<img src="https://app.saul.angry.ventures/assets/images/uploads/7HDuaiMC7oIYjYD.png" class="img-responsive"></h2>
-
-
-                </div>
-
-            </div>
-        </div>
-
-    </section>
-    <!-- HOME-BELOW SECTION END-->
-    <!--FEATURES SECTION START  -->
-
-    <!--FEATURES SECTION END  -->
-    <!-- CLIENTS SECTION START-->
-
-    <!-- CLIENTS SECTION END-->
-    <!-- DOWNLOAD SECTION START-->
-
-    <!-- DOWNLOAD SECTION END-->
-    <!-- BOTTOM SECTION START-->
-    <section id="bottom" class="" style="position: relative; left: 0px; top: 1px;">
-        <div class="container">
-
-            <div class="row text-center">
-
-                <div class="col-md-12">
-                    <h3 class="" style="position: relative; left: -1px; top: 1px;">Full Site Coming Soon!</h3>
-                </div>
-            </div>
-            <div class="row text-center">
-
-                <div class="col-md-12 ">
-                    <div class="social" style="position: relative;">
-                        <a href="#"><i class="fa fa-facebook "></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#" class="" style="position: relative;"><i class="fa fa-google-plus "></i></a>
-
-                        <a href="#"><i class="fa fa-linkedin "></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- BOTTOM SECTION END-->
-    <!-- FOOTER SECTION START-->
-    <footer class="" style="position: relative;">
-
-    </footer>
-    <!-- FOOTER SECTION END-->
-</body>
-
-</html>
+export default Home
