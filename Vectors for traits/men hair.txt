@@ -1,0 +1,47 @@
+HAIR
+
+
+LONG:
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#644727">
+  <path d="M192 248 l0 -8 -9.5 0 -9.5 0 0 -8 0 -8 9.5 0 9.5 0 0 -24 0 -24 8 0 8 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 56 0 56 0 0 8 0 8 8 0 8 0 0 8 0 8 9.5 0 9.5 0 0 24 0 24 -9.5 0 -9.5 0 0 -8 0 -8 -8 0 -8 0 0 -8 0 -8 -8 0 -8 0 0 -8 0 -8 -16 0 -16 0 0 8 0 8 -8 0 -8 0 0 8 0 8 -8 0 -8 0 0 8 0 8 -8 0 -8 0 0 8 0 8 -8 0 -8 0 0 -16 0 -16 -8 0 -8 0 0 24 0 24 -8 0 -8 0 0 -8z"/>
+ </g>
+ <g fill="#000000">
+  <path d="M160 232 l0 -8 8 0 8 0 0 8 0 8 -8 0 -8 0 0 -8z"/>
+  <path d="M368 200 l0 -24 8 0 8 0 0 24 0 24 -8 0 -8 0 0 -24z"/>
+ </g>
+</svg>
+
+
+------------
+
+
+MEDIUM:
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#775014">
+  <path d="M192 216 l0 -40 8 0 8 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 56 0 56 0 0 8 0 8 8 0 8 0 0 8 0 8 -48 0 -48 0 0 8 0 8 -8 0 -8 0 0 16 0 16 -8 0 -8 0 0 -8 0 -8 -8 0 -8 0 0 24 0 24 -8 0 -8 0 0 -40z"/>
+ </g>
+</svg>
+
+
+
+
+---------
+
+
+SHORT:
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#644727">
+  <path d="M192 192 l0 -16 8 0 8 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 56 0 56 0 0 8 0 8 8 0 8 0 0 8 0 8 -48 0 -48 0 0 8 0 8 -8 0 -8 0 0 8 0 8 -24 0 -24 0 0 -16z"/>
+ </g>
+</svg>

@@ -1,0 +1,100 @@
+MENS SHOES
+
+SLIDES:
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#282727">
+  <path d="M112 488 l0 -8 16 0 16 0 0 -8 0 -8 8 0 8 0 0 8 0 8 32 0 32 0 0 8 0 8 -56 0 -56 0 0 -8z"/>
+  <path d="M304 488 l0 -8 32 0 32 0 0 -8 0 -8 8 0 8 0 0 8 0 8 16 0 16 0 0 8 0 8 -56 0 -56 0 0 -8z"/>
+ </g>
+</svg>
+
+-----------
+
+House shoes:
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#644727">
+  <path d="M112 488 l0 -8 16 0 16 0 0 -8 0 -8 16 0 16 0 0 8 0 8 24 0 24 0 0 8 0 8 -56 0 -56 0 0 -8z"/>
+  <path d="M304 488 l0 -8 24 0 24 0 0 -8 0 -8 16 0 16 0 0 8 0 8 16 0 16 0 0 8 0 8 -56 0 -56 0 0 -8z"/>
+ </g>
+</svg>
+
+
+----------
+
+Converse:
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#282727">
+  <path d="M141 488 c0 -6.4 0.3 -8 1.5 -8 0.8 0 1.5 -0.7 1.5 -1.5 0 -1.2 1.4 -1.5 6.5 -1.5 l6.5 0 0 -6.5 0 -6.5 33.5 0 33.5 0 0 9.5 0 9.5 -6.5 0 -6.5 0 0 6.5 0 6.5 -35 0 -35 0 0 -8z"/>
+  <path d="M317 489.5 l0 -6.5 -6.5 0 -6.5 0 0 -9.5 0 -9.5 33.5 0 33.5 0 0 6.5 0 6.5 6.5 0 c5.1 0 6.5 0.3 6.5 1.5 0 0.8 0.7 1.5 1.5 1.5 1.2 0 1.5 1.6 1.5 8 l0 8 -35 0 -35 0 0 -6.5z"/>
+ </g>
+ <g fill="#ffffff">
+  <path d="M112 488 l0 -8 16 0 16 0 0 -8 0 -8 8 0 8 0 0 8 0 8 -8 0 -8 0 0 8 0 8 -16 0 -16 0 0 -8z"/>
+  <path d="M208 488 l0 -8 8 0 8 0 0 8 0 8 -8 0 -8 0 0 -8z"/>
+  <path d="M304 488 l0 -8 8 0 8 0 0 8 0 8 -8 0 -8 0 0 -8z"/>
+  <path d="M384 488 l0 -8 -8 0 -8 0 0 -8 0 -8 8 0 8 0 0 8 0 8 16 0 16 0 0 8 0 8 -16 0 -16 0 0 -8z"/>
+ </g>
+</svg>
+
+
+-------------
+
+Tennis shoes plain:
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#282727">
+  <path d="M112 488 l0 -8 16 0 16 0 0 -8 0 -8 40 0 40 0 0 16 0 16 -56 0 -56 0 0 -8z"/>
+  <path d="M304 480 l0 -16 40 0 40 0 0 8 0 8 16 0 16 0 0 8 0 8 -56 0 -56 0 0 -16z"/>
+ </g>
+</svg>
+
+
+--------------
+
+Tennis shoes multi (black top)
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#000000">
+  <path d="M141 481.5 c0 -0.8 0.7 -1.5 1.5 -1.5 1.2 0 1.5 -1.6 1.5 -8 l0 -8 40 0 40 0 0 9.5 0 9.5 -41.5 0 c-36.2 0 -41.5 -0.2 -41.5 -1.5z"/>
+  <path d="M304 473.5 l0 -9.5 40 0 40 0 0 8 c0 6.4 0.3 8 1.5 8 0.8 0 1.5 0.7 1.5 1.5 0 1.3 -5.3 1.5 -41.5 1.5 l-41.5 0 0 -9.5z"/>
+ </g>
+ <g fill="#ffffff">
+  <path d="M112 488 l0 -8 56 0 56 0 0 8 0 8 -56 0 -56 0 0 -8z"/>
+  <path d="M304 488 l0 -8 56 0 56 0 0 8 0 8 -56 0 -56 0 0 -8z"/>
+ </g>
+</svg>
+
+
+--------------------------------------
+
+Tennis shoes multi 2 9black and white
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#000000">
+  <path d="M141 481.5 c0 -0.8 0.7 -1.5 1.5 -1.5 1.2 0 1.5 -1.6 1.5 -8 l0 -8 40 0 40 0 0 9.5 0 9.5 -41.5 0 c-36.2 0 -41.5 -0.2 -41.5 -1.5z"/>
+  <path d="M304 473.5 l0 -9.5 40 0 40 0 0 8 c0 6.4 0.3 8 1.5 8 0.8 0 1.5 0.7 1.5 1.5 0 1.3 -5.3 1.5 -41.5 1.5 l-41.5 0 0 -9.5z"/>
+ </g>
+ <g fill="#ffffff">
+  <path d="M112 488 l0 -8 56 0 56 0 0 8 0 8 -56 0 -56 0 0 -8z"/>
+  <path d="M304 488 l0 -8 56 0 56 0 0 8 0 8 -56 0 -56 0 0 -8z"/>
+ </g>
+</svg>
+
+

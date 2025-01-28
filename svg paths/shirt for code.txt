@@ -1,0 +1,976 @@
+Shirt Type (D4):
+Base:
+
+Professional: D4 = 0
+Dress Shirt: D4 = 1
+Jacket: D4 = 2
+Jersey: D4 = 3
+Long Sleeve: D4 = 4
+Plaid: D4 = 5
+Open Shirt: D4 = 6
+Short Sleeve: D4 = 7
+Suit Top: D4 = 8
+Vacation Shirt: D4 = 9
+
+
+
+
+
+
+Female/Female Heel:
+
+Dress: D4 = 0, 2, 8
+Dress Shirt: D4 = 1, 6, 9
+Track Suit: D4 = 3, 5
+T-Shirt: D4 = 4, 7
+
+
+
+
+Arm out:
+Only has one shirt type (long sleeve)
+
+
+-------------------------------------------------------------------
+
+
+
+Shirt Colors (D5):
+
+
+
+
+Base only SHIRT SVGs:
+
+D4 = 0
+PROFESSIONAL:
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#000000"> #### COLOR 1
+  <path d="M253 385.5 l0 -30.5 -8 0 -8 0 0 -8 0 -8 -8 0 -8 0 0 -19 c0 -16.2 0.2 -19 1.5 -19 0.8 0 1.5 0.7 1.5 1.5 0 1.2 1.6 1.5 8 1.5 l8 0 0 8 c0 6.4 0.3 8 1.5 8 1.2 0 1.5 1.4 1.5 6.5 l0 6.5 8 0 8 0 0 8 0 8 5 0 5 0 0 -8 0 -8 8 0 8 0 0 -6.5 0 -6.5 11 0 11 0 0 9.5 0 9.5 -8 0 -8 0 0 8 0 8 -8 0 -8 0 0 30.5 0 30.5 -11 0 -11 0 0 -30.5z"/>
+  <path d="M160 344 l0 -8 -16 0 -16 0 0 -8 0 -8 8 0 c6.4 0 8 -0.3 8 -1.5 0 -1.2 1.7 -1.5 9.5 -1.5 l9.5 0 0 8 0 8 8 0 c6.4 0 8 0.3 8 1.5 0 0.8 -0.7 1.5 -1.5 1.5 -1.2 0 -1.5 1.6 -1.5 8 l0 8 -8 0 -8 0 0 -8z"/>
+  <path d="M352 344 c0 -6.4 -0.3 -8 -1.5 -8 -0.8 0 -1.5 -0.7 -1.5 -1.5 0 -1.2 1.6 -1.5 8 -1.5 l8 0 0 -8 0 -8 9.5 0 c7.8 0 9.5 0.3 9.5 1.5 0 1.2 1.6 1.5 8 1.5 l8 0 0 8 0 8 -16 0 -16 0 0 8 0 8 -8 0 -8 0 0 -8z"/>
+ </g>
+ <g fill="#343131"> #### COLOR 2
+  <path d="M208 368 l0 -48 -8 0 -8 0 0 8 0 8 -16 0 -16 0 0 -8 0 -8 -8 0 -8 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 32 0 32 0 0 24 0 24 8 0 c6.4 0 8 -0.3 8 -1.5 0 -0.8 0.7 -1.5 1.5 -1.5 0.8 0 1.5 0.7 1.5 1.5 0 0.8 -0.7 1.5 -1.5 1.5 -1.2 0 -1.5 1.6 -1.5 8 l0 8 8 0 c6.4 0 8 -0.3 8 -1.5 0 -0.8 0.7 -1.5 1.5 -1.5 0.8 0 1.5 0.7 1.5 1.5 0 0.8 -0.7 1.5 -1.5 1.5 -1.3 0 -1.5 4.2 -1.5 32 l0 32 -24 0 -24 0 0 -48z"/>
+  <path d="M272 384 c0 -27.8 -0.2 -32 -1.5 -32 -0.8 0 -1.5 -0.7 -1.5 -1.5 0 -0.8 0.7 -1.5 1.5 -1.5 0.8 0 1.5 0.7 1.5 1.5 0 1.2 1.6 1.5 8 1.5 l8 0 0 -8 c0 -6.4 -0.3 -8 -1.5 -8 -0.8 0 -1.5 -0.7 -1.5 -1.5 0 -0.8 0.7 -1.5 1.5 -1.5 0.8 0 1.5 0.7 1.5 1.5 0 1.2 1.6 1.5 8 1.5 l8 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 16 0 16 0 0 8 0 8 8 0 8 0 0 8 0 8 -8 0 -8 0 0 8 0 8 -16 0 -16 0 0 -8 0 -8 -8 0 -8 0 0 48 0 48 -24 0 -24 0 0 -32z"/>
+ </g>
+ <g fill="#ffffff">
+  <path d="M256 344 l0 -8 -8 0 -8 0 0 -8 0 -8 24 0 24 0 0 8 0 8 -8 0 -8 0 0 8 0 8 -8 0 -8 0 0 -8z"/>
+ </g>
+</svg>
+
+
+The above is for the "Professional" Style shirt, colored for black
+
+To Add buttons for those with buttons, add these paths to "<g fill="#ffffff">"
+
+ <path d="M262 411 c0 -1.3 0.7 -2 2 -2 1.3 0 2 0.7 2 2 0 1.3 -0.7 2 -2 2 -1.3 0 -2 -0.7 -2 -2z"/>
+  <path d="M262 399 c0 -1.3 0.7 -2 2 -2 1.3 0 2 0.7 2 2 0 1.3 -0.7 2 -2 2 -1.3 0 -2 -0.7 -2 -2z"/>
+  <path d="M262 387 c0 -1.3 0.7 -2 2 -2 1.3 0 2 0.7 2 2 0 1.3 -0.7 2 -2 2 -1.3 0 -2 -0.7 -2 -2z"/>
+  <path d="M262 375 c0 -1.3 0.7 -2 2 -2 1.3 0 2 0.7 2 2 0 1.3 -0.7 2 -2 2 -1.3 0 -2 -0.7 -2 -2z"/>
+  <path d="M262 363 c0 -1.3 0.7 -2 2 -2 1.3 0 2 0.7 2 2 0 1.3 -0.7 2 -2 2 -1.3 0 -2 -0.7 -2 -2z"/>
+
+
+
+only add buttons on specified ones.
+
+Green: D4 = 0 and D5 = 0
+Color 1: #69cb66
+Color 2: #3a7e38
+
+Green with Buttons: D4 = 0 and D5 = 1
+Color 1: #69cb66
+Color 2: #3a7e38
+
+Orange: D4 = 0 and D5 = 2
+Color 1: #dc8233
+Color 2: #e27413
+
+Orange with Buttons: D4 = 0 and D5 = 3
+Color 1: #dc8233
+Color 2: #e27413
+
+Blue: D4 = 0 and D5 = 4
+Color 1: #82c0f3
+Color 2: #6fa9d9
+
+Blue with Buttons: D4 = 0 and D5 = 5
+Color 1: #82c0f3
+Color 2: #6fa9d9
+
+Red: D4 = 0 and D5 = 6
+Color 1: #e35959
+Color 2: #cd3e3e
+
+Red with Buttons: D4 = 0 and D5 = 7
+Color 1: #e35959
+Color 2: #cd3e3e
+
+Yellow: D4 = 0 and D5 = 8
+Color 1: #f7e959
+Color 2: #cac053
+
+Black: D4 = 0 and D5 = 9
+Color 1: #000000
+Color 2: #343131
+
+
+
+
+Dress Shirts: 
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+  
+  <!-- Main Shirt Color -->
+  <g fill="{{shirtColor}}"> 
+    <path d="M208 368 l0 -48 -8 0 -8 0 0 8 0 8 -8 0 -8 0 0 9.5 0 9.5 -24 0 -24 0 0 -17.5 0 -17.5 8 0 8 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 32 0 32 0 0 8 0 8 8 0 8 0 0 8 0 8 9.5 0 9.5 0 0 48 0 48 -25.5 0 -25.5 0 0 -48z"/>
+    <path d="M269 368 l0 -48 25.5 0 25.5 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 16 0 16 0 0 8 0 8 8 0 8 0 0 8 0 8 8 0 8 0 0 17.5 0 17.5 -24 0 -24 0 0 -9.5 0 -9.5 -8 0 -8 0 0 -8 0 -8 -8 0 -8 0 0 9.5 0 9.5 -14.5 0 -14.5 0 0 5 0 5 14.5 0 14.5 0 0 33.5 0 33.5 -25.5 0 -25.5 0 0 -48z"/>
+  </g>
+
+  <!-- Sleeve Ends and Pocket -->
+  <g fill="{{sleeveEndAndPocketColor}}"> 
+    <path d="M128 360 l0 -8 24 0 24 0 0 8 0 8 -24 0 -24 0 0 -8z"/>
+    <path d="M352 360 l0 -8 24 0 24 0 0 8 0 8 -24 0 -24 0 0 -8z"/>
+    <path d="M288 344 l0 -8 16 0 16 0 0 8 0 8 -16 0 -16 0 0 -8z"/>
+  </g>
+
+  <!-- Tie -->
+  <g fill="{{tieColor}}"> 
+    <path d="M256 361.5 l0 -41.5 8 0 8 0 0 41.5 0 41.5 -8 0 -8 0 0 -41.5z"/>
+  </g>
+
+  <!-- End of Tie -->
+  <g fill="{{endOfTieColor}}"> 
+    <path d="M256 408 l0 -8 8 0 8 0 0 8 0 8 -8 0 -8 0 0 -8z"/>
+  </g>
+
+</svg>
+
+
+
+
+
+Dress Shirt Color Map:
+
+Blue : D4 = 1 and D5 = 0
+  shirtColor: "#dae5eb"        # Light blue (from the SVG data)
+  sleeveEndAndPocketColor: "#ccdadc"  # Slightly darker blue/grey for sleeve ends and pocket
+  tieColor: "#4a749e"          # Dark blue tie
+  endOfTieColor: "#cbcbcb"     # Light grey tie end
+
+
+Green: D4 = 1 and D5 = 1
+  shirtColor: "#5ab354"        # Bright green (from the SVG data)
+  sleeveEndAndPocketColor: "#407e3b"  # Dark green for sleeve ends and pocket
+  tieColor: "#0da900"          # Bright green tie
+  endOfTieColor: "#407e3b"     # Dark green tie end
+
+
+Green White: D4 = 1 and D5 = 2
+  shirtColor: "#5ab354"        # Bright green (from the SVG data)
+  sleeveEndAndPocketColor: "#407e3b"  # Dark green sleeve ends and pocket
+  tieColor: "#ffffff"          # White tie
+  endOfTieColor: "#cbcbcb"     # Light grey tie end
+
+Light Blue White: D4 = 1 and D5 = 3
+  shirtColor: "#dae5eb"        # Light blue shirt (from the SVG data)
+  sleeveEndAndPocketColor: "#ccdadc"  # Light grey for sleeve ends and pocket
+  tieColor: "#ffffff"          # White tie
+  endOfTieColor: "#cbcbcb"     # Light grey tie end
+
+
+Orange: D4 = 1 and D5 = 4
+  shirtColor: "#d7a251"        # Orange (from the SVG data)
+  sleeveEndAndPocketColor: "#ba812b"  # Darker orange for sleeve ends and pocket
+  tieColor: "#d78203"          # Darker orange tie
+  endOfTieColor: "#b16b02"     # Dark brown tie end
+
+
+
+Orange White: D4 = 1 and D5 = 5
+  shirtColor: "#d7a251"        # Orange (from the SVG data)
+  sleeveEndAndPocketColor: "#ba812b"  # Darker orange for sleeve ends and pocket
+  tieColor: "#ffffff"          # White tie
+  endOfTieColor: "#cbcbcb"     # Light grey tie end
+
+
+Purple: D4 = 1 and D5 = 6
+  shirtColor: "#d732d7"        # Bright purple (from the SVG data)
+  sleeveEndAndPocketColor: "#b117b1"  # Darker purple for sleeve ends and pocket
+  tieColor: "#9d02b1"          # Dark purple tie
+  endOfTieColor: "#7b028b"     # Darker purple tie end
+
+
+Purple White: D4 = 1 and D5 = 7
+  shirtColor: "#d732d7"        # Bright purple (from the SVG data)
+  sleeveEndAndPocketColor: "#b117b1"  # Darker purple for sleeve ends and pocket
+  tieColor: "#ffffff"          # White tie
+  endOfTieColor: "#cbcbcb"     # Light grey tie end
+
+
+Red: D4 = 1 and D5 = 8
+  shirtColor: "#ed4545"        # Bright red (from the SVG data)
+  sleeveEndAndPocketColor: "#c23838"  # Darker red for sleeve ends and pocket
+  tieColor: "#cf0000"          # Dark red tie
+  endOfTieColor: "#c23838"     # Light red tie end
+
+
+Red White: D4 = 1 and D5 = 9
+  shirtColor: "#ed4545"        # Bright red (from the SVG data)
+  sleeveEndAndPocketColor: "#c23838"  # Darker red for sleeve ends and pocket
+  tieColor: "#ffffff"          # White tie
+  endOfTieColor: "#cbcbcb"     # Light grey tie end
+
+
+
+
+
+
+
+
+JACKETS:
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#8f93db">
+  <path d="M208 376 l0 -56 -8 0 -8 0 0 8 0 8 -8 0 -8 0 0 16 0 16 -24 0 -24 0 0 -24 0 -24 8 0 8 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 32 0 32 0 0 8 0 8 8 0 8 0 0 8 c0 6.4 0.3 8 1.5 8 1.3 0 1.5 6 1.5 48 0 42 -0.2 48 -1.5 48 -1.2 0 -1.5 1.6 -1.5 8 l0 8 -16 0 -16 0 0 -56z"/>
+  <path d="M288 424 c0 -6.4 -0.3 -8 -1.5 -8 -1.3 0 -1.5 -6 -1.5 -48 l0 -48 17.5 0 17.5 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 16 0 16 0 0 8 0 8 8 0 8 0 0 8 0 8 8 0 8 0 0 24 0 24 -24 0 -24 0 0 -16 0 -16 -8 0 -8 0 0 -8 0 -8 -8 0 -8 0 0 56 0 56 -16 0 -16 0 0 -8z"/>
+ </g>
+ <g fill="#ffffff">
+  <path d="M240 368 l0 -48 24 0 24 0 0 48 0 48 -24 0 -24 0 0 -48z"/>
+ </g>
+</svg>
+
+
+
+leave undershirt as white (#ffffff) unless "Undershirt" specified in color map.
+
+
+
+Jacket Color Map:
+
+Black: D4 = 2 and D5 = 0
+#343232
+
+Light Blue: D4 = 2 and D5 = 1
+#8f93db
+
+Green: D4 = 2 and D5 = 2
+#00800d
+
+Orange: D4 = 2 and D5 = 3
+#fe7e2a
+
+Pink: D4 = 2 and D5 = 4
+#f350bd
+
+Purple: D4 = 2 and D5 = 5
+#9802ba
+
+Red: D4 = 2 and D5 = 6
+#dc050
+
+Yellow: D4 = 2 and D5 = 7
+#dcd400
+
+Red: D4 = 2 and D5 = 8
+#dc050
+Undershirt: #343232
+
+Pink: D4 = 2 and D5 = 9
+#f350bd
+Undershirt: #343232
+
+
+
+
+
+
+
+JERSEYS
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#ffffff"> ####COLOR 1
+  <path d="M208 352 l0 -64 8 0 8 0 0 8 0 8 8 0 8 0 0 8 0 8 40 0 40 0 0 -8 0 -8 8 0 8 0 0 8 0 8 -8 0 -8 0 0 48 0 48 -56 0 -56 0 0 -64z m50 38 l0 -6 -3 0 c-2.7 0 -3 0.3 -3 3 l0 3 -8.5 0 -8.5 0 0 -4.5 c0 -4.1 0.5 -5 4.5 -9 2.4 -2.5 4.9 -4.5 5.4 -4.5 0.6 0 3.7 -2.7 7 -5.9 5.9 -5.8 6.1 -6.2 6.1 -11.1 0 -4.5 -0.4 -5.5 -3.5 -8.5 -3.3 -3.4 -3.7 -3.5 -11 -3.5 -7.3 0 -7.7 0.1 -11 3.5 -4.4 4.3 -4.5 6.5 -0.5 6.5 2.7 0 3 -0.3 3 -3 l0 -3 8.5 0 8.5 0 0 8 c0 7.3 -0.3 8.3 -2.5 10.5 -1.3 1.4 -2.9 2.5 -3.5 2.5 -0.6 0 -3.8 2.7 -7 6 -3.2 3.3 -6.2 6 -6.5 6 -2.2 0 -3.5 3.4 -3.5 9.4 l0 6.6 14.5 0 14.5 0 0 -6z m41.5 2.5 c3.4 -3.4 3.5 -3.6 3.5 -12 0 -5 -0.4 -8.5 -1 -8.5 -0.5 0 -1 -2 -1 -4.5 0 -2.5 0.5 -4.5 1 -4.5 0.6 0 1 -2.8 1 -6.5 0 -6.2 -0.2 -6.8 -3.5 -10 -3.2 -3.3 -3.8 -3.5 -10 -3.5 -6.2 0 -6.8 0.2 -10 3.5 -4 4 -4.8 8.5 -1.5 8.5 1.6 0 2 -0.7 2 -3 l0 -3 9.5 0 9.5 0 0 8.5 0 8.5 -6 0 c-5.7 0 -6 0.1 -6 2.5 0 2.4 0.3 2.5 6 2.5 l6 0 0 9.5 0 9.5 -8.3 0 c-7.1 0 -8.5 -0.3 -9.7 -2 -1.7 -2.4 -5 -2.7 -5 -0.5 0 0.9 1.5 3.1 3.3 5 3 3.2 3.6 3.4 10 3.4 6.4 0.1 6.9 -0.1 10.2 -3.4z"/>
+ </g>
+ <g fill="#f54653">  ####COLOR 2
+  <path d="M226 389.4 c0 -6.9 0.4 -9.9 1.4 -11 0.8 -0.8 1.7 -1.4 2.1 -1.4 0.3 0 3.3 -2.7 6.5 -6 3.2 -3.3 6.4 -6 7 -6 0.6 0 2.2 -1.1 3.5 -2.5 2 -1.9 2.5 -3.4 2.5 -7.5 l0 -5 -5.5 0 c-5.4 0 -5.5 0 -5.5 3 l0 3 -6 0 -6 0 0 -4.5 c0 -3.9 0.5 -5.1 3.5 -8 l3.4 -3.5 10.6 0 10.6 0 3.4 3.5 c3.4 3.4 3.5 3.6 3.5 11.5 l0 8.1 -6.1 6 c-3.3 3.2 -6.4 5.9 -7 5.9 -1.6 0 -9.9 8.8 -9.9 10.5 0 1.2 1.2 1.5 5.5 1.5 5.4 0 5.5 0 5.5 -3 l0 -3 6 0 6 0 0 9 0 9 -17.5 0 -17.5 0 0 -9.6z"/>
+  <path d="M276.3 395.5 c-2.7 -2.9 -3.3 -4.2 -3.3 -8 l0 -4.5 4.8 0 c3.6 0 5.1 0.5 6.2 2 1.1 1.6 2.6 2 6.7 2 l5.3 0 0 -6.5 0 -6.5 -6 0 -6 0 0 -5.5 0 -5.5 6 0 6 0 0 -5.5 0 -5.5 -6.5 0 -6.5 0 0 3 c0 2.9 -0.1 3 -5 3 l-5 0 0 -5.5 c0 -5 0.3 -5.9 3.5 -9 l3.4 -3.5 9.6 0 9.6 0 3.4 3.5 3.5 3.4 0 9.6 c0 5.7 -0.4 9.5 -1 9.5 -0.5 0 -1 0.7 -1 1.5 0 0.8 0.5 1.5 1 1.5 0.6 0 1 4.5 1 11.5 l0 11.6 -3.5 3.4 -3.4 3.5 -9.8 -0.1 -9.8 0 -3.2 -3.4z"/>
+ </g>
+</svg>
+
+
+Jersey Color Map:
+
+White and Black: D4 = 3 and D5 = 0
+Color 1: #ffffff
+Color 2: #000000
+
+White and Red: D4 = 3 and D5 = 1
+Color 1: #ffffff
+Color 2: #f54653
+
+White Purple: D4 = 3 and D5 = 2
+Color 1: #ffffff
+Color 2: #de1fd8
+
+Blue: D4 = 3 and D5 = 3
+Color 1: #1e49cb
+Color 2: #3eada9
+
+Orange: D4 = 3 and D5 = 4
+Color 1: #f38405
+Color 2: #ad6c21
+
+Orange and Black: D4 = 3 and D5 = 5
+Color 1: #f38405
+Color 2: #000000
+
+Orange and Blue: D4 = 3 and D5 = 6
+Color 1: #10e9ed
+Color 2: #ed8610
+
+Red and Yellow: D4 = 3 and D5 = 7
+Color 1: #c20b0b
+Color 2: #dad130
+
+Yellow and Blue: D4 = 3 and D5 = 8
+Color 1: #ede02c
+Color 2: #375eba
+
+Purple and Yellow: D4 = 3 and D5 = 9
+Color 1: #6d0451
+Color 2: #dad130
+
+
+
+
+
+LONG SLEEVE:
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#375eba"> ### See color map
+  <path d="M208 368 l0 -48 -8 0 -8 0 0 8 0 8 -8 0 -8 0 0 16 0 16 -24 0 -24 0 0 -24 0 -24 8 0 8 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 32 0 32 0 0 8 0 8 8 0 8 0 0 8 0 8 40 0 40 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 16 0 16 0 0 8 0 8 8 0 8 0 0 8 0 8 8 0 8 0 0 24 0 24 -24 0 -24 0 0 -16 0 -16 -8 0 -8 0 0 -8 0 -8 -8 0 -8 0 0 48 0 48 -56 0 -56 0 0 -48z"/>
+ </g>
+</svg>
+
+
+Long Sleeve Color map:
+
+Green: D4 = 4 and D5 = 0
+#1d8712
+
+Grey: D4 = 4 and D5 = 1
+#747373
+
+Light Blue: D4 = 4 and D5 = 2
+#4de8f9
+
+Light Green: D4 = 4 and D5 = 3
+#6dd363
+
+Orange: D4 = 4 and D5 = 4
+#b77005
+
+Pink: D4 = 4 and D5 = 5
+#f74ae6
+
+Purple: D4 = 4 and D5 = 6
+#7c05af
+
+Red: D4 = 4 and D5 = 7
+#f30000
+
+Yellow: D4 = 4 and D5 = 8
+#edf768
+
+Blue: D4 = 4 and D5 = 9
+#375eba
+
+
+
+
+
+SHORT OPEN:
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#8f93db"> ###SHIRT COLOR
+  <path d="M208 368 l0 -48 -8 0 -8 0 0 8 0 8 -16 0 -16 0 0 -8 0 -8 -8 0 -8 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 32 0 32 0 0 8 0 8 8 0 8 0 0 8 c0 6.4 0.3 8 1.5 8 1.3 0 1.5 6 1.5 48 l0 48 -17.5 0 -17.5 0 0 -48z"/>
+  <path d="M285 368 l0 -48 17.5 0 17.5 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 16 0 16 0 0 8 0 8 8 0 8 0 0 8 0 8 -8 0 -8 0 0 8 0 8 -16 0 -16 0 0 -8 0 -8 -8 0 -8 0 0 48 0 48 -17.5 0 -17.5 0 0 -48z"/>
+ </g>
+ <g fill="#ffffff">
+  <path d="M240 368 l0 -48 24 0 24 0 0 48 0 48 -24 0 -24 0 0 -48z"/>
+ </g>
+</svg>
+
+
+
+all undershirts stay as #ffffff.
+
+
+Short Open color map:
+
+Black: D4 = 6 and D5 = 0
+#363434
+
+Blue: D4 = 6 and D5 = 1
+#321bb1
+
+Light Blue: D4 = 6 and D5 = 2
+#8f93db
+
+Green: D4 = 6 and D5 = 3
+#367c29
+
+Grey: D4 = 6 and D5 = 4
+#696464
+
+Orange: D4 = 6 and D5 = 5
+#cf8b37
+
+Pink: D4 = 6 and D5 = 6
+#ed7eeb
+
+Purple: D4 = 6 and D5 = 7
+#a713a7
+
+Red: D4 = 6 and D5 = 8
+#d13d3d
+
+Yellow: D4 = 6 and D5 = 9
+#cbcf5b
+
+
+
+
+
+
+
+PLAID:
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#f532be"> ####DARK COLOR
+  <path d="M220 409 l0 -7 -6 0 -6 0 0 -11 0 -11 6 0 6 0 0 -5 0 -5 -6 0 -6 0 0 -11 0 -11 6 0 6 0 0 -5 0 -5 -6 0 -6 0 0 -9 0 -9 -8 0 -8 0 0 8 0 8 -8 0 -8 0 0 9 0 9 -7 0 -7 0 0 7 0 7 -11 0 -11 0 0 -7 0 -7 -6 0 -6 0 0 -11 0 -11 6 0 6 0 0 -6 c0 -5.3 0.2 -6 2 -6 1.3 0 2 -0.7 2 -2 0 -1.8 0.7 -2 6 -2 l6 0 0 -6 c0 -5.3 0.2 -6 2 -6 1.3 0 2 -0.7 2 -2 0 -1.8 0.7 -2 6 -2 l6 0 0 -6 0 -6 11 0 11 0 0 6 0 6 5 0 5 0 0 -6 0 -6 10 0 10 0 0 8 0 8 8 0 8 0 0 8 c0 4.7 0.4 8 1 8 0.6 0 1 0.5 1 1 0 0.6 -3.3 1 -8 1 l-8 0 0 5 0 5 8.5 0 8.5 0 0 11 0 11 -8.5 0 -8.5 0 0 5 0 5 8.5 0 8.5 0 0 11 0 11 -8.5 0 -8.5 0 0 5 0 5 8.5 0 8.5 0 0 10 0 10 -11.5 0 -11.5 0 0 -7z m-64 -66 l0 -5 -5 0 -5 0 0 5 0 5 5 0 5 0 0 -5z m15.8 -16.2 l0.3 -4.8 -5 0 -5.1 0 0 5.1 0 5 4.8 -0.3 4.7 -0.3 0.3 -4.7z m16 -16 l0.3 -4.8 -5 0 -5.1 0 0 5.1 0 5 4.8 -0.3 4.7 -0.3 0.3 -4.7z m32 0.5 l-0.3 -4.8 -4.7 -0.3 -4.8 -0.3 0 4.4 c0 2.4 0.3 4.7 0.7 5 0.3 0.4 2.6 0.7 5 0.7 l4.4 0 -0.3 -4.7z"/>
+  <path d="M285 406 l0 -10 7.5 0 7.5 0 0 -5 0 -5 -7.5 0 -7.5 0 0 -11 0 -11 7.5 0 7.5 0 0 -5 0 -5 -7.5 0 -7.5 0 0 -11 0 -11 7.5 0 7.5 0 0 -6 0 -6 10 0 10 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 9 0 9 0 0 6 0 6 7 0 c6.3 0 7 0.2 7 2 0 1.1 0.6 2 1.4 2 1.1 0 1.3 1.3 0.9 6 l-0.6 6 7.2 0 c6.4 0 7.1 0.2 7.1 2 0 1.1 0.6 2 1.4 2 1.1 0 1.3 1.3 0.9 6 l-0.6 6 7.2 0 7.1 0 0 11 0 11 -7 0 -7 0 0 7 0 7 -11 0 -11 0 0 -7 0 -7 -6 0 -6 0 0 -9 0 -9 -8 0 -8 0 0 -8 0 -8 -8 0 -8 0 0 9 0 9 -7 0 -7 0 0 5 0 5 7 0 7 0 0 11 0 11 -7 0 -7 0 0 5 0 5 7 0 7 0 0 11 0 11 -7 0 -7 0 0 7 0 7 -10.5 0 -10.5 0 0 -10z m95 -63 l0 -5 -5 0 -5 0 0 5 0 5 5 0 5 0 0 -5z m-16 -16 l0 -5 -5 0 -5 0 0 4.3 c0 2.4 0.3 4.7 0.7 5 0.3 0.4 2.6 0.7 5 0.7 l4.3 0 0 -5z m-16 -16 l0 -5 -5 0 -5 0 0 4.3 c0 2.4 0.3 4.7 0.7 5 0.3 0.4 2.6 0.7 5 0.7 l4.3 0 0 -5z"/>
+ </g>
+ <g fill="#ff59d0"> ####LIGHT COLOR
+  <path d="M208 407.5 l0 -8.5 7.5 0 7.5 0 0 -8 0 -8 -7.5 0 -7.5 0 0 -8 0 -8 7.5 0 7.5 0 0 -8 0 -8 -7.5 0 -7.5 0 0 -8 0 -8 7.5 0 7.5 0 0 -8 0 -7.9 -7.7 -0.3 -7.8 -0.3 -0.3 -7.7 -0.3 -7.8 -7.9 0 -7.9 0 -0.3 7.8 -0.3 7.7 -7.7 0.3 -7.7 0.3 -0.3 7.7 -0.3 7.7 -7.7 0.3 -7.8 0.3 0 7.9 0 8 8.5 0 8.5 0 0 8.5 0 8.5 -8.5 0 -8.5 0 0 -8.5 0 -8.5 -8 0 -8 0 0 8.5 0 8.5 -7.5 0 -7.5 0 0 -8.5 0 -8.5 7.5 0 7.5 0 0 -8 0 -8 -7.5 0 -7.5 0 0 -7.5 0 -7.5 7.5 0 7.5 0 0 7.5 0 7.5 8 0 8 0 0 -8 0 -8 -7.5 0 -7.5 0 0 -7.5 0 -7.5 7.5 0 7.5 0 0 7.5 0 7.5 8 0 8 0 0 -8 0 -8 -7.5 0 -7.5 0 0 -7.5 0 -7.5 7.5 0 7.5 0 0 7.5 0 7.5 8 0 8 0 0 -7.5 0 -7.5 8 0 8 0 0 7.5 0 7.4 7.8 0.3 7.7 0.3 0.3 7.8 0.3 7.7 7.7 0 c12.6 0 12.2 -0.3 12.2 10.1 0 7.2 -0.3 8.9 -1.5 8.9 -0.8 0 -1.5 -0.7 -1.5 -1.5 0 -1.2 -1.6 -1.5 -8.5 -1.5 l-8.5 0 0 8 0 8 8.5 0 c6.9 0 8.5 -0.3 8.5 -1.5 0 -0.8 0.7 -1.5 1.5 -1.5 1.2 0 1.5 1.9 1.5 11 0 9.1 -0.3 11 -1.5 11 -0.8 0 -1.5 -0.7 -1.5 -1.5 0 -1.2 -1.6 -1.5 -8.5 -1.5 l-8.5 0 0 8 0 8 8.5 0 c6.9 0 8.5 -0.3 8.5 -1.5 0 -0.8 0.7 -1.5 1.5 -1.5 1.2 0 1.5 1.9 1.5 11 0 9.1 -0.3 11 -1.5 11 -0.8 0 -1.5 -0.7 -1.5 -1.5 0 -1.2 -1.6 -1.5 -8.5 -1.5 l-8.5 0 0 8.5 0 8.5 -7.5 0 -7.5 0 0 -8.5z"/>
+  <path d="M303 407.5 l0 -8.5 -7.5 0 c-6 0 -7.5 0.3 -7.5 1.5 0 0.8 -0.7 1.5 -1.5 1.5 -1.2 0 -1.5 -1.9 -1.5 -11 0 -9.1 0.3 -11 1.5 -11 0.8 0 1.5 0.7 1.5 1.5 0 1.2 1.5 1.5 7.5 1.5 l7.5 0 0 -8 0 -8 -7.5 0 c-6 0 -7.5 0.3 -7.5 1.5 0 0.8 -0.7 1.5 -1.5 1.5 -1.2 0 -1.5 -1.9 -1.5 -11 0 -9.1 0.3 -11 1.5 -11 0.8 0 1.5 0.7 1.5 1.5 0 1.2 1.5 1.5 7.5 1.5 l7.5 0 0 -8 0 -8 -7.5 0 c-6 0 -7.5 0.3 -7.5 1.5 0 0.8 -0.7 1.5 -1.5 1.5 -1.2 0 -1.5 -1.7 -1.5 -9 l0 -9 9 0 9 0 0 7.5 0 7.5 8.5 0 8.5 0 0 8 0 8 -8.5 0 -8.5 0 0 8 0 8 8.5 0 8.5 0 0 8 0 8 -8.5 0 -8.5 0 0 8 0 8 8.5 0 8.5 0 0 8.5 0 8.5 -8.5 0 -8.5 0 0 -8.5z"/>
+  <path d="M352 359.5 l0 -8.5 7.5 0 7.5 0 0 -8 0 -7.9 -7.7 -0.3 -7.8 -0.3 -0.3 -7.7 -0.3 -7.7 -7.7 -0.3 -7.7 -0.3 0 -7.5 0 -7.5 7.8 -0.3 7.7 -0.3 0 -7.4 0 -7.5 8.5 0 8.5 0 0 7.5 0 7.5 -8.5 0 -8.5 0 0 8 0 8 8 0 8 0 0 -7.5 0 -7.5 8.5 0 8.5 0 0 7.5 0 7.5 -8.5 0 -8.5 0 0 8 0 8 8 0 8 0 0 -7.5 0 -7.5 8.5 0 8.5 0 0 7.5 0 7.5 -8.5 0 -8.5 0 0 8 0 8 8.5 0 8.5 0 0 8.5 0 8.5 -8.5 0 -8.5 0 0 -8.5 0 -8.5 -8 0 -8 0 0 8.5 0 8.5 -7.5 0 -7.5 0 0 -8.5z"/>
+ </g>
+ <g fill="#ffffff"> ###Undershirt
+  <path d="M240 368 l0 -48 8 0 8 0 0 8 0 8 8 0 8 0 0 -8 0 -8 8 0 8 0 0 48 0 48 -24 0 -24 0 0 -48z"/>
+ </g>
+</svg>
+
+
+
+Leave Undershirt as White unless specified. 
+
+Yellow: D4 = 5 and D5 = 0
+Dark: #ddd473
+Light: #f7e959
+
+Pink: D4 = 5 and D5 = 1
+Dark: #f532be
+Light: #ff59d0
+
+Purple: D4 = 5 and D5 = 2
+Dark: #650289
+Light: #ae00ed
+
+Blue: D4 = 5 and D5 = 3
+Dark: #4549a9
+Light: #6b70f3
+
+Orange: D4 = 5 and D5 = 4
+Dark: #c26d18
+Light: #da8d40
+
+Black: D4 = 5 and D5 = 5
+Dark: #343131
+Light: #4f4d4d
+
+Green: D4 = 5 and D5 = 6
+Dark: #248933
+Light: #35c94b
+
+Green 2: D4 = 5 and D5 = 7
+Dark: #248933
+Light: #35c94b
+Undershirt: #434343
+
+Red: D4 = 5 and D5 = 8
+Dark: #591712
+Light: #6c1e18
+Undershirt: #b7a765
+
+Blue 2: D4 = 5 and D5 = 9
+Dark: #4549a9
+Light: #6b70f3
+Undershirt: #b7a765
+
+
+
+
+
+
+SUIT TOP:
+
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#888888"> #### JACKET
+  <path d="M208 376 l0 -56 -8 0 -8 0 0 8 0 8 -8 0 -8 0 0 16 0 16 -24 0 -24 0 0 -24 0 -24 8 0 8 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 32 0 32 0 0 8 0 8 8 0 8 0 0 8 c0 6.4 0.3 8 1.5 8 1.3 0 1.5 6 1.5 48 0 42 -0.2 48 -1.5 48 -1.2 0 -1.5 1.6 -1.5 8 l0 8 -16 0 -16 0 0 -56z"/>
+  <path d="M288 424 c0 -6.4 -0.3 -8 -1.5 -8 -1.3 0 -1.5 -6 -1.5 -48 l0 -48 17.5 0 17.5 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 16 0 16 0 0 8 0 8 8 0 8 0 0 8 0 8 8 0 8 0 0 24 0 24 -24 0 -24 0 0 -16 0 -16 -8 0 -8 0 0 -8 0 -8 -8 0 -8 0 0 56 0 56 -16 0 -16 0 0 -8z"/>
+ </g>
+ <g fill="#ffffff"> #### UNDERSHIRT
+  <path d="M240 361.5 l0 -41.5 9.5 0 9.5 0 0 41.5 0 41.5 -9.5 0 -9.5 0 0 -41.5z"/>
+  <path d="M269 361.5 l0 -41.5 9.5 0 9.5 0 0 41.5 0 41.5 -9.5 0 -9.5 0 0 -41.5z"/>
+ </g>
+ <g fill="#dc7e04"> ##### TIE 
+  <path d="M253 401.5 c0 -0.8 0.7 -1.5 1.5 -1.5 1.3 0 1.5 -5.1 1.5 -40 l0 -40 8 0 8 0 0 40 c0 34.9 0.2 40 1.5 40 0.8 0 1.5 0.7 1.5 1.5 0 1.2 -1.9 1.5 -11 1.5 -9.1 0 -11 -0.3 -11 -1.5z"/>
+ </g>
+ <g fill="#181818"> #### BELT
+  <path d="M240 408 l0 -8 9.5 0 9.5 0 0 8 0 8 -9.5 0 -9.5 0 0 -8z"/>
+  <path d="M269 408 l0 -8 9.5 0 9.5 0 0 8 0 8 -9.5 0 -9.5 0 0 -8z"/>
+ </g>
+ <g fill="#dbd78f"> #### BELT BUCKLE
+  <path d="M256 408 l0 -8 8 0 8 0 0 8 0 8 -8 0 -8 0 0 -8z"/>
+ </g>
+</svg>
+
+
+
+
+Suit Top color map:
+
+Blue: D4 = 8 and D5 = 0
+Jacket: #080ebe
+Tie: #080ebe
+
+Green Grey: D4 = 8 and D5 = 1
+Jacket: #02a03c
+Tie: #888888
+
+Grey Blue: D4 = 8 and D5 = 2
+Jacket: #888888
+Tie: #080ebe
+
+Grey Orange: D4 = 8 and D5 = 3
+Jacket: #888888
+Tie: #dc7e04
+
+Light Blue: D4 = 8 and D5 = 4
+Jacket: #8f93db
+Tie: #a8a6a5
+
+Orange: D4 = 8 and D5 = 5
+Jacket: #dc7e04
+Tie: #dc7e04
+
+Pink: D4 = 8 and D5 = 6
+Jacket: #fc52f6
+Tie: #fc52f6
+
+Purple: D4 = 8 and D5 = 7
+Jacket: #8d08ba
+Tie: #8d08ba
+
+Red Blue: D4 = 8 and D5 = 8
+Jacket: #e61e1e
+Tie: #5252ef
+
+Red: D4 = 8 and D5 = 9
+Jacket: #e61e1e
+Tie: #e61e1e
+
+
+
+
+
+
+T-SHRIT:
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#0061a7">
+  <path d="M208 368 l0 -48 -8 0 -8 0 0 8 0 8 -8 0 -8 0 0 -8 0 -8 -16 0 -16 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 32 0 32 0 0 8 0 8 8 0 8 0 0 8 0 8 40 0 40 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 16 0 16 0 0 8 0 8 8 0 8 0 0 8 0 8 -16 0 -16 0 0 8 0 8 -8 0 -8 0 0 -8 0 -8 -8 0 -8 0 0 48 0 48 -56 0 -56 0 0 -48z"/>
+ </g>
+</svg>
+
+
+
+T-Shirt Color map:
+
+Bright Orange: D4 = 7 and D5 = 0
+#f77c00
+
+Blue: D4 = 7 and D5 = 1
+#0061a7
+
+Green: D4 = 7 and D5 = 2
+#169e1f
+
+Grey: D4 = 7 and D5 = 3
+#c1c1c1
+
+Light Blue: D4 = 7 and D5 = 4
+#23cdcd
+
+Orange: D4 = 7 and D5 = 5
+#cb8d2a
+
+Pink: D4 = 7 and D5 = 6
+#ff3ef9
+
+Purple: D4 = 7 and D5 = 7
+#8d08ba
+
+Red: D4 = 7 and D5 = 8
+#ef2020
+
+Yellow: D4 = 7 and D5 = 9
+#e2da45
+
+
+
+
+
+
+
+
+Vacation:
+
+
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#e3f794"> <!-- Base color -->
+  <path d="M208 406.5 l0 -25.5 9.5 0 9.5 0 0 8 0 8 8 0 8 0 0 9.5 c0 7.8 -0.3 9.5 -1.5 9.5 -1.2 0 -1.5 1.6 -1.5 8 l0 8 -16 0 -16 0 0 -25.5z"/>
+  <path d="M288 424 c0 -6.4 -0.3 -8 -1.5 -8 -1.3 0 -1.5 -4.4 -1.5 -34 l0 -34 11 0 11 0 0 8.5 0 8.5 6.5 0 6.5 0 0 19 0 19 -6.5 0 -6.5 0 0 14.5 0 14.5 -9.5 0 -9.5 0 0 -8z"/>
+  <path d="M208 345.5 l0 -25.5 -8 0 -8 0 0 8 0 8 -9.5 0 -9.5 0 0 -6.5 0 -6.5 -6.5 0 c-5.1 0 -6.5 -0.3 -6.5 -1.5 0 -0.8 -0.7 -1.5 -1.5 -1.5 -1.2 0 -1.5 -1.6 -1.5 -8 0 -6.4 0.3 -8 1.5 -8 1.2 0 1.5 -1.6 1.5 -8 l0 -8 17.5 0 17.5 0 0 6.5 0 6.5 8 0 8 0 0 8 0 8 7.5 0 7.5 0 0 9.8 c0 5.3 0.3 17.5 0.7 27 l0.6 17.2 -9.6 0 -9.7 0 0 -25.5z"/>
+  <path d="M336 328 l0 -8 -8 0 c-6.4 0 -8 0.3 -8 1.5 0 0.8 -0.7 1.5 -1.5 1.5 -0.8 0 -1.5 -0.7 -1.5 -1.5 0 -0.8 0.7 -1.5 1.5 -1.5 1.2 0 1.5 -1.6 1.5 -8 l0 -8 8 0 8 0 0 -8 0 -8 9.5 0 9.5 0 0 6.5 0 6.5 6.5 0 c5.1 0 6.5 0.3 6.5 1.5 0 0.8 0.7 1.5 1.5 1.5 1.2 0 1.5 1.6 1.5 8 0 6.4 -0.3 8 -1.5 8 -1.2 0 -1.5 1.6 -1.5 8 l0 8 -16 0 -16 0 0 -8z"/>
+ </g>
+ <g fill="#f5c7b9"> <!-- Undershirt -->
+  <path d="M240 408 c0 -6.4 -0.3 -8 -1.5 -8 -1.3 0 -1.5 -5.3 -1.5 -41.5 0 -36.2 0.2 -41.5 1.5 -41.5 0.8 0 1.5 0.7 1.5 1.5 0 1.3 3.5 1.5 25.5 1.5 l25.5 0 0 15.5 c0 13.1 -0.2 15.5 -1.5 15.5 -1.3 0 -1.5 4.3 -1.5 32.5 l0 32.5 -24 0 -24 0 0 -8z"/>
+ </g>
+ <g fill="#f73333"> <!-- Accent -->
+  <path d="M304 416 l0 -16 8 0 8 0 0 16 0 16 -8 0 -8 0 0 -16z"/>
+  <path d="M224 392 l0 -8 -8 0 -8 0 0 -8 0 -8 8.1 0 8.1 0 -0.4 -9.5 -0.3 -9.5 8.3 0 8.2 0 0 25.5 0 25.5 -8 0 -8 0 0 -8z"/>
+  <path d="M304 359.5 c0 -6.9 -0.3 -8.5 -1.5 -8.5 -1.3 0 -1.5 -2.4 -1.5 -15.5 l0 -15.5 9.5 0 9.5 0 0 24 0 24 -8 0 -8 0 0 -8.5z"/>
+  <path d="M160 328 l0 -8 -8 0 -8 0 0 -8 0 -8 8 0 8 0 0 8 0 8 8 0 8 0 0 8 0 8 -8 0 -8 0 0 -8z"/>
+  <path d="M223 321.5 c0 -1.2 -1.5 -1.5 -7.5 -1.5 l-7.5 0 0 -8 0 -8 -8 0 -8 0 0 -8 0 -8 16 0 16 0 0 8 c0 6.4 0.3 8 1.5 8 1.2 0 1.5 1.7 1.5 9.5 0 8.8 -0.1 9.5 -2 9.5 -1.1 0 -2 -0.7 -2 -1.5z"/>
+  <path d="M368 312 l0 -8 -8 0 -8 0 0 -8 0 -8 8 0 8 0 0 8 0 8 8 0 8 0 0 8 0 8 -8 0 -8 0 0 -8z"/>
+ </g>
+ <g fill="#d2e48a"> <!-- Shirt collar -->
+  <path d="M223.7 351.3 c-0.9 -0.8 -0.9 -19.4 0 -35.1 l0.6 -12.2 7.9 0 7.8 0 0 24 0 24 -7.8 0 c-4.3 0 -8.2 -0.3 -8.5 -0.7z"/>
+  <path d="M288 335.5 l0 -15.5 8 0 8 0 0 15.5 0 15.5 -8 0 -8 0 0 -15.5z"/>
+ </g>
+</svg>
+
+
+
+
+Color Map for all vacation shirts:
+
+Yellow Red: D4 = 9 and D5 = 0
+Base color: #e3f794
+Undershirt: #f5c7b9
+Accent: #f73333
+Shirt collar: #d2e48a
+
+Yellow Purple: D4 = 9 and D5 = 1
+Base color: #fff64e
+Undershirt: #f949eb
+Accent: #b89bde
+Shirt collar: #ed8be4
+
+Blue Green: D4 = 9 and D5 = 2
+Base color: #0979e2
+Undershirt: #93eda5
+Accent: #3ce25d
+Shirt collar: #076ecf
+
+Blue Pink: D4 = 9 and D5 = 3
+Base color: #0979e2
+Undershirt: #ff9cbb
+Accent: #8fb4d7
+Shirt collar: #076ecf
+
+Green Pink: D4 = 9 and D5 = 4
+Base color: #52ed53
+Undershirt: #aaf2e7
+Accent: #ff9cbb
+Shirt collar: #43d642
+
+Orange Purple: D4 = 9 and D5 = 5
+Base color: #ed9b21
+Undershirt: #e6bd80
+Accent: #b89bde
+Shirt collar: #dc8f1d
+
+Pink Blue: D4 = 9 and D5 = 6
+Base color: #fa93b2
+Undershirt: #aaf2e7
+Accent: #3cdcc9
+Shirt collar: #3cdcc9
+
+Purple Green: D4 = 9 and D5 = 7
+Base color: #b54be2
+Undershirt: #adedb6
+Accent: #46eb48
+Shirt collar: #41da43
+
+Red Blue: D4 = 9 and D5 = 8
+Base color: #f73b3b
+Undershirt: #aaf2e7
+Accent: #3cdcc9
+Shirt collar: #dc3c3c
+
+Yellow Blue: D4 = 9 and D5 = 9
+Base color: #fff64e
+Undershirt: #efea91
+Accent: #5239f9
+Shirt collar: #e4dc46
+
+
+
+
+
+
+
+ARM OUT shirt svgs: 
+
+LONG SLEEVE:
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#375eba">
+  <path d="M208 368 l0 -48 -8 0 -8 0 0 8 0 8 -8 0 -8 0 0 16 0 16 -24 0 -24 0 0 -24 0 -24 8 0 8 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 32 0 32 0 0 8 0 8 8 0 8 0 0 8 0 8 40 0 40 0 0 -8 0 -8 48 0 48 0 0 24 0 24 -32 0 -32 0 0 -8 0 -8 -8 0 -8 0 0 16 0 16 -8 0 -8 0 0 24 0 24 -56 0 -56 0 0 -48z"/>
+ </g>
+</svg>
+
+
+
+
+
+COLOR MAP for ARM OUT SHIRTs:
+
+Yellow: D5 = 0
+#ecf277 
+
+Red: D5 = 1
+#d94343
+
+Purple: D5 = 2
+#a438d2
+
+Pink: D5 = 3
+#f74ae6
+
+Orange: D5 = 4
+#e18b09
+
+Light Green: D5 = 5
+#6dd363
+
+Light Blue: D5 = 6
+#42b5f2
+
+Grey: D5 = 7
+#747373
+
+Blue: D5 = 8
+#375eba
+
+Green: D5 = 9
+#1d8712
+
+
+
+
+
+
+
+
+
+FEMALE/ Female Heel SHIRTs SVGs:
+
+
+DRESS: D4 = 2, 8
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#395cdb">
+  <path d="M176 440 l0 -8 8 0 8 0 0 -8 0 -8 8 0 8 0 0 -24 0 -24 -8 0 -8 0 0 -32 0 -32 8 0 8 0 0 16 0 16 8 0 8 0 0 8 0 8 24 0 24 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 8 0 8 0 0 24 0 24 -8 0 -8 0 0 24 0 24 8 0 8 0 0 8 0 8 8 0 8 0 0 8 0 8 -72 0 -72 0 0 -8z"/>
+ </g>
+</svg>
+
+
+DRESS COLOR MAP: 
+
+Black: DRESS: D4 = 2, 8 and D5 = 0, 1, 8
+#191919
+
+Teal: D4 = 2, 8 and D5 = 2, 6
+#6cb5a5
+
+Pink: D4 = 2, 8 and D5 = 3, 7, 9
+#ea5eaf
+
+Blue: D4 = 2, 8 and D5 = 5, 4
+#395cdb
+
+
+
+
+
+
+DRESS SHIRT: D4 = 1, 6, 9
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#fce86b">  ###Primary 
+  <path d="M208 385.5 l0 -17.5 -8 0 -8 0 0 -16 0 -16 -8 0 c-5.7 0 -8 0.4 -8 1.3 0 0.9 -3.8 1.1 -16.7 0.9 -15.6 -0.4 -19.7 -0.8 -16.5 -1.9 0.8 -0.3 1.2 -3 1.2 -8.4 l0 -7.9 8 0 8 0 0 -8 0 -8 24 0 24 0 0 8 0 8 8 0 8 0 0 8 c0 6.1 0.3 8 1.4 8 1 0 1.3 1.5 1.2 5.8 l-0.1 5.7 6.8 0.3 c5.9 0.3 6.7 0.5 6.7 2.2 0 1.1 0.5 2 1 2 0.6 0 1 9.2 1 25.5 l0 25.5 -17 0 -17 0 0 -17.5z"/>
+  <path d="M252 377.5 c0 -24.8 0.1 -25.5 2 -25.5 1.3 0 2 -0.7 2 -2 0 -1.6 0.8 -1.9 5.8 -2.2 l5.7 -0.3 0.3 -5.7 0.3 -5.8 9.9 0 10 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 16 0 16 0 0 8 0 8 8 0 8 0 0 7.9 c0 5.4 0.4 8.1 1.3 8.4 3.1 1.1 -1 1.5 -16.6 1.9 -12.9 0.2 -16.7 0 -16.7 -0.9 0 -0.9 -2.3 -1.3 -8 -1.3 l-8 0 0 16 0 16 -8 0 -8 0 0 17.5 0 17.5 -18 0 -18 0 0 -25.5z"/>
+ </g>
+ <g fill="#a08e7f"> ### Skirt
+  <path d="M176 440 l0 -8 8 0 8 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 15.5 0 c13.1 0 15.5 -0.2 15.5 -1.5 0 -1.2 1.6 -1.5 8 -1.5 6.4 0 8 0.3 8 1.5 0 1.3 2.5 1.5 16.5 1.5 l16.5 0 0 8 0 8 8 0 8 0 0 8 0 8 8 0 8 0 0 8 0 8 -72 0 -72 0 0 -8z"/>
+ </g>
+ <g fill="#ecd960"> ### Secondary
+  <path d="M238.8 375.8 l-0.3 -24.3 -7.5 -0.5 -7.5 -0.5 -0.3 -7.2 -0.3 -7.3 8.6 0 8.5 0 0 8 0 8 7.5 0 7.5 0 0 24 0 24 -8 0 -8 0 -0.2 -24.2z"/>
+  <path d="M128 344.2 l0 -7.9 12.2 -0.6 c6.6 -0.4 17.4 -0.7 24 -0.7 l11.8 0 0 8.5 0 8.5 -24 0 -24 0 0 -7.8z"/>
+  <path d="M320 343.5 l0 -8.5 11.8 0 c6.6 0 17.4 0.3 24 0.7 l12.2 0.6 0 7.9 0 7.8 -24 0 -24 0 0 -8.5z"/>
+  <path d="M256 343.5 l0 -7.5 7.5 0 7.6 0 -0.3 7.3 -0.3 7.2 -7.2 0.3 -7.3 0.3 0 -7.6z"/>
+ </g>
+</svg>
+
+
+DRESS SHIRT COLOR MAP
+
+Red: D4 = 1, 6, 9 and D5 = 0, 1, 8
+Primary: #c84747
+Secondary: #863030
+
+Blue: D4 = 1, 6, 9 and D5 = 3, 7, 9
+Primary: #33afce
+Secondary: #1d6273
+
+Green: D4 = 1, 6, 9 and D5 = 2, 6
+Primary: #49b35e
+Secondary: #2a6c37
+
+Yellow: D4 = 1, 6, 9 and D5 = 4, 5
+Primary: #fce86b
+Secondary: #ecd960
+
+
+
+
+
+TRACK SUIT: D4 = 3, 5
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#2c8c37"> ### Primary
+  <path d="M173 456 c0 -6.4 0.3 -8 1.5 -8 0.8 0 1.5 -0.7 1.5 -1.5 0 -1.2 1.4 -1.5 6.5 -1.5 l6.5 0 0 -6.5 c0 -5.1 0.3 -6.5 1.5 -6.5 0.8 0 1.5 -0.7 1.5 -1.5 0 -1.2 1.4 -1.5 6.5 -1.5 l6.5 0 0 -6.5 c0 -5.1 0.3 -6.5 1.5 -6.5 1.3 0 1.5 -3.3 1.5 -24 l0 -24 -8 0 -8 0 0 -16 0 -16 -8 0 -8 0 0 8 0 8 -24 0 -24 0 0 -8 0 -8 8 0 c6.4 0 8 -0.3 8 -1.5 0 -1.2 1.4 -1.5 6.5 -1.5 l6.5 0 0 -6.5 c0 -5.1 0.3 -6.5 1.5 -6.5 0.8 0 1.5 -0.7 1.5 -1.5 0 -1.2 1.4 -1.5 6.5 -1.5 l6.5 0 0 -6.5 0 -6.5 17.5 0 17.5 0 0 8 0 8 8 0 8 0 0 8 c0 6.4 0.3 8 1.5 8 1.3 0 1.5 4.9 1.5 38.5 l0 38.5 21 0 21 0 0 -38.5 0 -38.5 9.5 0 9.5 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 9.5 0 9.5 0 0 6.5 0 6.5 6.5 0 c5.1 0 6.5 0.3 6.5 1.5 0 0.8 0.7 1.5 1.5 1.5 1.2 0 1.5 1.4 1.5 6.5 l0 6.5 6.5 0 c5.1 0 6.5 0.3 6.5 1.5 0 1.2 1.6 1.5 8 1.5 l8 0 0 8 0 8 -24 0 -24 0 0 -8 0 -8 -8 0 -8 0 0 16 0 16 -8 0 -8 0 0 24 c0 20.7 0.2 24 1.5 24 1.2 0 1.5 1.4 1.5 6.5 l0 6.5 6.5 0 c5.1 0 6.5 0.3 6.5 1.5 0 0.8 0.7 1.5 1.5 1.5 1.2 0 1.5 1.4 1.5 6.5 l0 6.5 6.5 0 c5.1 0 6.5 0.3 6.5 1.5 0 0.8 0.7 1.5 1.5 1.5 1.2 0 1.5 1.6 1.5 8 l0 8 -25.5 0 -25.5 0 0 -8 0 -8 -9.5 0 -9.5 0 0 -6.5 0 -6.5 -5 0 -5 0 0 6.5 0 6.5 -9.5 0 -9.5 0 0 8 0 8 -25.5 0 -25.5 0 0 -8z"/>
+ </g>
+ <g fill="#ffffff"> ### Undershirt
+  <path d="M224 376 l0 -40 24 0 24 0 0 40 0 40 -24 0 -24 0 0 -40z"/>
+ </g>
+ <g fill="#3ebb4c"> ### Secondary
+  <path d="M160 456 l0 -8 8 0 8 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 8 0 8 0 0 8 0 8 -8 0 -8 0 0 8 0 8 -8 0 -8 0 0 8 0 8 -8 0 -8 0 0 -8z"/>
+  <path d="M320 456 l0 -8 -8 0 -8 0 0 -8 0 -8 -8 0 -8 0 0 -8 0 -8 8 0 8 0 0 8 0 8 8 0 8 0 0 8 0 8 8 0 8 0 0 8 0 8 -8 0 -8 0 0 -8z"/>
+  <path d="M144 328 l0 -8 8 0 8 0 0 -8 0 -8 8 0 8 0 0 8 0 8 -8 0 -8 0 0 8 0 8 -8 0 -8 0 0 -8z"/>
+  <path d="M336 328 l0 -8 -8 0 -8 0 0 -8 0 -8 8 0 8 0 0 8 0 8 8 0 8 0 0 8 0 8 -8 0 -8 0 0 -8z"/>
+ </g>
+ <g fill="#000000"> ### used to shape
+  <path d="M240 440 l0 -8 8 0 8 0 0 8 0 8 -8 0 -8 0 0 -8z"/>
+ </g>
+</svg>
+
+
+
+
+TRACK SUIT COLOR MAP:
+
+Red: D4 = 3, 5 and D5 = 3, 7, 9
+Primary: #9f413f
+Secondary: #cb6a68
+
+Orange: D4 = 3, 5 and D5 = 0, 1, 8
+Primary: #ce861c
+Secondary: #dd9a38
+
+Green: D4 = 3, 5 and D5 = 2, 4, 5, 6 
+Primary: #2c8c37
+Secondary: #3ebb4c
+
+
+
+
+
+
+T-SHIRT: D4 = 0, 4, 7
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#dc71f7">
+  <path d="M208 392 l0 -24 -8 0 -8 0 0 -16 0 -16 -8 0 -8 0 0 8 0 8 -24 0 -24 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 24 0 24 0 0 8 0 8 8 0 8 0 0 8 0 8 32 0 32 0 0 -8 0 -8 8 0 8 0 0 -8 0 -8 16 0 16 0 0 8 0 8 8 0 8 0 0 8 0 8 8 0 8 0 0 8 0 8 -24 0 -24 0 0 -8 0 -8 -8 0 -8 0 0 16 0 16 -8 0 -8 0 0 24 0 24 -40 0 -40 0 0 -24z"/>
+ </g>
+</svg>
+
+
+
+T-SHIRT COLOR MAP:
+
+Yellow: D4 = 0, 4, 7 and D5 = 0, 1, 8
+#eaea9e
+
+White: D4 = 0, 4, 7 and D5 = 3, 7, 9
+#e8e8e8
+
+Pink: D4 = 0, 4, 7 and D5 = 4, 5
+#e67acb
+
+Blue: D4 = 0, 4, 7 and D5 = 2, 6
+#55e9ec
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------

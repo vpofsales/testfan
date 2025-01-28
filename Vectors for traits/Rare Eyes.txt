@@ -1,0 +1,56 @@
+Rare Eyes
+
+
+3D
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#ffffff">
+  <path d="M256 248 l0 -24 -24 0 -24 0 0 -8 0 -8 72 0 72 0 0 9.5 0 9.5 -6.5 0 -6.5 0 0 13 0 13 6.5 0 6.5 0 0 9.5 0 9.5 -16 0 -16 0 0 -8 0 -8 -8 0 -8 0 0 8 0 8 -24 0 -24 0 0 -24z m45 -8 l0 -13 -13 0 -13 0 0 13 0 13 13 0 13 0 0 -13z"/>
+ </g>
+ <g fill="#ff0000">
+  <path d="M272 240 l0 -16 16 0 16 0 0 16 0 16 -16 0 -16 0 0 -16z"/>
+ </g>
+ <g fill="#1501f9">
+  <path d="M336 240 l0 -16 8 0 8 0 0 16 0 16 -8 0 -8 0 0 -16z"/>
+ </g>
+</svg>
+
+
+-------------
+
+
+Cyclops 
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#888888">
+  <path d="M224 240 l0 -16 8 0 8 0 0 -8 0 -8 56 0 56 0 0 9.5 0 9.5 -54.5 0 -54.5 0 0 5 0 5 54.5 0 54.5 0 0 9.5 0 9.5 -64 0 -64 0 0 -16z"/>
+ </g>
+ <g fill="#e21200">
+  <path d="M240 232 l0 -8 56 0 56 0 0 8 0 8 -56 0 -56 0 0 -8z"/>
+ </g>
+</svg>
+
+
+
+------------
+
+
+hollow 
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#ffffff">
+  <path d="M256 240 l0 -16 16 0 16 0 0 8 0 8 8 0 8 0 0 8 0 8 -24 0 -24 0 0 -16z"/>
+  <path d="M320 248 l0 -8 8 0 8 0 0 -8 0 -8 8 0 8 0 0 16 0 16 -16 0 -16 0 0 -8z"/>
+ </g>
+</svg>
+
+
+

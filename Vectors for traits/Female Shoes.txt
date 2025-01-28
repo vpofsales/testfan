@@ -1,0 +1,71 @@
+Female Shoes
+
+
+
+Tennis shoes
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#ffffff">
+  <path d="M112 488 l0 -8 16 0 c13.6 0 16 -0.2 16 -1.5 0 -1.3 2.3 -1.5 14.5 -1.5 l14.5 0 0 -6.5 0 -6.5 11 0 11 0 0 6.5 0 6.5 6.5 0 6.5 0 0 9.5 0 9.5 -48 0 -48 0 0 -8z"/>
+  <path d="M288 486.5 l0 -9.5 6.5 0 6.5 0 0 -6.5 0 -6.5 11 0 11 0 0 6.5 0 6.5 14.5 0 c12.2 0 14.5 0.2 14.5 1.5 0 1.3 2.4 1.5 16 1.5 l16 0 0 8 0 8 -48 0 -48 0 0 -9.5z"/>
+ </g>
+ <g fill="#9f413f">
+  <path d="M144 472 l0 -8 16 0 16 0 0 8 0 8 -16 0 -16 0 0 -8z"/>
+  <path d="M192 472 l0 -8 8 0 8 0 0 8 0 8 -8 0 -8 0 0 -8z"/>
+  <path d="M288 472 l0 -8 8 0 8 0 0 8 0 8 -8 0 -8 0 0 -8z"/>
+  <path d="M320 472 l0 -8 16 0 16 0 0 8 0 8 -16 0 -16 0 0 -8z"/>
+ </g>
+</svg>
+
+
+
+-------------------------
+
+sandals
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#4d8140">
+  <path d="M112 488 l0 -8 24 0 24 0 0 -8 0 -8 8 0 8 0 0 8 0 8 16 0 16 0 0 8 0 8 -48 0 -48 0 0 -8z"/>
+  <path d="M288 488 l0 -8 16 0 16 0 0 -8 0 -8 8 0 8 0 0 8 0 8 24 0 24 0 0 8 0 8 -48 0 -48 0 0 -8z"/>
+ </g>
+</svg>
+
+
+----------------
+
+
+heels 
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#010000">
+  <path d="M96 496 l0 -16 8 0 8 0 0 -8 0 -8 17.5 0 17.5 0 0 9.5 0 9.5 -16 0 -16 0 0 5 0 5 29 0 29 0 0 -8 0 -8 11 0 11 0 0 8 0 8 5 0 5 0 0 -14.5 0 -14.5 9.5 0 9.5 0 0 24 0 24 -16 0 -16 0 0 -8 0 -8 -8 0 -8 0 0 8 0 8 -40 0 -40 0 0 -16z"/>
+  <path d="M272 488 l0 -24 9.5 0 9.5 0 0 14.5 0 14.5 5 0 5 0 0 -8 0 -8 11 0 11 0 0 8 0 8 29 0 29 0 0 -5 0 -5 -16 0 -16 0 0 -9.5 0 -9.5 17.5 0 17.5 0 0 8 0 8 8 0 8 0 0 16 0 16 -40 0 -40 0 0 -8 0 -8 -8 0 -8 0 0 8 0 8 -16 0 -16 0 0 -24z"/>
+ </g>
+ <g fill="#b7d7e3">
+  <path d="M112 488 l0 -8 16 0 16 0 0 -8 0 -8 32 0 32 0 0 16 0 16 -8 0 -8 0 0 -8 0 -8 -8 0 -8 0 0 8 0 8 -32 0 -32 0 0 -8z"/>
+  <path d="M288 480 l0 -16 32 0 32 0 0 8 0 8 16 0 16 0 0 8 0 8 -32 0 -32 0 0 -8 0 -8 -8 0 -8 0 0 8 0 8 -8 0 -8 0 0 -16z"/>
+ </g>
+</svg>
+
+
+-------------
+
+flats
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512px" height="512px" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+ <g fill="#6cb5a5">
+  <path d="M112 488 l0 -8 48 0 48 0 0 8 0 8 -48 0 -48 0 0 -8z"/>
+  <path d="M288 488 l0 -8 48 0 48 0 0 8 0 8 -48 0 -48 0 0 -8z"/>
+ </g>
+</svg>
+
