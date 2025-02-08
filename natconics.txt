@@ -1,0 +1,858 @@
+<canvas id="natconicsviewer" width="256" height="256"></canvas>
+<input id="input" type="number" style="display:none" />
+<div id="info"></div>
+<script id="preview" mint="MINT_INSCRIPTION_ID">
+  const canvas = document.getElementById('natconicsviewer')
+  const ctx = canvas.getContext('2d')
+
+  canvas.parentElement.style.width = '100%'
+  canvas.parentElement.style.height = '100%'
+  canvas.parentElement.style.padding = '0px'
+  canvas.parentElement.style.margin = '0px'
+
+  const orgWidth = 2000
+  const orgHeight = 2000
+  let blockNumber = '1'
+
+  let scaleW = 0
+  let scaleH = 0
+  let offsetX = 0
+  let offsetY = 0
+
+  let backgroundImg = new Image()
+  backgroundImg.onload = redraw
+  
+  let furImg = new Image()
+  furImg.onload = redraw
+
+  let facialExpressionImg = new Image()
+  facialExpressionImg.onload = redraw
+
+  let headwearImg = new Image()
+  headwearImg.onload = redraw
+
+  let clothingImg = new Image()
+  clothingImg.onload = redraw
+
+  let eyewearImg = new Image()
+  eyewearImg.onload = redraw
+
+  let accessoiresImg = new Image()
+  accessoiresImg.onload = redraw
+
+  let earringsImg = new Image()
+  earringsImg.onload = redraw
+
+  let necklaceImg = new Image()
+  necklaceImg.onload = redraw
+
+  let tattooImg = new Image()
+  tattooImg.onload = redraw
+
+
+  window.addEventListener('resize', resize, true)
+  resize()
+
+  // Retrieve mint inscription id
+  let mintText = document.getElementById('preview').getAttribute('mint')
+
+  // Check no mint provided
+  if(mintText.includes('MINT_INSCRIPTION_ID')) {
+    let input = document.getElementById('input')
+    input.style.display = 'block'
+    input.style.position = 'absolute'
+    input.style.fontSize = '20px'
+    input.style.margin = '20px'
+    input.style.top = '0'
+    input.value = blockNumber
+    input.addEventListener('input',(event) => {
+        blockNumber = input.value
+        update()
+    })
+    update()
+  }
+  // Mint was provided
+  else {
+    const request = new XMLHttpRequest()
+    try {
+      request.open('GET', '/content/' + mintText)
+      request.responseType = 'text'
+      request.addEventListener('load', () => initialize(request.response))
+      request.addEventListener('error', () => console.error('XHR error'))
+      request.send()
+    } catch (error) {
+      console.error(`XHR error ${request.status}`)
+    }
+  }
+
+  function initialize(result) {
+    if(result) {
+      console.log('Result', result)
+      data = JSON.parse(result)
+      blockNumber = data.blk
+    }
+    update()
+  }
+
+  function update() {
+    let errorDiv = document.getElementById('error');
+    const request = new XMLHttpRequest()
+    try {
+      request.open('GET', 'https://ordinals.com/r/blockinfo/' + blockNumber)
+      request.responseType = 'text'
+      request.addEventListener('load', () => drawNatconics(request.response))
+      request.addEventListener('error', () => console.error('XHR error'))
+      request.send()
+    } catch (error) {
+      console.error(`XHR error ${request.status}`)
+    }
+  }
+
+  function drawNatconics(result) {
+    
+    if(result) {
+      let res = JSON.parse(result)
+      let height = res.height
+      let nonce = res.nonce
+      let reward = res.total_fee + res.subsidy
+      let blockSize = res.total_size
+      let totalFee = res.total_fee
+      let transactionCount = res.transaction_count
+      let timestamp = res.timestamp
+      let date = new Date(timestamp * 1000)
+      let dateString = date.toISOString().split('.')[0];
+
+        
+      let data = {
+                  height: height,
+                  nonce: nonce,
+                  reward: reward,
+                  blockSize: blockSize,
+                  totalFee: totalFee,
+                  transactionCount: transactionCount,
+                  datetime: dateString
+                }
+      backgroundImg.src = getBackgroundImage(data)
+      furImg.src = getFurImage(data)
+      facialExpressionImg.src = getFacialExpressionImage(data)
+      headwearImg.src = getHeadwearImage(data)
+      clothingImg.src = getClothingImage(data)
+      eyewearImg.src = getEyewearImage(data)
+      accessoiresImg.src = getAccessoiresImage(data)
+      earringsImg.src = getEarringsImage(data)
+      necklaceImg.src = getNecklaceImage(data)
+      tattooImg.src = getTattooImage(data) 
+      redraw('')
+    }
+  }
+
+  function resize(event) {
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+    scaleW = canvas.width / orgWidth
+    scaleH = canvas.height / orgHeight
+    offsetX = 0
+    offsetY = 0
+    if(scaleH < scaleW) {
+      scaleW = scaleH
+      offsetX = (canvas.width - orgWidth * scaleW) / 2
+    }
+    else {
+      scaleH = scaleW
+      offsetY = (canvas.height - orgHeight * scaleH) / 2
+    }
+    redraw('resize')
+  }
+  
+  function redraw(item) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    drawImageScaled(backgroundImg, orgWidth/2, orgHeight/2)
+    drawImageScaled(furImg, orgWidth/2, orgHeight/2)
+    drawImageScaled(facialExpressionImg, orgWidth/2, orgHeight/2)
+    drawImageScaled(headwearImg, orgWidth/2, orgHeight/2)
+    drawImageScaled(clothingImg, orgWidth/2, orgHeight/2)
+    drawImageScaled(eyewearImg, orgWidth/2, orgHeight/2)
+    drawImageScaled(accessoiresImg, orgWidth/2, orgHeight/2)
+    drawImageScaled(earringsImg, orgWidth/2, orgHeight/2)
+    drawImageScaled(necklaceImg, orgWidth/2, orgHeight/2)
+    drawImageScaled(tattooImg, orgWidth/2, orgHeight/2)
+  }
+
+  function drawImageScaled(img, x, y) {
+    if(img == null) return
+    if(img.src == '/content/') return
+    ctx.drawImage(img, offsetX + (x - img.width/2) * scaleW, offsetY + (y - img.height/2) * scaleH, scaleW * img.width, scaleH * img.height)
+  }
+
+  function calculateDigitSum(data) {
+    const digits = data.split('');
+    const sum = digits.reduce((acc, digit) => acc + parseInt(digit, 10), 0);
+    return sum;
+  }
+
+  function cumulativeSum(data) {
+    let numStr = data;
+    let sum = 0;
+    for (let i = 0; i < numStr.length; i++) {
+        sum += parseInt(numStr[i]);
+    }
+    while (sum > 9) {
+        let sumStr = sum.toString();
+        sum = 0;
+        for (let i = 0; i < sumStr.length; i++) {
+            sum += parseInt(sumStr[i]);
+        }
+    }
+    return sum;
+  }
+
+  function range(first, last, data) {
+    let lists = [42336, 122976, 622944, 828576];
+    for(let list of lists) {
+      if ((data >= list + first -1) && (data <= list + last -1 )) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function isPalindrome(str) {  
+    var reversedStr = str.split('').reverse().join('');
+    return str === reversedStr;
+  }
+
+  function getBackgroundImage(result){
+    let date = result.datetime.slice(8,10);
+
+    switch (date) {
+      case '01':
+        return '/content/84939030c62d7182a97d4c1ee6496b52e2756c97ee395bc35470d956f40aba62i0';
+      case '02':
+        return '/content/ad722177166ec034b40cadeaec4543bc0b08f8e09970d41bb93c20503f0a16f6i0';
+      case '03':
+        return '/content/af933f9f937a155847289cd1bc695ef231daabd133edb820e8e3acfdc84dbbb6i0';
+      case '04':
+        return '/content/a35de9793374f35a9238e0ff22f0911cd19ee3bb4e11eb4f927976ccd5a380adi0';
+      case '05':
+        return '/content/2819576acb574acc81832af66f55f8e3da70c693bd35c7debc900465174a6dfei0';
+      case '06':
+        return '/content/3331664d6a70c180bbd29fda00ef2fd432f10614e6378f0f3ed00f64a0c43b40i0';
+      case '07':
+        return '/content/1ae2474d1e386d23cda41f65524ffe35cd0eeae472870aec46797efd38ed303di0';
+      case '08':
+        return '/content/7e0f2a1ea415e1fd43b3920517eff7c4ecc8a8b1b626b8b4243ff21df9b40c20i0';
+      case '09':
+        return '/content/e9683f7bbccedac590759c7b65f38e1a6e808aaabcca38b2b05af17574ed3374i0';
+      case '10':
+        return '/content/2ed13dd7e305339a1bac6e1982d2f7f8a13f9e6cec22df1d28066c4173512bfci0';
+      case '11':
+        return '/content/8110eb42f02ceeffa1b1eba17a3465ee417926eb658ebbba07f127ee6413a726i0';
+      case '12':
+        return '/content/ee3b47d0111d3922ced7d7b326cc4a15986d84abe33bf3bd7931b9e48574d4a9i0';
+      case '13':
+        return '/content/820b498424bdec951b834598aea122e20ccf80027a1575930cdc0dc9a48eca82i0';
+      case '14':
+        return '/content/f5523a0b281b4f7e52bb223c6e9e07ab5bb1b5c87b522be9cab6016802babad1i0';
+      case '15':
+        return '/content/5ae7910cd27c7c6412c3955cf609581c4932060ddd54658c431c6f1386aba645i0';
+      case '16':
+        return '/content/354af006c1e94944c2202ee32058eed8f266f066e8d6caf2dc02dbdd7eaa6360i0';
+      case '17':
+        return '/content/c0c468865a646b801b3d8faec9d4e4a4783add348459d46e9077e744d2ab0145i0';
+      case '18':
+        return '/content/e731083df45130df4fb48f176d110c7844bbaeb7fe45df9c95b12a0cd984f6d5i0';
+      case '19':
+        return '/content/dbd05904b977b53a0e0c7d3d9c3345ed5198add7ac0620c3b6448174e2dc8b54i0';
+      case '20':
+        return '/content/6a375ac2c3573f66ebdd036671ac541060f93621c795fd5bb908f341c4bcb7a2i0';
+      case '21':
+        return '/content/044f71973e430c447fe43ac8fc830d94523eeb4eb6f454245f6b9e0a5e3a098ei0';
+      case '22':
+        return '/content/47c48e156c549d589ee65cf254a566149f25299b220f991014847e2e1b0f2b82i0';
+      case '23':
+        return '/content/6a7c676b5c1140a52b4856f93e23768e2c09f4c4d5011311df875746b3b8aeaci0';
+      case '24':
+        return '/content/7a3e4ed6b779f1bf584440d57aef4710169858082f201e65f9364f6e60a01383i0';
+      case '25':
+        return '/content/a2db414bef2655f1825c9ba1459d6a30655124bc5337df7202d82774a3e90532i0';
+      case '26':
+        return '/content/8a25e71d8394f919d1fedd5e02d5a3411776292f0353b62989ecec697d6e738fi0';
+      case '27':
+        return '/content/5cccdf1828d1bbe73d8f63ec85fa0164a148638e7708c5a76fcf9514d4c48d70i0';
+      case '28':
+        return '/content/d5a1450ad8dea500584d79fd29d4d9dee60b71326e5662e08b55de3362c28cc3i0';
+      case '29':
+        return '/content/373e31712b98d496687020aae5aafe640e16c0884883ea0623ea75baa09698bbi0';
+      case '30':
+        return '/content/81e3d202a7d02694b953fc7c42ff7264c18869ba4db2a72fde25072aaf5c4893i0';
+      case '31':
+        return '/content/4f83e349c40825b2dfa319ce00d09a27fb862062ec4fa5ac830ca037bd90330ci0';
+    }
+  }
+
+  function getFurImage(result){
+    let timeStr = result.datetime.slice(11); //HH:MM:SS
+    let hmStr = timeStr.slice(0,5);
+    let hStr = timeStr.slice(0,2);
+
+    if (isPalindrome(timeStr))
+    {
+      return '/content/d3a738740f888fac80073f95d0500f20d48f04019e80a3dd6470cea1d6924a43i0';
+    }
+    else
+    {
+      if (hmStr == "04:20" || hmStr == "16:20")
+        return '/content/bc781eadfa7ba2fb160a60dee0748508de47cebaa05ef6e6620ee90c0f5b3c16i0';
+      else if (hmStr == "18:15")
+        return '/content/8b3fb0caf3611fe2ec1621e290742de14ba42a8d0f3a805fa0689559513590c1i0';
+      else if (hmStr == "17:15")
+        return '/content/2cce0130135cf05021664cd7c26bbe58513753e82cc76926569b12c6ed5046e6i0';
+      else if (hmStr == "23:59")
+        return '/content/58f8365ffa7fceb40df2aaf6109fd83b5c828189830cbb7bc37b89b7734ca982i0';
+      else if (hmStr == "09:09")
+        return '/content/cb0b78d6926b808d112a27ddf45d4c3b2f8f11d6571f0417016b0efd6958a1a8i0';
+      else if (hmStr == "08:08")
+        return '/content/4adf9df11b5e7872fb8ae72b9f1fc941806b8016d9c0778f0bb05f4d789d8f03i0';
+      else if (hmStr == "07:07")
+        return '/content/20ec69106226f0b71542249d495c3e2226ad0e727a146d6de32a399b6bb4b423i0';
+      else if (hmStr == "06:06")
+        return '/content/bd706f2148d571332322dc8cb7efdd7c134582431b9d51dd187c67c1d5ddda49i0';
+      else if (hmStr == "05:05")
+        return '/content/f84cae0a1790ce577e99d267566acef080bcce53d84dd8156ae1fe26963c3c1di0';
+      else if (hmStr == "04:04")
+        return '/content/8e609e8ea88cb9738060b345c0467616da69fc267a2e6a620c5bcc5d52b6299ai0';
+      else if (hmStr == "03:03")
+        return '/content/0a9464b1a6f95c3e919ff17b9329b053f2211c3ba796692f7ad91c5820715110i0';
+      else if (hmStr == "02:02")
+        return '/content/e761549ffbe321717abc4835b647b474c6c5f516641727545563f8a8e9729fffi0';
+      else if (hmStr == "01:01")
+        return '/content/6b2a5b8b1d72c12aa080bd1e7cf6bd4c5bbb887cc4f4eee4851ec59403ca470di0';
+      else if (hmStr == "23:23")
+        return '/content/ed739f5be37fbc18bfd69ea66a5bad21cf04120805ddfabc7a5a213fe119199di0';
+      else if (hmStr == "22:22")
+        return '/content/86f79a20baa4ef7d4062df0aaf6b9deab3b77e178b8a30c833d51d21bd955baei0';
+      else if (hmStr == "21:21")
+        return '/content/2c5ebe4f1bbdbd783f2247a9618584be9b1cbf6a2b4f5f921bf1f3ec9d552881i0';
+      else if (hmStr == "20:20")
+        return '/content/6ff17f5a8ccd812b77b2a9031fa28931dc0d5ace5af8649ffca3df370cb98b6ai0';
+      else if (hmStr == "19:19")
+        return '/content/445328462d8fade1a8a12c20fea594d3f6ba6bba09fbffd60e9f66d1db0070edi0';
+      else if (hmStr == "18:18")
+        return '/content/1a0d9c50ddb642751a80983c99eddf5257f67a233bad16c67b8c1444cbdeed37i0';
+      else if (hmStr == "17:17")
+        return '/content/7c809153f0ebb48e33590001c49c495adbd8fdd936934cdf79954ef5213285c9i0';
+      else if (hmStr == "16:16")
+        return '/content/843e9ae81f48054371bc7eee059f750ebe30c66271b0d34f54f18d874fabefaai0';
+      else if (hmStr == "15:15")
+        return '/content/85739f672ccde4c83a21ed73b64fc528c62d1dcdb478c5440e46806d3922f4bdi0';
+      else if (hmStr == "14:14")
+        return '/content/5063f6b97c3c51f35cd69d10611daada161575cfadd4eb9ed236bbd96e608a1di0';
+      else if (hmStr == "13:13")
+        return '/content/09d28f0207acd9dad2f4be4b4c1c79a70efa0011ee622b57dd7e3609cfc21626i0';
+      else if (hmStr == "12:12")
+        return '/content/7b00e2f95d9f2a4be1912e8f82f93198926bfd1052e45f61d6a14085f57670aai0';
+      else if (hmStr == "11:11")
+        return '/content/41b96019f6cae8430531140dd455dbab1cb3c1c9415b42178d6515bc7e952194i0';
+      else if (hmStr == "10:10")
+        return '/content/2eca1764b182cff6dee96873b232cef65f27eb094b177aa83af825478e7e0e27i0';
+      else if (hmStr == "05:55")
+        return '/content/5d2add694cf0542588dd60b3c7d6da27158a4206e931d8edca726a9fa268d48di0';
+      else if (hmStr == "04:44")
+        return '/content/4fb32effdc47a97ee2d18bc03536587d2919c3fa266b17545415357292707bbdi0';
+      else if (hmStr == "03:33")
+        return '/content/7d96209afce0179f75c18c66ccbd1c92d845c7686f831cedda43d6c954c8a506i0';
+      else if (hmStr == "02:22")
+        return '/content/f77069bf5d8503e88443d99ae133dec3ce9be91e017344606aec5e5e45916013i0';
+      else if (hmStr == "01:11")
+        return '/content/f01e3d89cefd456c76795fd421a0eb41f9d825df64450cdc3caaf5ae02845db9i0';
+      else if (hmStr == "00:00")
+        return '/content/76a337f0e05b18fac8f4775f75bac3c48eca2a335b5c52cb7b85182d44660b6ai0';
+      else if (hStr == "23")
+        return '/content/6b2a19ac901fa60dd06b0c139113fae4b8a7208ea8529709c667a90a1355fdcfi0';
+      else if (hStr == "22")
+        return '/content/438db1f2ac29aba08711128a72087ffda052e4e5956802990d7bad4ecb735b2di0';
+      else if (hStr == "21")
+        return '/content/588ab232076542f571c2f497f8a5ed632c95dd659508366c8dbbf0e8245d1a32i0';
+      else if (hStr == "20")
+        return '/content/e2485effd179d3bc9e8c6490986c769204cea94aa5ee470b17a7d856aaa6e3e0i0';
+      else if (hStr == "19")
+        return '/content/171992a2b59e105105f4155501da5158a024311a3182273893a94df3b1f18522i0';
+      else if (hStr == "18")
+        return '/content/a0d444692433a2d37ae03daed16b29a4c53db7dd40cacddbd94224fd18fd4b39i0';
+      else if (hStr == "17")
+        return '/content/7095455f00dd6f44909e0f468f1e85af6373f09072528a2edc581d09b1797c7ci0';
+      else if (hStr == "16")
+        return '/content/19d1b38d9bbd20f2073f541859b409783213c3eed226ce6dcc7d52ac24e39edfi0';
+      else if (hStr == "15")
+        return '/content/ab976c8e19cdcd5df5dc3bd7e2a579762f32ef2b29cddf4d85bb90983c6a761di0';
+      else if (hStr == "14")
+        return '/content/d9fa9307ec02b79c0c0bd8f9c645b4a72cb60b00f6dfc8e68b199e3808acbcbei0';
+      else if (hStr == "13")
+        return '/content/35fa73d0e11e920b4a5a32b99184804cebee5f2b24a0918901c6709bec7617b2i0';
+      else if (hStr == "12")
+        return '/content/04623f84cda0e049390c2c106258f5e12d81209f115c5e1fc99beb9a068e7a7fi0';
+      else if (hStr == "11")
+        return '/content/2be7378f6cc9df948a56418795f0ec1311f5018428be22d22d2ba49032f64c99i0';
+      else if (hStr == "10")
+        return '/content/5d7b810db93d8b984773b2949289237f548c073a1958884b3df71e364e7d366ai0';
+      else if (hStr == "09")
+        return '/content/43f61e218742429513fb70e383115ffdcec80aff97dae4e4d4511b00333b6dc2i0';
+      else if (hStr == "08")
+        return '/content/f1dfdb1e194e2de670c0746edb4ff060e6991ed7c93978e808b0709bcbe9f214i0';
+      else if (hStr == "07")
+        return '/content/26bcbfcc0cce49d0ce61430b1329e09d9ddbc76f7a8f2d2bab731d0fee1b165di0';
+      else if (hStr == "06")
+        return '/content/7674937ac384eaf3ad806218885f5322a53ade428c2a530ac8be0bdefc04aa76i0';
+      else if (hStr == "05")
+        return '/content/79c163c9922868c76301aeb57fecc193deb752f2f6efdd1c1f0d23c49e68d23ei0';
+      else if (hStr == "04")
+        return '/content/1cc7f30f03487abf626f5965b963b743cd252f271ecfd32ff7e936c6b30a8b72i0';
+      else if (hStr == "03")
+        return '/content/c818e5eb23fc405bc85d4300785f17a4e9ba82dfa225a8e55eeb772de5cc9dc2i0';
+      else if (hStr == "02")
+        return '/content/8041bfd1623eae7e32e7d6e7db81e4e6e7c704aeaa9855509c1adbc02d95bcbfi0';
+      else if (hStr == "01")
+        return '/content/7e977be62b2ffe38d8fea62fe381ea80f84233b310c437122d26fc59ff8858c3i0';
+      else if (hStr == "00")
+        return '/content/9dba464759804554418122569c3c44e6267c2e34b2965022628388729d57db1ci0';
+    }
+  }
+
+  function getFacialExpressionImage(result){
+    let blockHeight = result.height;
+    const blockHeightStr = blockHeight.toString();
+    const lastChar = blockHeightStr[blockHeightStr.length - 1];
+
+    if (isPalindrome(blockHeightStr))
+      return '/content/7501af9963da9e43e60439f2dbce1f99b741ded34bcf70603e88daa8de02aff4i0';
+
+    if (blockHeightStr.includes('000'))
+      return '/content/00d9251d5055d9aed2b88db99c864ef6e727ce016f406af9d99819371c10fd15i0';
+
+    if (blockHeightStr.includes('111'))
+      return '/content/a2f85e8d6f134bc19376e482b16b626f4440f32fc5780c1664f715fc1a2631fbi0';
+
+    if (blockHeightStr.includes('222'))
+      return '/content/856fa1b2929dcfe3a4643b84fb49914eee7048b44e3de3bd21f791dd146211d7i0';
+
+    if (blockHeightStr.includes('333'))
+      return '/content/167e9f206767df317d7074fba07967ef3a6a6d2cb06142b02540bb3f58071a25i0';
+
+    if (blockHeightStr.includes('444'))
+      return '/content/d10bceaae6a0ac81f89e87e6d787c13251800018fbf9fc46bec6f0d6138d4d3ei0'; 
+
+    if (blockHeightStr.includes('555'))
+      return '/content/4b4c5d64bc11a3482ae7d586f9249e565888d61684141b8b235cf853b58a38f3i0';
+
+    if (blockHeightStr.includes('666'))
+      return '/content/aea0c2fb5f2072bc9e78662fe840d2dc453ea7e34b1ec6a5b338bff0a52fc48ai0';
+
+    if (blockHeightStr.includes('777'))
+      return '/content/431c57ac418f155f1319d8bc37d0d9642bc6c5428df7bd87a1bb82ae0d6c725ci0';
+
+    if (blockHeightStr.includes('888'))
+      return '/content/5e258b9488afe50c746370f67e09f3039f401c92cace87a05aa98e391f2db293i0';
+
+    if (blockHeightStr.includes('999'))
+      return '/content/6f3f4ba7b220e79b831eb86793a981d13d27f19a69748d7311a4d0da599d03e2i0';
+
+    switch (lastChar) {
+      case '0':
+        return '/content/66aa9e5c4f092b14ce02fb1505cf0d1d2f97e9419229aeac6b08f5d300a87885i0';
+      case '1':
+        return '/content/45e5af12a8ff9aceef6701114d9f7995979af93a3c715b856e29170b9fbcb8aai0';
+      case '2':
+        return '/content/3634e64f92248e4623fa389579007b96cbcb309ea069fdd4b1d35dd9ebdc4fc4i0';
+      case '3':
+        return '/content/e8ba68ec0617cfddb1f00d00c8c7e03291abcbb4ade9155fef3182b2379fabe4i0';
+      case '4':
+        return '/content/5bd40fc91648057608a1b7e5d7216a5422ff30ff6a2fa460ab05e4574f60585bi0';
+      case '5':
+        return '/content/b8a7b79f9d3971a077e9aa74e9215cca314fe594592bb54254dc753a7050a22ai0';
+      case '6':
+        return '/content/8a64b65efdc807f52d16952363e9de75b501270a7765f03962ba9cefe9237255i0';
+      case '7':
+        return '/content/1e3490bbb656796c696b191d9a1c4711ffeb0fcfed38e4812b4d6e7241b8048ci0';
+      case '8':
+        return '/content/6be7c6c8215bb9dcb72ce4c180958fb43694890fd3baaea573ae30f425e0c796i0';
+      case '9':
+        return '/content/1ec6c26bbec1b306d4e4ab3bb9113028bf4edc77b574d8741a8a2048d2863493i0';
+    }
+
+  }
+
+  function getHeadwearImage(result){
+    let sum = calculateDigitSum(result.height.toString());
+
+    if (isPalindrome(result.height.toString()))                          
+      return '/content/f7d5aa1fc05c7b81c3b0d6ff105f3e9729bf29942f0c77e76b458e37b9318c31i0';
+    
+    switch (sum) {
+      case 6:
+        return '/content/68b15521063d388bd8c862961652e36e65b2986fc3fb29044dafd94956ab5f1fi0';
+      case 7:
+        return '/content/5c2bfd7d3bf5d42853a4a3b95570553da7a8f5ccd35fdf80c96ad88d1ced077ai0';
+      case 8:
+        return '/content/41ff4231ec152dd273f1a181f6f01536dd92a7ef72b833b06dd4ff2a7de5a53ci0';
+      case 9:
+        return '/content/3b79113e2beb27568379d11612dc26226ede73275a77697e7443c33e53e286bai0';
+      case 10:
+        return '/content/723425c195a1e9f36e56d48ec96fe55d65132dc22d98ef0593d9a9e561099114i0';
+      case 11:
+        return '/content/';
+      case 12:
+        return '/content/5b01a8875f19383e55798cc66912367d2c479888201fcaf0d3377f7341756d46i0';
+      case 13:
+        return '/content/31cea2b827f85b942447777dd394953fb120ea28036828bdadd4be468f3f575ei0';
+      case 14:
+        return '/content/314117e70adc13b3e19e4f6cbac65e80815a61cc3185b256480e1a2b5766e80ai0';
+      case 15:
+        return '/content/fb87c9661e7e93f2b35ff18022ac0b5c4dc6b4b331a6543ae0a25f35917112fbi0';
+      case 16:
+        return '/content/9fe97cec4c064dcebdce8c4d5f996e92f62f5e7dc22efeb59d76a1c54d062ecci0';
+      case 17:
+        return '/content/c8fe26d373c1cae255c3b2b48aaf096de1c0a216a7d6b4279183d69b23f6113fi0';
+      case 18:
+        return '/content/32cfe2c857bae773614d091c1f23c594b12ac3bc9f3df3cc4920da6c4bd01e8fi0';
+      case 19:
+        return '/content/a6727615b11e941d691bd90ca5aaa46210b1f562d725fca01217755654f06d40i0';
+      case 20:
+        return '/content/19a68c0cfd9471e6c45aea7e7ccaf360ea7f5fcbe9b86b2f8ce8737bf920505ai0';
+      case 21:
+        return '/content/c856cf053d24909c46d8153912582f109412613a6d2f187457fc94b7cb88b67ei0';
+      case 22:
+        return '/content/';
+      case 23:
+        return '/content/b644af70381d8dc7c61cc7d5bc74a69e68e012021656108714cbdac1c77e867di0';
+      case 24:
+        return '/content/';
+      case 25:
+        return '/content/dcd0c0c3daa16b8e6193b6f57bc99cacfef0275b41ad4cc8f9c273daba2daef7i0';
+      case 26:
+        return '/content/9b432af6c229e50397330f40ca55a3ae44555cc3d65a01c7f6bf14dadd24622fi0';
+      case 27:
+        return '/content/78db69a11da311dbdaf29c3b50ebd9b311e9c0d6b434eda2dd9bc09472ce70ddi0';
+      case 28:
+        return '/content/33858ae3a079b9c4e4b790c61067de24abf6c5214b383fa7966fd341fd8cd64bi0';
+      case 29:
+        return '/content/ef999dc83cbd591b89c6c5fd28832fecb22b64f436fa14f8d665ca9258037bffi0';
+      case 30:
+        return '/content/352c0cc630d36943b28e5d4681d654d09e55388a80e9b1c0263d2e2142da8ee2i0';
+      case 31:
+        return '/content/d6485163272759141ac0ac9597789a7b02d941c1527c0c0bf5b65bb04c7b8b79i0';
+      case 32:
+        return '/content/841c67152348d35cc6ce18aed6339fb2f32475ab803819a3e6397c85b3d887e7i0';
+      case 33:
+        return '/content/';
+      case 34:
+        return '/content/cd7c7d4bf9ce9cbdc9ba6bad7d5a08dc1430a5c24c1ef5c324064fdd54c5e305i0';
+      case 35:
+        return '/content/392a2081c623317be89ab070bdab8df9789f6eba70fa2484d939095f5645b630i0';
+      case 36:
+        return '/content/30d4068578327ce011d58e90de8f82e0e8b260e0bf5c8d3b2a1a312c9bf95de8i0';
+      case 37:
+        return '/content/b2ad70f76c5aa880084996eed22619f5ea66da8787e2bfcd2f72db6a3335872ei0';
+      case 38:
+        return '/content/6222fdf5b8f99e6967ed66afd9b74bee5c8b6e0ad87bf0b69d38e56d8a59098ei0';
+      case 39:
+        return '/content/2b442b44b0c1cf668fa5b1598dd3b94cf4038948ba4f4eaaccce65dcb01c5f16i0';
+      case 40:
+        return '/content/d5e0a300b22d49c8daa86834450d5288c2f824da9e2478e5b73a92fa60158f2ai0';
+      case 41:
+        return '/content/155fe1fb0c1baadc13c6a434976962c32052b7bc638c1236bed831767f4af47di0';
+      case 42:
+        return '/content/031acce34169ad0db6c8ac3aa2388840dbddfda8550a8072749c4d821e05ea80i0';
+      case 43:
+        return '/content/8bbfdb78001bd11522a44907e5f9a4ea6fe3e78892e436880feebc09fa9ef74di0';
+      case 44:
+        return '/content/';
+      case 45:
+        return '/content/aff529aafb48042e838fdd8f62d87e9677f03a6c297ee9a3f46348566204d3c1i0';
+      case 46:
+        return '/content/5fd48ae24cd64dbc3ac00bc1742b0bdb1ef992040151cb93aad1ebac0633a870i0';
+    }    
+
+    return '/content/';
+  }
+
+  function getClothingImage(result){
+    let sum = cumulativeSum(result.height.toString())
+    if (result.totalFee == 0)
+    {
+      switch (sum) {
+        case 1:
+          return '/content/97f9ee3442d0ffa22b5095e730ede735d745ae90b2cb560988bb2b825a739984i0';
+        case 2:
+          return '/content/0a5484f1dd3afbc38b3f7e546cbdd2bb47c537f21489ea008822a4fb24b3d975i0';
+        case 3:
+          return '/content/8d86e42533e7f95095671c1e0e7d1b79957caeeb0ef5a24eacd4adc33d53138di0';
+        case 4:
+          return '/content/85e0158fd73e3c970f2cb3b358c41e0fc06aba799152c1dfd4351e0f707765d4i0';
+        case 5:
+          return '/content/ffa76760947fbb898aa53b3559573558f3855464ca6f5f60c9356d4b00aeda3bi0';
+        case 6:
+          return '/content/20a7c5f9897bfea2aa33c34bae4b2cd81065935dcbfb73750634f9372c1428f4i0';
+        case 7:
+          return '/content/d4f7f4215952e0767b633ed0cf445ad73eedffa26cde240a05a72eacbfe915fdi0';
+        case 8:
+          return '/content/81b0b896bc89484b22e05d3774480aba9f46a50a75e8ef414592b561e2e5d88ei0';
+        case 9:
+          return '/content/54d02e8674f8d4aee4fcef78de45c7d21272fd7a9b9ca72884c029b15bd52eb9i0';
+      }
+    }
+    else if (result.totalFee == 500000) {
+      return '/content/b7907da22f52a6a06a5bbbeaaf7b5e4b6db67f2e25eecf70d992da00e49a66c0i0';
+    }
+    else if (result.totalFee < 1000000)
+      return '/content/ca904a0efd4e4fa7dbaff7ccb14e9361a8e4e25f1bc7793b1f7f7503ea40b319i0';
+    else if (result.totalFee < 2000000)
+      return '/content/8fe295fbaa9efeb1ff9abfcdff20550edde58cceaf83b44b0746db3bbced1602i0';
+    else if (result.totalFee < 3000000)
+      return '/content/2644fa2a9dc46f14e001bedbc3d8849d5198b5f8cc15504aac94b50211003499i0';
+    else if (result.totalFee < 4000000)
+      return '/content/2e563d7a4c53dffe76bd75c0829d79ddbb0ef79097039617adf8f848dd4ab2fdi0';
+    else if (result.totalFee < 5000000)
+      return '/content/93c1045aa6a81e1a6367a1739ccf0d636af9dcd292c2892a7a4dbfbbf5a9a7bai0';
+    else if (result.totalFee < 6000000)
+      return '/content/e23c775a5f41c9362e7588b68443824bb9ff0950d50d8175a6ec9022318e7906i0';
+    else if (result.totalFee < 7000000)
+      return '/content/ab73742145f8377447f7bba0409198cf7234cebe61530c671746d360e7bb73b8i0';
+    else if (result.totalFee < 8000000)
+      return '/content/028ff99f81312a361be7ab217ff90cac5ce94ca234f077570a516a9477ca6909i0';
+    else if (result.totalFee < 9000000)
+      return '/content/d2ff6ce5502dcd33f38e407b5eb11395dc45fc3f2c1730f522d8ccadc56d17b9i0';
+    else if (result.totalFee < 10000000)
+      return '/content/6d06ad1647a40116167ca5e534bde45cfd7ef66db7990b451c897bfa5c337ccdi0';
+    else if (result.totalFee < 11000000)
+      return '/content/ce4fbcffc6cb002335719c822533b32383713ad86fd0ba877866b6828433ac9bi0';
+    else if (result.totalFee < 12000000)
+      return '/content/ff70dd768a5c49e4264e7a72e40c6705e811ad527e0f851dbb5ec79601ad3810i0';
+    else if (result.totalFee < 13000000)
+      return '/content/531deb893c6026d51855661c147ef357fd65866b26be8b3f9335285efa7152c2i0';
+    else if (result.totalFee < 14000000)
+      return '/content/998d86ed060f5c8c707346903a77cfc6587da2a2f1eeb32c23869c56b917210di0';
+    else if (result.totalFee < 15000000)
+      return '/content/1db5556021cb01a9edcd48784fbf39a0ddc320ee82a21695320cff15a31491c7i0';
+    else if (result.totalFee < 16000000)
+      return '/content/779ae3c6c359dae7bd0027cec6ae386b91b256c28e5389ec616f08e3e315877bi0';
+    else if (result.totalFee < 17000000)
+      return '/content/d34f9e126fa11611c721edfe5d02353e0643aa6a4deba9098ab38c6d060c7184i0';
+    else if (result.totalFee < 18000000)
+      return '/content/3f6e61657dfdc5cc4c68e01a2c0a9808e43ecdc9d0b8c521b15ff6c679ceef2ai0';
+    else if (result.totalFee < 19000000)
+      return '/content/80b6be99cef01f3292bad80a2069b384f2ea2ab97414a413c4d262a8339f5c52i0';
+    else if (result.totalFee < 20000000)
+      return '/content/9a191f22503e49af90f3c93285be7ec0c0f7d3daefb5740053359df20ff165eai0';
+    else if (result.totalFee < 21000000)
+      return '/content/7169be22f609749c78fe59c5dcb255516e4fc2885f8822bfe68d94da6d86f675i0';
+    else if (result.totalFee < 22000000)
+      return '/content/20e2d00d5ecda4eedbcb4c088baab061d2262b43ac0981f6168e096bda389ddai0';
+    else if (result.totalFee < 23000000)
+      return '/content/219b0c5932b0471aa7a2cff2ad4a12d7cc0eff2a2ce0f183c4d14520a633ca8ei0';
+    else if (result.totalFee < 24000000)
+      return '/content/ea3e7647f13906204cc71ea3ccaa1c91e53c8207ccc5b52045d8c1dd9dcfafa3i0';
+    else if (result.totalFee < 25000000)
+      return '/content/5db578bded1f096fe00d85b49c9b998f2502ecab8f47df8097fd2fb4901b5c1bi0';
+    else if (result.totalFee < 26000000)
+      return '/content/544347c5a77674f55b9f39720bc1a1329988a1d34978731d2336f81cbc2d61ddi0';
+    else if (result.totalFee < 27000000)
+      return '/content/b425c238b80d251cde9e70651832a1ec256e84eb5498d8e50edd9dc752f9b772i0';
+    else if (result.totalFee < 28000000)
+      return '/content/0ea8278e8529bd5a8c4d492d30d910c37b3dd4422f7fc9d0fb6915c26a831a15i0';
+    else if (result.totalFee < 29000000)
+      return '/content/cd58485ac7587299bdeb964e682909c78736f45e84a4516802fcb6e4e5592efbi0';
+    else if (result.totalFee < 30000000)
+      return '/content/5cb17454c1f6a63bc883d4ed460498e19465c1973de812716d7af52e668b51d0i0';
+    else if (result.totalFee < 31000000)
+      return '/content/4201c02ec9c309eb3c94878b498a9d16e89361f98a3bd98e052752a2e2d5a9c8i0';
+    else if (result.totalFee < 32000000)
+      return '/content/9419f63c99c565c7a4cb876ba3221f3486595f4d2ec43e2f96553e2aa4b7b3b6i0';
+    else if (result.totalFee < 33000000)
+      return '/content/588c04446f851c706b3464bbfa3241aefada7aa24b7a2c35f53be1645760191ai0';
+    else if (result.totalFee < 34000000)
+      return '/content/d7409143aca6d0654514e6da2bfd41f763b363e23de3ce57f069eee0c1b8072fi0';
+    else if (result.totalFee < 35000000)
+      return '/content/f4f5942a45c7ddd650933a1257ddf1ab3c06ecbf69f2176b42cd24634a92760ai0';
+    else if (result.totalFee < 36000000)
+      return '/content/c9a7cbb93faf2d37342818dba5a4048aa24a1afa29228f98d016919053e7d63ai0';
+    else if (result.totalFee < 37000000)
+      return '/content/ddde2e3a474f317212db00179bc64a563d5e145370ad25904e8c6ff16573009fi0';
+    else if (result.totalFee < 38000000)
+      return '/content/3d259d1d7975f2c68e7ce2281ad9ec5f6e9508009b86c812f4aa3082cbb66254i0';
+    else if (result.totalFee < 39000000)
+      return '/content/61d3d6abc1ad475dc4f378f0848016d54b4d0f40058ceb0db5d2dca77139072bi0';
+    else if (result.totalFee < 40000000)
+      return '/content/e7fe6eb0757e5e4c761b2bbf223d2d84229e44a154da814a351b15ab6a858daei0';
+    else if (result.totalFee < 50000000)
+      return '/content/4e49a58a84522d214f161f1bb5af1419a32ffd383436db9d4c1c69dff1a212c2i0';
+    else if (result.totalFee < 100000000)
+      return '/content/70d9dfd4bf5e8d1acd202f04eda432cf09996ce5580e204655f22e4c1010422ei0';
+    else    
+      return '/content/d89aa1983a01e339d7fddec92f3b4c052e3ff7ccef305bd703e3c7a13ce3e774i0';
+  }
+
+  function getEyewearImage(result) {
+    switch (result.transactionCount % 21) {
+      case 0:
+        return '/content/bb8cd8395512e3e6e82d01436c304850a655555b8e4cd1a5600f99768c36f0ffi0';
+      case 1:
+        return '/content/';
+      case 2:
+        return '/content/a8c0612f81061e128725c59f44412b7e079ea05a99be6998b606904e70e0afc7i0';
+      case 3:
+        return '/content/f8087e4a3f4d367dcffdc91202ffbdf8fe424b2b0a265985082d265d22875e84i0';
+      case 4:
+        return '/content/912d0cf2099a18899fb883836a36caa1ca7d5356fa9ed3aeb5189d1ce81720c3i0';
+      case 5:
+        return '/content/312c6235e772f10db46393aa064c7bca35a89737a0e5293ca30d30995acf637ci0';
+      case 6:
+        return '/content/ed97705d9a57d467e01af5ded413785f42949a58398306a39bea9952c3ce42c7i0';
+      case 7:
+        return '/content/67509ba124d7116a13b89c815ae7c27226b642d03170dd4cfc4493dc2278abfci0';
+      case 8:
+        return '/content/aa1346cad8e51c75ed6681406836dc5e5d765d857eb9fcfe9a577cd883997007i0';
+      case 9:
+        return '/content/a2d5d57da339d7391c885455b441bdd73ec1ca065f7254c3e152151cbac03af8i0';
+      case 10:
+        return '/content/954ebf7a6763c7c33571d94ed935dbbe769729b1aef003ff46d0acd4ebfe6e35i0';
+      case 11:
+        return '/content/00fd3a4784ed387a4c632d511dac6f553a1ff5dde3c7dc7cefdd5dd2edffa06ai0';
+      case 12:
+        return '/content/419de6a140624eb798f43cc5a4e0462c10a691bb261b9a075bab184dc87c1705i0';
+      case 13:
+        return '/content/ec8cda37245c1ea9bf851d4671dd33b8cb30e8c3586edeeb2a454384b36c6dc9i0';
+      case 14:
+        return '/content/0a94e0bc4222968a74c743544c950d48116af93b0de91c33876a2b6c7925163ei0';
+      case 15:
+        return '/content/cd4b74401bfb85a01612818a7ce36837a103fa96bc72e40323750d5fa19b8653i0';
+      case 16:
+        return '/content/489ebcfce44ccd178049ab2811dd0f8494600cfda8e2b28655fa3102d029da63i0';
+      case 17:
+        return '/content/676e538b4c4e05a046b1a5e7d3d579f5a9418b50486ebac62591672cdf71bfdei0';
+      case 18:
+        return '/content/';
+      case 19:
+        return '/content/';
+      case 20:
+        return '/content/';
+    }
+  }
+
+  function getAccessoiresImage(result){
+    let height = result.height;
+    if (range(1,5,height))
+      return '/content/2aa669b3b013deb218d036257ac706b7294fa2898e993d39ab94a279de7718e6i0';
+    else if (range(6, 10, height))
+      return '/content/aa07333c723945e8ef945d019bff340aadaf75710cedd108e0ba89082e91b274i0';
+    else if (range(11, 25, height))
+      return '/content/f6a5d668b21086712e64a1845a88d1659904a9f7ffd2f4fb85277736b7a784b6i0';
+    else if (range(26, 50, height))
+      return '/content/d3d79d054eff72d608a85d31b70cb058c0e66b3a6190f4b25c73ec526ef800e6i0';
+    else if (range(69, 69, height))
+      return '/content/138e8fde36962b4f4a584ca12c8fe625e8c4511fcb281fdeef21efa6e61e8256i0';
+    else if (range(51, 75, height))
+      return '/content/aa528a7dcc19141003b8a9043aa8b79d343a379e82a7aaa2f71a9a82de58ceadi0';
+    else if (range(76, 100, height))
+      return '/content/4aff84be7c7a6ce88a935366552fd29f8a13ef7997aa13a093b8fda1db4af679i0';
+    else if (range(101, 200, height))
+      return '/content/eddeb13687c2c62050b36a274d706f725b1b395a8df97508e994c4365f69e39ai0';
+    else
+    return '/content/';
+  }
+
+  function getEarringsImage(result){
+    let blockSizeStr = result.blockSize.toString();
+    blockSizeStr = blockSizeStr.substring(blockSizeStr.length - 3);
+
+    if (blockSizeStr.includes('25'))
+      return '/content/bfa270d73ee6ab76908b3eee74907f950b87c425d86d5e656b6a10b17104e29ci0';
+    if (blockSizeStr.includes('13'))
+      return '/content/5fb5c4f854ba9a9299c1faacd60a1046b2bd0c3d5cd186ebcc25a0d5bc263163i0';
+    if (blockSizeStr.includes('42'))
+      return '/content/0319b01266e9bd8f1515899ad0b197b199bcf73081b7afb880f9edefe12b0fddi0';
+    if (blockSizeStr.includes('35'))
+      return '/content/e0f7c84f757f9db29f1523d252fc2562ead62a8ec3111b2f651844955dee8596i0';
+    if (blockSizeStr.includes('30'))
+      return '/content/42b3f431903c4950169f5c476bb9d5b8b6f4ed1387de5de7ee35adc97127fbbci0';
+    if (blockSizeStr.includes('36'))
+      return '/content/26e4ed7c48fd664b7066b108be634c1b6668e12c86b9d2df2a5e455091496265i0';
+    if (blockSizeStr.includes('60'))
+      return '/content/7b6a668a275800382a172aee13340dad67c55527d7eb63c2b5d0c30af60995abi0';
+    if (blockSizeStr.includes('46'))
+      return '/content/2fad75417f2fc555206c66d98dbe617d969438de56b54a855bca7800c1de8085i0';
+    if (blockSizeStr.includes('39'))
+      return '/content/70446fc0427b58c075b18779a13a871e9d5a2cceaf96a1c922dc39d7b10624f5i0';
+    if (blockSizeStr.includes('19'))
+      return '/content/5dfb63b7cc98fb59687de0f45715348bd2129de9300e7f022a5061f9f363dcf0i0';
+    if (blockSizeStr.includes('34'))
+      return '/content/9074f6a4ca332d558fb3dae9e4a694a188655b0696c564f6bd428375443b772ei0';
+    if (blockSizeStr.includes('11'))
+      return '/content/32d04aef15ba3a865f54caf832bd8f4b906587229c693ecd2605ec6aec86c09ci0';
+    if (blockSizeStr.includes('27'))
+      return '/content/e50ad77bae431b05a3d7b8323cfff8df1c569c1dfba026ecf8ab35d18e55aeedi0';
+    if (blockSizeStr.includes('32'))
+      return '/content/0896b53181b2319259af9cd47f5063791783c987bd7659a28ae7da8c8171d001i0';
+    if (blockSizeStr.includes('48'))
+      return '/content/dc77cd2e14c8370b3d84361ceb8df75941d8fdef4a7f4d33dc31e547f5b0b66bi0';
+
+    return '/content/';
+  }
+
+  function getNecklaceImage(result){
+    let images = [];
+    let rewardStr = result.reward.toString();
+    
+    if (rewardStr.includes('78'))
+      images.push('/content/0cc64d747df77e7c54d02f0d98bec60b71535a48b68aaeb74485386610eb5e5fi0');
+    else if (rewardStr.includes('808'))
+      images.push('/content/dadfc8893342183abe86759ddd0cbfcd400fe67eea969b9018318dc3cb03bb33i0');
+    else if (rewardStr.includes('80'))
+      images.push('/content/da9aba6a45000673eefa14cc7f154a907977768c3360b5f078e34ba0769f1a38i0');
+    else if (rewardStr.includes('82'))
+      images.push('/content/eb007524fa3c1acb2dafe27cf4e587cce6525cfe779a61117d6f0337c8f9ee7di0');
+    else if (rewardStr.includes('85'))
+      images.push('/content/65ed0942971f8215fb5ffefd51aa4fedbdb50a80b578bcdab3dd985306546abfi0');
+    else if (rewardStr.includes('90'))
+      images.push('/content/facb9096be695814590550c0acb95dcaa9e8ea1f9c67d6a51fd5c107931b363bi0');
+    else if (rewardStr.includes('99'))
+      images.push('/content/3d76610497bb43acc51dc9cf27524622ae1a7971e3051166ab3404c640913dfei0');
+    else if (rewardStr.includes('104'))
+      images.push('/content/a773409f31ee6ba12c75a123a3d6e9793ed2dffcb856ef580c93557124ad2d8bi0');
+    else if (rewardStr.includes('108'))
+      images.push('/content/20bddaad0e8c73bb82d888d512170aa53e2d5d4d21b3e765a3b8f380cbda7bdai0');
+    else if (rewardStr.includes('120'))
+      images.push('/content/fafeac2cc5e59455e7e57b8e790cbf01dc0dc64509896e1b6265dc49ceb14adfi0');
+    else if (rewardStr.includes('128'))
+      images.push('/content/2e44f8aeb9bab28278a9c6cc5c982eeb06c6590a1abce52ae95c614faa765b5ei0');
+    else if (rewardStr.includes('150'))
+      images.push('/content/41586f0ec3092f06ae174b65c2a5d01a813b87b8bec59454797367fc34afaa85i0');
+    else
+      images.push('/content/');
+
+    return images[0];
+  }
+
+  function getTattooImage(result){
+    let nonceStr = result.nonce.toString();
+    const lastChar = nonceStr[nonceStr.length - 1];
+    if (result.height < 50000) {
+      if (lastChar == '0' || lastChar == '1')
+        return '/content/991eb7ecd9a7d9402c0856a029dac8a41bcb036c0305c35c0f69b0547a17335di0';
+      if (lastChar == '2')
+        return '/content/13040a31a9c4b10ab345b9e7388d3ddedc24b301abfdb462ea56fc0b8d0f0230i0';
+      if (lastChar == '3')
+        return '/content/8fe94a912bf333df0b29e0396f2c925f689e740a6bc8439e666b583ddcc6779di0';
+      if (lastChar == '4')
+        return '/content/49d2dce06bb78996a76c9b2be3e5d0821d62bb895005755f84e4d96f6276af0ci0';
+      if (lastChar == '5')
+        return '/content/e6fe4f052a5c36936f8ce548d1a4753c08d087a73032b8ec57c4aeff3c1fcd92i0';
+      if (lastChar == '6' || lastChar == '9')
+        return '/content/7637bc4a64b571f231fd60ab0a1decf080746d0dc1d8dfcf927a9445d6b48440i0';
+      if (lastChar == '7')
+        return '/content/b521ed3bd3ca85c191b5e9451392b8a6e0e4cecdb8d463894add4f6d88c16a94i0';
+      if (lastChar == '8')
+        return '/content/85d686fc2af5037bdb857dde14f414725c1f7ba677f80b5a6e3dc7a351f5b595i0';
+    }
+    return '/content/';
+  }
+</script>
