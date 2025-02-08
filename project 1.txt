@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Natimated Wizards</title>
+    <style>
+      body {
+        background-color: black; /* Setting background color of the body */
+        color: white; /* Setting text color for the body */
+        margin: 0; /* Removing default margin */
+        padding: 0; /* Reset padding */
+      }
+      h1 {
+        text-align: end; /* Centering the title */
+        color: white; /* White text color for the title */
+        margin-bottom: 10px; /* Increase space below the title as needed */
+        font-size: 2em; /* Adjust the font size as needed */
+      }
+      #natimatedwizards {
+        width: 657px;
+        height: 976px;
+        position: relative; /* Ensure your wizard is positioned relative to this container */
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Natimated Wizards</h1>
+    <!-- This is your title in white letters -->
+    <div id="natimatedwizards"></div>
+    <!-- Wizard container -->
+    <input id="blk" type="number" style="display: none" />
+    <script id="preview" mint="MINT_INSCRIPTION_ID">
+      // Retrieve render area
+      const root = document.getElementById("natimatedwizards");
+      root.parentElement.style.width = "100%";
+      root.parentElement.style.height = "100%";
+      root.parentElement.style.padding = "0px";
+      root.parentElement.style.margin = "0px";
+
+      const orgWidth = 212;
+      const orgHeight = 212;
+      let scaleW = 1;
+      let scaleH = 1;
+      let blockNumber = "0";
+
+      // Define the color map with the given colors
+      const colorMap = {
+        1: "#6D2BF8", // Purple
+        2: "#AF89FE", // Lilac
+        3: "#FDF64D", // Yellow
+        4: "#2067F0", // Blue
+        5: "#976F53", // Brown
+        6: "#CBC7E3", // Light Grey
+        7: "#15D96F", // Green
+        8: "#1833e0", // Wizard Blue
+        9: "#F95E3C", // Orange
+        0: "#585663", // Grey
+      };
+
+      // Define the color map with the given colors
+      const colorMap2 = {
+        1: "#5922CD", // Purple
+        2: "#9C6EFE", // Lilac
+        3: "#FDE14D", // Yellow
+        4: "#1C54C0", // Blue
+        5: "#725540", // Brown
+        6: "#8F8DA5", // Light Grey
+        7: "#17B35F", // Green
+        8: "#F0EBE3", // Mystic White
+        9: "#EC5331", // Orange
+        0: "#403F4A", // Dark Grey
+      };
+
+      // Define the color map with the given colors
+      const colorMap3 = {
+        1: "#A2FF00", // GITD
+        2: "#49EFEF", // Diamond
+        3: "#FFB800", // Gold
+        4: "#F0EBE3", // Mystic White
+        5: "#FF7528", // Orange
+        6: "#FF1E39", // Red
+        7: "#00B127", // Green
+        8: "#2A32FF", // Blue
+        9: "#A9A8D6", // Platinum
+      };
+
+      // Resize window
+      window.addEventListener("resize", resize, true);
+      resize();
+
+      // Retrieve content inscription id
+      let mintText = document.getElementById("preview").getAttribute("mint");
+
+      // Check no mint provided
+      if (mintText.includes("MINT_INSCRIPTION_ID")) {
+        let input = document.getElementById("blk");
+        input.style.display = "block";
+        input.style.position = "absolute";
+        input.style.fontSize = "20px";
+        input.style.margin = "20px";
+        input.style.top = "0";
+        input.value = blockNumber;
+        input.addEventListener("input", (event) => {
+          blockNumber = input.value;
+          update();
+        });
+        update();
+      }
+      // Mint was provided
+      else {
+        const request = new XMLHttpRequest();
+        try {
+          request.open("GET", "/content/" + mintText);
+          request.responseType = "text";
+          request.addEventListener("load", () => initialize(request.response));
+          request.addEventListener("error", () => console.error("XHR error"));
+          request.send();
+        } catch (error) {
+          console.error(`XHR error ${request.status}`);
+        }
+      }
+
+      function initialize(result) {
+        if (result) {
+          console.log("Result", result);
+          data = JSON.parse(result);
+          blockNumber = data.blk;
+        }
+        update();
+      }
+
+      function resize(event) {
+        root.width = window.innerWidth;
+        root.height = window.innerHeight;
+        scaleW = root.width / orgWidth;
+        scaleH = root.height / orgHeight;
+        offsetX = 0;
+        offsetY = 0;
+        if (scaleH < scaleW) {
+          scaleW = scaleH;
+          offsetX = (root.width - orgWidth * scaleW) / 2;
+        } else {
+          scaleH = scaleW;
+          offsetY = (root.height - orgHeight * scaleH) / 2;
+        }
+        root.style.zoom = scaleW / 2;
+        update("resize");
+      }
+
+      function update() {
+        generateHtmlBasedOnBlockNumber(blockNumber);
+      }
+
+      function generateSvgForDigits(blockNumber) {
+        const originalString = blockNumber.toString();
+        const digits = originalString
+          .padStart(7, "0")
+          .split("")
+          .map(Number)
+          .reverse();
+        let svgs = [];
+
+        //HAT
+        if (originalString.length >= 3) {
+          const colorForThirdDigit = colorMap2[digits[2]] || "transparent";
+          svgs.push(`
+        <div style="position: absolute; top: -57px; left: -90px;">
+    <svg width="730" height="570" viewBox="0 0 1000 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="m485.7,143.2l-135.2,43.6l-62.8,128c-12.1,17.1 -12.7,17.8 -17.1,17.3c-2,-0.2 -8,-0.3 -13.4,-0.2c-21.6,0.6 -40.2,3.9 -54.9,9.8c-16,6.5 -33.1,21.9 -36,32.3c-2.3,8.2 3.5,15.3 7.3,21c10.6,15.9 26.1,23.8 41.1,30.7c38.8,17.7 72.7,27.8 93.4,33.5c27.2,7.5 20.6,5.1 45.9,11.3c9.3,2.3 60.7,12.6 74.2,11.1c9.3,-1 22.9,-5.4 32.3,-10.5c8.8,-4.8 23.2,-15.4 33.9,-24.9c12.1,-10.7 13.4,-13.7 10.4,-22.5c-4.8,-13.5 -29.4,-32.3 -63.2,-48.7l-9.5,-4.6c-2,-1 -3.5,-2.8 -4,-4.9l-1.3,-5.5c-7.6,-33.7 -8,-50.6 -17.1,-136.2" stroke="#000000" stroke-miterlimit="10" fill="${colorForThirdDigit}">
+            <animateTransform attributeName="transform" attributeType="XML" type="translate" values="0 0; 0 -2; 0 0" dur="2s" repeatCount="indefinite" />
+        </path>
+    </svg>
+</div>
+`);
+        }
+        // Beard
+        if (originalString.length >= 4) {
+          const colorForFourthDigit = colorMap2[digits[3]] || "transparent";
+          svgs.push(`
+        <div style="position: absolute; top: -70px; left: -19px;">
+    <svg width="600" height="600" viewBox="0 0 1000 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Beard polygons -->
+        <polygon class="st5" points="271.7,530.2 290.5,525.4 302.5,521.1 323.6,529.5 335.9,533.5 353.1,536 331.1,548.6 310.1,557.4      302.5,557.4 289.3,548.6" fill="${colorForFourthDigit}"/>
+        <polygon class="st7" points="301.8,499.1 126.4,537.5 239.6,541.3 253.3,624 262.2,664.5 269.7,686 287.9,713.9 299.6,730.3      306.6,715.2 317,698 328.6,683.8 343.2,667.2 363.5,642.1 388.1,599.9 407.5,551.1 408.8,547.9 478.9,550.7" fill="${colorForFourthDigit}" stroke="#150400" stroke-miterlimit="10"/>
+                
+        <!-- Mouth elements -->
+        <path d="m335.9,533.5l-12.3,-4l-21.1,-8.3l-30.8,9l17.6,18.4l13.2,8.9l3.4,0l10.8,-2.8l18.9,-8.6l17.5,-10l-17.2,-2.6l0,0z" fill="#FFCBAA" stroke="#000000" stroke-miterlimit="10"/>
+        <polygon id="Mouth" class="st8" points="287.6,533.5 328.2,535.7 326.4,540.8 319.2,545.3 305.8,545.3 294.6,541.7  " fill="#FF152F" stroke="#000000" stroke-miterlimit="10"/>
+    </svg>
+</div>
+`);
+        }
+        //Ring
+        if (originalString.length >= 2) {
+          const colorForSecondDigit = colorMap2[digits[1]] || "transparent";
+          svgs.push(`
+           <div style="position: absolute; top: 201px; left:54px; transform: rotate(20deg);">
+                <svg width="36" height="24" viewBox="0 0 36 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect y="36" width="18" height="18" fill="${colorForSecondDigit}" stroke="#000000" stroke-miterlimit="18"/>
+                </svg>
+            </div>   
+        `);
+        }
+
+        // Cloak
+        if (originalString.length >= 1) {
+          const colorForFirstDigit = colorMap[digits[0]];
+          svgs.push(`<div style="position: absolute; top: -70px; left: -20px;">
+    <svg width="600" height="600" viewBox="0 0 1000 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Cloak -->
+        <path id="facePath" fill-rule="evenodd" clip-rule="evenodd" d="m564.3,423.8c-0.2,0.4 -0.7,3.3 -1,6.5c-3.3,28.3 -11.9,59.7 -25.8,93.6c-6.6,16 -5.8,15.2 -25,23.2c-13.2,5.4 -29.2,10 -42.1,12c-16.4,2.6 -43.1,4 -51.5,2.7c-3.5,-0.5 -3.5,-0.6 -6.3,-9.1c-3,-8.6 -4.1,-10.6 -5.2,-9.6c-0.4,0.3 -2.6,6.3 -5,13.2c-10.6,30.4 -22.1,53.6 -36.8,74.8c-7.6,10.8 -13.8,18.4 -31.2,38.1c-18.3,20.6 -24.3,29.3 -30.8,44.5c-2,4.5 -3.7,8.4 -4,8.7c-0.3,0.4 -1.6,-1.4 -2.9,-3.8c-1.2,-2.4 -6.3,-9.5 -11.3,-15.7c-9.5,-12 -13.8,-19.2 -18.3,-30.9c-7.3,-18.7 -14.5,-53.6 -20.6,-99c-0.3,-1.7 -0.8,-0.9 -2.4,3.5l-2.1,5.8l-14.7,7.9c-8,4.3 -21.6,11.7 -30.2,16.2l-15.5,8.4l-32.1,-20.8c-17.6,-11.4 -32.4,-21 -33,-21.3c-0.7,-0.4 -4.9,7.3 -11.5,20.6l-10.4,21.3l11,11.7c34,36.1 49.5,48.1 63.2,49.1c5.8,0.5 11.4,-1.1 38.6,-10.5c2.7,-1 5.2,-1.5 5.5,-1.3c0.5,0.5 -1.1,5.1 -13.1,36.9c-6.8,18.2 -10.7,28.3 -20,50.9c-11.2,27.4 -20.9,46.4 -35.4,70c-11,17.8 -18,29.4 -18,30c0,1 15.1,12.8 23.9,18.8c43.7,29.7 103.6,48 172.2,52.6c58,4 122.7,-15.1 184.1,-54l14.7,-9.3l0.3,-4.2c0.5,-7 -3.1,-12.2 -19.7,-28.9c-10.9,-11 -13,-13.9 -23.3,-33.4c-18.4,-34.8 -29.3,-65.3 -37.4,-104.1c-4.3,-20.3 -10,-56.1 -9.1,-56.8c0.4,-0.3 3.5,-1 7,-1.6c32.1,-5.3 77,-25.2 119.9,-53l10.7,-6.9l4.4,-11.5c2.5,-6.4 12.3,-32.1 21.8,-57.1c9.5,-25.1 18.6,-48.6 20,-52.3c1.5,-3.6 2.6,-6.7 2.5,-6.8c-0.2,-0.2 -52.9,-19.8 -53.2,-19.8c-0.3,0.1 -0.7,0.3 -0.9,0.7l0,0l0,0z" stroke="#000000" stroke-miterlimit="10" fill="${colorForFirstDigit}">
+            <animateTransform attributeName="transform" attributeType="XML" type="translate" values="0 0; 0 -02; 0 0" dur="2.5s" repeatCount="indefinite" />
+        </path>
+    </svg>
+</div>
+       `);
+        }
+        //Magic_Staff
+        if (originalString.length >= 5) {
+          const colorForFifthDigit = colorMap2[digits[4]] || "transparent";
+          svgs.push(`<div style="position: absolute; top: -70px; left: -20px;">
+    <svg width="600" height="600" viewBox="0 0 1000 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path id="Sceptum_up "d="m74.7,515.1c-6.8,2.9 -15.5,3.1 -23,0.4c-1.7,-0.6 -3.5,2.8 -4.6,9.3c-1.1,6.3 0.3,19 3.8,36.6c1.6,7.4 2.8,14.6 2.8,16.1c0.1,2.5 0.3,2.3 2.2,-1.9c3.5,-7.3 10.9,-11 21.6,-11c5.7,0 6,-0.1 6.6,-2.5c0.5,-1.3 0.7,-10.8 0.7,-21c0,-17.5 -0.1,-18.9 -2.1,-22.2c-2.8,-5.3 -3.6,-5.7 -8,-3.8l0,0l0,0z" fill="#9F5500"/>
+        <path id="Sceptum_down " d="m55,586.3c0.3,1.4 0.7,5.1 0.9,8c0.6,5.4 1.5,13.8 5.7,52.3c1.3,11.7 3,29.1 3.7,38.5c1.8,21.9 3.4,32 7.5,48.5c3.5,14.4 7.3,34.8 8.8,48.3c1.5,12.7 1.2,21.4 -0.8,32.7c-3,16.3 -2.6,21 4.3,48.2c2.9,11.5 3.7,13.6 6.2,15.8c2.7,2.4 2.9,2.5 4.6,1c2.3,-1.9 2.2,-3.8 -0.7,-12.3c-2.2,-6.6 -2.3,-7.4 -1.1,-12.4c0.8,-3.6 1.2,-12.2 1.2,-26.6c0,-17.7 0.3,-22.6 1.8,-29.1c2.1,-8.8 1.8,-11.5 -2.6,-30.7c-6.7,-29.3 -9.6,-85 -7,-132.9c0.7,-11 0.8,-21.4 0.5,-23.1c-0.6,-3 -0.9,-3.4 -6.7,-5.1c-11.5,-3.5 -19.8,-10.1 -24.3,-19c-2,-3.7 -2.4,-4.1 -2,-2.1l0,0l0,0z" fill="#9F5500"/>
+    </svg>
+</div>
+
+            `);
+        }
+
+        //stripes for magic_staff
+        if (originalString.length >= 6) {
+          const colorForSixthDigit = colorMap[digits[5]] || "transparent";
+          svgs.push(`
+            <div style="position: absolute; top: 240px; left:65px;">
+                <svg width="36" height="54" viewBox="0 0 36 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="10" height="18" fill="${colorForSixthDigit}"/>
+                <rect y="36" width="9" height="15" fill="${colorForSixthDigit}"/>
+                </svg>
+            </div>
+
+        `);
+        }
+        //Belt
+        if (originalString.length >= 2) {
+          const colorForSecondDigit = colorMap2[digits[1]] || "transparent";
+          svgs.push(`
+        <div style="position: absolute; top: 255px; left: 108px; z-index: 10; transform:rotate(0deg);">
+         <svg width="475" height="100" viewBox="0 0 475 100" xmlns="http://www.w3.org/2000/svg">
+            <!-- Belt -->
+            <rect x="10" y="48" width="145" height="10" fill="#9F5500" stroke="#000000" stroke-width="0.5"/>
+             <!-- bronce buckle in the center -->
+            <rect x="75" y="48" width="10" height="10" fill="#fda63a" stroke="#000000" stroke-width="0.5"/>
+            </svg>
+        </div> 
+            
+        `);
+        }
+
+        return svgs.join("");
+      }
+
+      function generateSvgForDigits2(blockNumber) {
+        const originalString = blockNumber.toString();
+        const digits = originalString
+          .padStart(7, "0")
+          .split("")
+          .map(Number)
+          .reverse();
+        let svgs = [];
+
+        //Bracelet
+        if (originalString.length >= 7) {
+          const colorForSeventhDigit = colorMap3[digits[6]] || "FFFFFF";
+          svgs.push(`
+        <div style="position: absolute; top: 135px; left:299px; transform: rotate(10deg); z-index: 10;">
+                <svg width="40" height="24" viewBox="0 0 40 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect y="36" width="100" height="20" fill="${colorForSeventhDigit}" stroke="#000000" stroke-miterlimit="18"/>
+                </svg>
+            </div>
+        `);
+        }
+
+        //White_wand
+        if (originalString.length >= 7) {
+          const colorForSeventhDigit = colorMap3[digits[6]] || "FFFFFF";
+          svgs.push(`
+        <path id="Wand" d="m537.5,157.3c0.4,1.4 3.4,15 6.6,30.1c3.3,15.1 8.1,37.2 10.7,49.2c2.6,12 5.4,24.5 6.1,27.9c0.7,3.4 3.3,15 5.6,25.7c2.3,10.7 9.1,42 15,69.6c6,27.6 11.4,50.6 12,51.2c2,1.9 7.6,1.7 10,-0.4l2,-1.9l-6.6,-24.6c-3.6,-13.6 -10.3,-38.2 -14.6,-54.8c-4.5,-16.6 -11.1,-41.7 -14.9,-55.8c-3.8,-14.2 -12.4,-46.4 -19.1,-71.8c-6.8,-25.3 -12.5,-46.2 -12.8,-46.5s-0.4,0.6 0,2.1l0,0l0,0z" fill="#F0EBE3"/>
+
+        `);
+        }
+
+        return svgs.join("");
+      }
+
+      //eye direction
+      function getLook(number) {
+        const numberStr = number.toString();
+        const lastFourDigits = parseInt(
+          numberStr.substring(numberStr.length - 4)
+        );
+
+        if (lastFourDigits < 4800) {
+          return "look_right";
+        } else if (lastFourDigits >= 4800 && lastFourDigits <= 5200) {
+          return "look_crossed";
+        } else {
+          return "look_left";
+        }
+      }
+
+      function generateLookSvg(lookDir) {
+        let lookHtml = "";
+        if (lookDir === "look_left") {
+          lookHtml = `<div style="position: absolute; top: 154px; left:160px; transform: rotate(10deg);">
+                <svg width="40" height="24" viewBox="0 0 40 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect y="36" width="10" height="10" fill="white" stroke="#000000" stroke-miterlimit="18"/>
+                <rect x= "56" y="30" width="10" height="10" fill="white" stroke="#000000" stroke-miterlimit="18"/>
+                </svg>
+            </div>`;
+        } else if (lookDir === "look_right") {
+          lookHtml = `<div style="position: absolute; top: 154px; left:160px; transform: rotate(10deg);">
+                <svg width="50" height="24" viewBox="0 0 40 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="-3" y="36" width="10" height="10" fill="white" stroke="#000000" stroke-miterlimit="18"/>
+                <rect x= "55" y="32" width="10" height="10" fill="white" stroke="#000000" stroke-miterlimit="18"/>
+                </svg>
+            </div>`;
+        } else if (lookDir === "look_crossed") {
+          lookHtml = `<div style="position: absolute; top: 154px; left:160px; transform: rotate(10deg);">
+                <svg width="40" height="24" viewBox="0 0 40 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="36" width="10" height="10" fill="white" stroke="#000000" stroke-miterlimit="18"/>
+                <rect x= "56" y="32" width="10" height="10" fill="white" stroke="#000000" stroke-miterlimit="18"/>
+                </svg>
+            </div>`;
+        }
+        return lookHtml;
+      }
+
+      function c420(number) {
+        const numberStr = number.toString();
+        return numberStr.includes("420");
+      }
+
+      function displayglasses() {
+        return `<div style="position: absolute; top: 148px; left: 156px; transform: rotate(7deg);">
+    <svg width="60" height="50" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+        <!-- Left lens -->
+        <circle cx="50" cy="50" r="30" stroke="black" stroke-width="4" fill="gray" />
+        <!-- Right lens -->
+        <circle cx="150" cy="50" r="30" stroke="black" stroke-width="4" fill="gray" />
+        <!-- Bridge -->
+        <rect x="80" y="47" width="40" height="6" fill="black"/>
+       
+    </svg>
+</div>`;
+      }
+
+      function c4a0(number) {
+        const numberStr = number.toString();
+        return numberStr.includes("4") && numberStr.includes("0");
+      }
+
+      function displayfireball(number) {
+        return `<div style="position: absolute; top: 117px; left: 11px;">
+    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Fireball -->
+        <circle cx="50" cy="50" r="15" fill="#FF4500">
+            <animate attributeName="fill" values="#FF4500;#FF6347;#FF4500" dur="2s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- Smoke effect -->
+        <ellipse cx="50" cy="30" rx="45" ry="15" fill="white" fill-opacity="0.3">
+            <animate attributeName="ry" values="15;20;15" dur="3s" repeatCount="indefinite"/>
+            <animate attributeName="cy" values="30;20;30" dur="3s" repeatCount="indefinite"/>
+            <animate attributeName="fill-opacity" values="0.3;0.1;0.3" dur="3s" repeatCount="indefinite"/>
+        </ellipse>
+        
+        <!-- Fire glow animation -->
+        <animateTransform attributeName="transform" type="scale" begin="0s" dur="2s" values="1;1.1;1" repeatCount="indefinite" additive="sum" />
+    </svg>
+</div>`;
+      }
+
+      function c0(number) {
+        const numberStr = number.toString();
+        return numberStr.includes("0");
+      }
+
+      function displayBronceBeltHat(number) {
+        return `<div style="position: absolute; top: 50px; left: 160px; z-index: 10; transform:rotate(15deg);">
+    <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <!-- Belt -->
+        <rect x="10" y="48" width="75" height="10" fill="#9F5500" stroke="#000000" stroke-width="0.5"/>
+         <!-- bronce buckle in the center -->
+        <rect x="35" y="42" width="20" height="20" fill="#fda63a" stroke="#000000" stroke-width="0.5"/>
+    </svg>
+</div>`;
+      }
+
+      function c00(number) {
+        const numberStr = number.toString();
+        return numberStr.includes("00");
+      }
+
+      function displaySilverBeltHat(number) {
+        return `<div style="position: absolute; top: 50px; left: 160px; z-index: 10; transform:rotate(15deg);">
+    <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <!-- Belt -->
+        <rect x="10" y="48" width="75" height="10" fill="#9F5500" stroke="#000000" stroke-width="0.5"/>
+         <!-- silver buckle in the center -->
+        <rect x="35" y="42" width="20" height="20" fill="#d7dbd8" stroke="#000000" stroke-width="0.5"/>
+    </svg>
+</div>`;
+      }
+
+      function c000(number) {
+        const numberStr = number.toString();
+        return numberStr.includes("000");
+      }
+
+      function displayGoldenBeltHat(number) {
+        return `<div style="position: absolute; top: 90px; left: 193px; z-index: 20; transform:rotate(15deg);">
+                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="23" height="23" fill="#ffee05" stroke="#000000" stroke-width="0.5"/>
+                </svg>
+    </div>`;
+      }
+
+      function c0000(number) {
+        const numberStr = number.toString();
+        return numberStr.includes("0000");
+      }
+
+      function displayDiamondBeltHat(number) {
+        return `<div style="position: absolute; top: 90px; left: 193px; z-index: 20; transform:rotate(15deg);">
+                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="23" height="23" fill="#49EFEF" stroke="#000000" stroke-width="0.5"/>
+                </svg>
+    </div>`;
+      }
+
+      function c00000(number) {
+        const numberStr = number.toString();
+        return numberStr.includes("00000");
+      }
+
+      function displayIceBall(number) {
+        return `<div style="position: absolute; top: 112px; left: 11px;">
+    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Iceball -->
+        <circle cx="50" cy="50" r="15" fill="#ADD8E6">
+            <animate attributeName="fill" values="#ADD8E6;#B0E0E6;#ADD8E6" dur="2s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- Icy mist effect -->
+        <ellipse cx="50" cy="30" rx="45" ry="15" fill="#F0FFFF" fill-opacity="0.3">
+            <animate attributeName="ry" values="15;20;15" dur="3s" repeatCount="indefinite"/>
+            <animate attributeName="cy" values="30;20;30" dur="3s" repeatCount="indefinite"/>
+            <animate attributeName="fill-opacity" values="0.3;0.0;0.3" dur="3s" repeatCount="indefinite"/>
+        </ellipse>
+        
+        <!-- Ice pulse animation -->
+        <animateTransform attributeName="transform" type="scale" begin="0s" dur="2s" values="1;1.05;1" repeatCount="indefinite" additive="sum" />
+    </svg>
+</div>`;
+      }
+
+      function c11(number) {
+        const numberStr = number.toString();
+        return numberStr.includes("11");
+      }
+
+      function displayPhoenix(number) {
+        return `<div style="position: absolute; top: -10px; left: 15px;">
+    <svg width="145" height="145" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <!-- Phoenix Body -->
+        <path d="M100,30 Q80,60 100,90 Q120,60 100,30" fill="#FF4500"/>
+
+        <!-- First Phoenix Tail -->
+        <path d="M100,90 Q80,130 50,160 Q70,130 100,90 Q130,130 150,160 Q130,130 100,90" fill="#FFA500">
+            <animate attributeName="fill" values="#FFA500;#FF0000;#FFA500" dur="1s" repeatCount="indefinite"/>
+        </path>
+
+        <!-- Second Phoenix Tail, slightly offset for visual effect -->
+        <path d="M100,90 Q85,135 55,165 Q75,135 100,90 Q125,135 145,165 Q125,135 100,90" fill="#FFA500" opacity="0.8">
+            <animate attributeName="fill" values="#FFA500;#FF0000;#FFA500" dur="1s" repeatCount="indefinite"/>
+        </path>
+
+        <!-- Phoenix Wing -->
+        <path d="M100,60 Q70,40 40,80 Q70,80 100,60 Q130,80 160,40 Q130,40 100,60" fill="#FFD700"/>
+
+        <!-- Phoenix Head -->
+        <circle cx="100" cy="40" r="10" fill="#FF6347"/>
+
+        <!-- Phoenix Eye -->
+        <circle cx="105" cy="35" r="2" fill="black"/>
+
+        <!-- Phoenix Beak -->
+        <polygon points="110,40 120,35 110,45" fill="yellow"/>
+
+        <!-- Fire-like glow animation around the phoenix -->
+        <animateTransform attributeName="transform" type="scale" begin="0s" dur="3s" values="1;1.1;1" repeatCount="indefinite" additive="sum"/>
+
+        <!-- Phoenix glow pulsation -->
+        <animate attributeName="fill" attributeType="CSS" values="#FF4500;#FF6347;#FF4500" dur="3s" repeatCount="indefinite"/>
+    </svg>
+</div>`;
+      }
+
+      function c111(number) {
+        const numberStr = number.toString();
+        return numberStr.includes("111");
+      }
+
+      function displayCristalBall(number) {
+        return `<div class="crystal-ball" style="position: absolute; top: 140px; left: 25px; z-index: 10;">
+    <svg width="25%" height="25%" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Define a linear gradient for the crystal ball -->
+      <defs>
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:rgb(255,255,255);stop-opacity:1" />
+          <stop offset="100%" style="stop-color:rgb(176,224,230);stop-opacity:1" />
+        </linearGradient>
+      </defs>
+        <!-- Circle representing the crystal ball -->
+      <circle cx="50%" cy="50%" r="40%" fill="url(#grad1)" stroke="black" stroke-width="0.5">
+        <!-- Animate the crystal ball to rotate in circles -->
+        <animateTransform attributeName="transform" attributeType="XML"
+                          type="rotate" from="0 50% 50%" to="360 50% 50%"
+                          dur="10s" repeatCount="indefinite"/>
+        <!-- Animate the crystal ball to bounce slightly -->
+        <animate attributeName="cy" values="50%;45%;50%" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      
+      <!-- Reflection on the crystal ball -->
+      <circle cx="60%" cy="45%" r="10%" fill="white" opacity="0.3">
+        <!-- Animate the reflection to bounce slightly -->
+        <animate attributeName="cy" values="45%;42.5%;45%" dur="2s" repeatCount="indefinite"/>
+      </circle>
+    </svg>
+  </div>
+  
+  <div style="position: absolute; top: -70px; left: -20px;">
+    <svg width="600" height="600" viewBox="0 0 1000 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path id="Sceptum_up "d="m74.7,515.1c-6.8,2.9 -15.5,3.1 -23,0.4c-1.7,-0.6 -3.5,2.8 -4.6,9.3c-1.1,6.3 0.3,19 3.8,36.6c1.6,7.4 2.8,14.6 2.8,16.1c0.1,2.5 0.3,2.3 2.2,-1.9c3.5,-7.3 10.9,-11 21.6,-11c5.7,0 6,-0.1 6.6,-2.5c0.5,-1.3 0.7,-10.8 0.7,-21c0,-17.5 -0.1,-18.9 -2.1,-22.2c-2.8,-5.3 -3.6,-5.7 -8,-3.8l0,0l0,0z" fill="#030303"/>
+        <path id="Sceptum_down " d="m55,586.3c0.3,1.4 0.7,5.1 0.9,8c0.6,5.4 1.5,13.8 5.7,52.3c1.3,11.7 3,29.1 3.7,38.5c1.8,21.9 3.4,32 7.5,48.5c3.5,14.4 7.3,34.8 8.8,48.3c1.5,12.7 1.2,21.4 -0.8,32.7c-3,16.3 -2.6,21 4.3,48.2c2.9,11.5 3.7,13.6 6.2,15.8c2.7,2.4 2.9,2.5 4.6,1c2.3,-1.9 2.2,-3.8 -0.7,-12.3c-2.2,-6.6 -2.3,-7.4 -1.1,-12.4c0.8,-3.6 1.2,-12.2 1.2,-26.6c0,-17.7 0.3,-22.6 1.8,-29.1c2.1,-8.8 1.8,-11.5 -2.6,-30.7c-6.7,-29.3 -9.6,-85 -7,-132.9c0.7,-11 0.8,-21.4 0.5,-23.1c-0.6,-3 -0.9,-3.4 -6.7,-5.1c-11.5,-3.5 -19.8,-10.1 -24.3,-19c-2,-3.7 -2.4,-4.1 -2,-2.1l0,0l0,0z" fill="#030303"/>
+    </svg>
+</div>
+<div style="position: absolute; top: 240px; left:65px;">
+                <svg width="36" height="54" viewBox="0 0 36 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="10" height="18" fill="#030303"/>
+                <rect y="36" width="9" height="15" fill="#030303"/>
+                </svg>
+            </div>`;
+      }
+
+      function c1111(number) {
+        const numberStr = number.toString();
+        return numberStr.includes("1111");
+      }
+
+      function displayAirMagic(number) {
+        return `<div style="position: absolute; top: -170px; left: 60px;">
+    <svg width="600" height="600" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        
+               <!-- Air animation -->
+<line x1="100" y1="50" x2="90" y2="60" stroke="#FFFFFF" stroke-width="2">
+    <animateTransform attributeName="transform" attributeType="XML"
+                        type="rotate" from="0 100 50" to="360 100 100"
+                        dur="2.5s" repeatCount="indefinite" />
+</line>
+<line x1="100" y1="50" x2="95" y2="55" stroke="#FFFFFF" stroke-width="2">
+    <animateTransform attributeName="transform" attributeType="XML"
+                        type="rotate" from="0 100 50" to="360 100 100"
+                        dur="1s" repeatCount="indefinite" />
+</line>
+<line x1="100" y1="50" x2="97" y2="52" stroke="#FFFFFF" stroke-width="2">
+    <animateTransform attributeName="transform" attributeType="XML"
+                        type="rotate" from="0 100 50" to="360 100 100"
+                        dur="1.6s" repeatCount="indefinite" />
+</line>
+<line x1="100" y1="50" x2="90" y2="51" stroke="#FFFFFF" stroke-width="2">
+    <animateTransform attributeName="transform" attributeType="XML"
+                        type="rotate" from="0 100 50" to="360 100 100"
+                        dur="1.2s" repeatCount="indefinite" />
+</line>
+
+
+    </svg>
+</div>`;
+      }
+
+      function c11111(number) {
+        const numberStr = number.toString();
+        return numberStr.includes("11111");
+      }
+
+      function displayMagicEnergyBall(number) {
+        return `<div style="position: absolute; top: 125px; left: 13px; z-index: 10;">
+    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Iceball -->
+        <circle cx="50" cy="50" r="15" fill="#ADD8E6">
+            <animate attributeName="fill" values="#ADD8E6;#B0E0E6;#ADD8E6" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Magic energy ball -->
+        <circle cx="50" cy="50" r="10" fill="blue" stroke="none">
+            <animate attributeName="r" dur="1s" repeatCount="indefinite" values="10;15;10" />
+            <animate attributeName="opacity" dur="1s" repeatCount="indefinite" values="0.5;1;0.5" />
+        </circle>
+    </svg>
+</div>`;
+      }
+
+      function c8a8(number) {
+        const numberStr = number.toString();
+        const count = (numberStr.match(/8/g) || []).length;
+        return count >= 2 ? "c8a8" : null;
+      }
+
+      function displayPhilStone(number) {
+        return `<div style="position: absolute; top: 150px; left: 45px;">
+    <svg width="33" height="33" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="18" height="18" fill="#FFB800">
+            <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="rotate"
+                from="0 9 9"
+                to="360 9 9"
+                dur="5s"
+                repeatCount="indefinite"/>
+        </rect>
+    </svg>
+</div>`;
+      }
+
+      function c88(number) {
+        const numberStr = number.toString();
+        return numberStr.includes("88");
+      }
+
+      function displayMasterElements(number) {
+        return `<div style="position: absolute; top: -200px; left: 45px;">
+    <svg width="600" height="600" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Circle for Earth (Green) -->
+        <circle cx="70" cy="90" r="5" fill="green">
+            <animateTransform attributeName="transform" attributeType="XML"
+                              type="rotate" from="0 100 100" to="360 100 100"
+                              dur="5s" repeatCount="indefinite"/>
+        </circle>
+        
+        <!-- Circle for Wind (White) -->
+        <circle cx="80" cy="80" r="5" fill="white">
+            <animateTransform attributeName="transform" attributeType="XML"
+                              type="rotate" from="0 100 100" to="360 100 100"
+                              dur="4s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- Circle for Water (Blue) -->
+        <circle cx="100" cy="70" r="5" fill="blue">
+            <animateTransform attributeName="transform" attributeType="XML"
+                              type="rotate" from="0 100 100" to="360 100 100"
+                              dur="3s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- Circle for Fire (Red or Orange) -->
+        <circle cx="100" cy="69" r="5" fill="#E72929">
+            <animateTransform attributeName="transform" attributeType="XML"
+                              type="rotate" from="0 100 100" to="360 100 100"
+                              dur="2s" repeatCount="indefinite"/>
+        </circle>
+    </svg>
+</div>`;
+      }
+
+      function c888(number) {
+        const numberStr = number.toString();
+        return numberStr.includes("888");
+      }
+
+      function displayFireWand(number) {
+        return `<div style="width: 650px; height: 550px; position: absolute; top: -89px; left: -49.5px;">
+    <svg width="100%" height="100%" viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Wand -->
+        <g id="Wand">
+            <path id="Wand-2" d="M537.5,157.3c0.4,1.4,3.4,15,6.6,30.1c3.3,15.1,8.1,37.2,10.7,49.2c2.6,12,5.4,24.5,6.1,27.9c0.7,3.4,3.3,15,5.6,25.7c2.3,10.7,9.1,42,15,69.6c6,27.6,11.4,50.6,12,51.2c2,1.9,7.6,1.7,10,-0.4l2,-1.9l-6.6,-24.6c-3.6,-13.6,-10.3,-38.2,-14.6,-54.8c-4.5,-16.6,-11.1,-41.7,-14.9,-55.8c-3.8,-14.2,-12.4,-46.4,-19.1,-71.8c-6.8,-25.3,-12.5,-46.2,-12.8,-46.5c-0.2,0.7,-0.4,0.6,0,2.1l0,0l0,0z" fill="#d44204"/>
+        </g>
+        
+        <!-- Wand Holder -->
+        <rect x="582" y="370" width="20" height="55" fill="#363534" transform="translate(585 380) rotate(-13) translate(-585 -380)" style="z-index: 10"/>
+    </svg>
+</div>`;
+      }
+
+      function c8888(number) {
+        const numberStr = number.toString();
+        return numberStr.includes("8888");
+      }
+
+      function displaySilverWand(number) {
+        return `<div style="width: 650px; height: 550px; position: absolute; top: -89px; left: -49.5px;">
+    <svg width="100%" height="100%" viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Wand -->
+        <g id="Wand">
+            <path id="Wand-2" d="M537.5,157.3c0.4,1.4,3.4,15,6.6,30.1c3.3,15.1,8.1,37.2,10.7,49.2c2.6,12,5.4,24.5,6.1,27.9c0.7,3.4,3.3,15,5.6,25.7c2.3,10.7,9.1,42,15,69.6c6,27.6,11.4,50.6,12,51.2c2,1.9,7.6,1.7,10,-0.4l2,-1.9l-6.6,-24.6c-3.6,-13.6,-10.3,-38.2,-14.6,-54.8c-4.5,-16.6,-11.1,-41.7,-14.9,-55.8c-3.8,-14.2,-12.4,-46.4,-19.1,-71.8c-6.8,-25.3,-12.5,-46.2,-12.8,-46.5c-0.2,0.7,-0.4,0.6,0,2.1l0,0l0,0z" fill="#a6a9ad"/>
+        </g>
+        
+        <!-- Wand Holder -->
+        <rect x="582" y="370" width="20" height="55" fill="#363534" transform="translate(585 380) rotate(-13) translate(-585 -380)" style="z-index: 10"/>
+    </svg>
+</div>`;
+      }
+
+      function c88888(number) {
+        const numberStr = number.toString();
+        return numberStr.includes("88888");
+      }
+
+      function displayGoldenWand(number) {
+        return `<div style="width: 650px; height: 550px; position: absolute; top: -89px; left: -49.5px;">
+    <svg width="100%" height="100%" viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Wand -->
+        <g id="Wand">
+            <path id="Wand-2" d="M537.5,157.3c0.4,1.4,3.4,15,6.6,30.1c3.3,15.1,8.1,37.2,10.7,49.2c2.6,12,5.4,24.5,6.1,27.9c0.7,3.4,3.3,15,5.6,25.7c2.3,10.7,9.1,42,15,69.6c6,27.6,11.4,50.6,12,51.2c2,1.9,7.6,1.7,10,-0.4l2,-1.9l-6.6,-24.6c-3.6,-13.6,-10.3,-38.2,-14.6,-54.8c-4.5,-16.6,-11.1,-41.7,-14.9,-55.8c-3.8,-14.2,-12.4,-46.4,-19.1,-71.8c-6.8,-25.3,-12.5,-46.2,-12.8,-46.5c-0.2,0.7,-0.4,0.6,0,2.1l0,0l0,0z" fill="#fae505"/>
+        </g>
+        
+        <!-- Wand Holder -->
+        <rect x="582" y="370" width="20" height="55" fill="#363534" transform="translate(585 380) rotate(-13) translate(-585 -380)" style="z-index: 10"/>
+    </svg>
+</div>`;
+      }
+
+      function cp6(number) {
+        const numberStr = number.toString();
+        // Loop through the number string
+        for (let i = 0; i <= numberStr.length - 6; i++) {
+          // Ensure there are at least 6 characters to check
+          const substring = numberStr.substring(i, i + 6); // Get the substring of 6 characters
+          // Check if the substring is a palindrome
+          if (substring === substring.split("").reverse().join("")) {
+            return "cp6";
+          }
+        }
+        return null;
+      }
+
+      function displayDiamondWand(number) {
+        return `<div style="width: 650px; height: 550px; position: absolute; top: -89px; left: -50px;">
+    <svg width="100%" height="100%" viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Wand -->
+        <g id="Wand">
+            <path id="Wand-2" d="M537.5,157.3c0.4,1.4,3.4,15,6.6,30.1c3.3,15.1,8.1,37.2,10.7,49.2c2.6,12,5.4,24.5,6.1,27.9c0.7,3.4,3.3,15,5.6,25.7c2.3,10.7,9.1,42,15,69.6c6,27.6,11.4,50.6,12,51.2c2,1.9,7.6,1.7,10,-0.4l2,-1.9l-6.6,-24.6c-3.6,-13.6,-10.3,-38.2,-14.6,-54.8c-4.5,-16.6,-11.1,-41.7,-14.9,-55.8c-3.8,-14.2,-12.4,-46.4,-19.1,-71.8c-6.8,-25.3,-12.5,-46.2,-12.8,-46.5c-0.2,0.7,-0.4,0.6,0,2.1l0,0l0,0z" fill="#49EFEF"/>
+        </g>
+        
+        <!-- Wand Holder -->
+        <rect x="582" y="370" width="20" height="55" fill="#363534" transform="translate(585 380) rotate(-13) translate(-585 -380)" style="z-index: 10"/>
+    </svg>
+</div>`;
+      }
+
+      function c9a9(number) {
+        const numberStr = number.toString();
+        const count = (numberStr.match(/9/g) || []).length;
+        return count >= 2 ? "c9a9" : null;
+      }
+
+      function displayTinyPotion(number) {
+        return `<div style="width: 50px; height: 150px; position: relative; top: 260px; left: 220px; z-index: 10; transform:rotate(-4deg);">
+    <svg width="75%" height="75%" viewBox="0 0 150 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Vial Body -->
+        <path d="M75 30C94.0043 30 110 39.5237 110 52.5V197.5C110 210.476 94.0043 220 75 220C55.9957 220 40 210.476 40 197.5V52.5C40 39.5237 55.9957 30 75 30Z" fill="#E0E0E0"/>
+        <path d="M75 30C91.3522 30 104.972 36.6714 104.972 45.8621V204.138C104.972 213.329 91.3522 220 75 220C58.6478 220 45.0278 213.329 45.0278 204.138V45.8621C45.0278 36.6714 58.6478 30 75 30Z" fill="#BDBDBD"/>
+        
+        <!-- Liquid -->
+        <path d="M75 75C64.1634 75 55 85.1634 55 96V198C55 208.837 64.1634 219 75 219C85.8366 219 95 208.837 95 198V96C95 85.1634 85.8366 75 75 75Z" fill="#64B5F6"/>
+        
+        <!-- Cork -->
+        <path d="M75 30C94.0043 30 110 39.5237 110 52.5V62.5C110 75.4763 94.0043 85 75 85C55.9957 85 40 75.4763 40 62.5V52.5C40 39.5237 55.9957 30 75 30Z" fill="#8D6E63"/>
+        <path d="M75 30C94.0043 30 110 39.5237 110 52.5V62.5C110 75.4763 94.0043 85 75 85C55.9957 85 40 75.4763 40 62.5V52.5C40 39.5237 55.9957 30 75 30Z" fill="#6D4C41"/>
+        
+        <!-- Bubble -->
+        <circle cx="75" cy="130" r="20" fill="#FFD600">
+            <animate attributeName="cy" dur="2s" repeatCount="indefinite" values="150; 140; 150; 160; 150" keyTimes="0; 0.25; 0.5; 0.75; 1"/>
+        </circle>
+    </svg>
+</div>
+`;
+      }
+
+      function c99(number) {
+        const numberStr = number.toString();
+        return numberStr.includes("99");
+      }
+
+      function displayTinyPotionRed(number) {
+        return `<div style="width: 50px; height: 150px; position: relative; top: 110px; left: 120px; z-index: 10; transform:rotate(3deg);">
+    <svg width="75%" height="75%" viewBox="0 0 150 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Vial Body -->
+        <path d="M75 30C94.0043 30 110 39.5237 110 52.5V197.5C110 210.476 94.0043 220 75 220C55.9957 220 40 210.476 40 197.5V52.5C40 39.5237 55.9957 30 75 30Z" fill="#E0E0E0"/>
+        <path d="M75 30C91.3522 30 104.972 36.6714 104.972 45.8621V204.138C104.972 213.329 91.3522 220 75 220C58.6478 220 45.0278 213.329 45.0278 204.138V45.8621C45.0278 36.6714 58.6478 30 75 30Z" fill="#BDBDBD"/>
+        
+        <!-- Liquid -->
+        <path d="M75 75C64.1634 75 55 85.1634 55 96V198C55 208.837 64.1634 219 75 219C85.8366 219 95 208.837 95 198V96C95 85.1634 85.8366 75 75 75Z" fill="#64B5F6"/>
+        
+        <!-- Cork -->
+        <path d="M75 30C94.0043 30 110 39.5237 110 52.5V62.5C110 75.4763 94.0043 85 75 85C55.9957 85 40 75.4763 40 62.5V52.5C40 39.5237 55.9957 30 75 30Z" fill="#8D6E63"/>
+        <path d="M75 30C94.0043 30 110 39.5237 110 52.5V62.5C110 75.4763 94.0043 85 75 85C55.9957 85 40 75.4763 40 62.5V52.5C40 39.5237 55.9957 30 75 30Z" fill="#6D4C41"/>
+        
+        <!-- Bubble -->
+        <circle cx="75" cy="130" r="20" fill="#fa1505">
+            <animate attributeName="cy" dur="2s" repeatCount="indefinite" values="150; 140; 150; 160; 150" keyTimes="0; 0.25; 0.5; 0.75; 1"/>
+        </circle>
+    </svg>
+</div>
+`;
+      }
+
+      function c999(number) {
+        const numberStr = number.toString();
+        return numberStr.includes("999");
+      }
+
+      function displayPotionMasterGreen(number) {
+        return `
+    <!-- Separate divs -->
+    <div style="position: absolute; top: -70px; left: -20px;">
+        <svg width="600" height="600" viewBox="0 0 1000 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="m74.7,515.1c-6.8,2.9 -15.5,3.1 -23,0.4c-1.7,-0.6 -3.5,2.8 -4.6,9.3c-1.1,6.3 0.3,19 3.8,36.6c1.6,7.4 2.8,14.6 2.8,16.1c0.1,2.5 0.3,2.3 2.2,-1.9c3.5,-7.3 10.9,-11 21.6,-11c5.7,0 6,-0.1 6.6,-2.5c0.5,-1.3 0.7,-10.8 0.7,-21c0,-17.5 -0.1,-18.9 -2.1,-22.2c-2.8,-5.3 -3.6,-5.7 -8,-3.8l0,0l0,0z" fill="#030303"/>
+            <path d="m55,586.3c0.3,1.4 0.7,5.1 0.9,8c0.6,5.4 1.5,13.8 5.7,52.3c1.3,11.7 3,29.1 3.7,38.5c1.8,21.9 3.4,32 7.5,48.5c3.5,14.4 7.3,34.8 8.8,48.3c1.5,12.7 1.2,21.4 -0.8,32.7c-3,16.3 -2.6,21 4.3,48.2c2.9,11.5 3.7,13.6 6.2,15.8c2.7,2.4 2.9,2.5 4.6,1c2.3,-1.9 2.2,-3.8 -0.7,-12.3c-2.2,-6.6 -2.3,-7.4 -1.1,-12.4c0.8,-3.6 1.2,-12.2 1.2,-26.6c0,-17.7 0.3,-22.6 1.8,-29.1c2.1,-8.8 1.8,-11.5 -2.6,-30.7c-6.7,-29.3 -9.6,-85 -7,-132.9c0.7,-11 0.8,-21.4 0.5,-23.1c-0.6,-3 -0.9,-3.4 -6.7,-5.1c-11.5,-3.5 -19.8,-10.1 -24.3,-19c-2,-3.7 -2.4,-4.1 -2,-2.1l0,0l0,0z" fill="#030303"/>
+        </svg>
+    </div>
+    <div style="position: absolute; top: 240px; left:65px;">
+        <svg width="36" height="54" viewBox="0 0 36 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="10" height="18" fill="#030303"/>
+            <rect y="36" width="9" height="15" fill="#030303"/>
+        </svg>
+    </div>
+</div>
+
+<div style="position: absolute; top: 125px; left: 11px;">
+    <svg width="100px" height="100px" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- magic stone -->
+        <ellipse cx="50" cy="45" rx="40" ry="40" fill="#000000">
+            <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="translate"
+                values="0,0; 0,-3; 0,0"  
+                keyTimes="0; 0.5; 1"     
+                dur="2s"
+                repeatCount="indefinite"/>
+        </ellipse>       
+    </svg>
+</div>
+    
+    <div style="width: 350px; height: 350px; position: absolute; top: 124px; left: -110px; z-index: 10;">
+    <svg width="100%" height="100%" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <!-- Potion Bottle Path -->
+        <g>
+            <path style="fill:#E5F8FF;" d="M344.017,134.667c0.429-9.641-3.354-18.218-8.014-26.382c-2.374-4.16-5.083-8.635-5.277-13.551
+                c-0.096-2.449,0.386-4.964,0.776-7.37c2.08-12.851,5.074-25.819,8.855-38.281c0.2-0.659-0.323-1.197-0.882-1.401
+                c-3.503-1.281-6.882-2.891-10.526-3.72c-3.644-0.829-7.386-0.841-11.099-1.202c-0.594-0.058-1.295,0.193-1.401,0.882
+                c-1.438,9.325-3.565,18.594-5.791,27.757c-1.139,4.689-2.298,9.407-3.856,13.978c-1.924,5.645-5.788,9.127-10.61,12.519
+                c-9.993,7.028-23.398,17.229-21.377,31.21c0.864,5.975,5.162,9.954,10.525,12.208c7.267,3.054,15.377,4.72,23.06,6.363
+                c7.494,1.602,16.768,4.45,24.426,2.317c6.866-1.912,10.459-8.275,11.163-15.014c0.155-1.48-2.126-2.017-2.283-0.52
+                c-0.856,8.199-5.963,13.901-14.496,13.835c-7.271-0.056-14.867-2.081-21.922-3.711c-7.01-1.619-15.209-2.991-21.503-6.615
+                c-7.545-4.345-8.215-12.937-4.453-20.167c3.257-6.26,8.551-11.297,14.273-15.275c4.43-3.08,9.44-6.043,12.628-10.518
+                c4.043-5.674,5.225-13.939,6.822-20.551c2.176-9.014,4.265-18.127,5.679-27.296c-0.467,0.294-0.934,0.588-1.401,0.882
+                c3.707,0.361,7.461,0.374,11.099,1.202c3.637,0.828,7.028,2.441,10.526,3.72c-0.294-0.467-0.588-0.934-0.882-1.401
+                c-3.851,12.692-6.94,25.927-8.975,39.031c-0.96,6.179-0.677,11.067,2.158,16.845c2.021,4.119,4.629,7.927,6.593,12.074
+                c2.631,5.555,4.1,12.129,3.827,18.259C341.611,136.275,343.951,136.164,344.017,134.667z"/>
+        </g>
+      <path style="fill:#E5F8FF;" d="M344.189,53.441c0.07-6.885-8.521-8.404-13.861-9.658c-4.185-0.983-15.486-3.97-18.091,1.22
+            c-3.548,7.069,7.695,10.405,12.309,11.631c4.844,1.287,18.268,4.769,19.62-2.94c0.008-0.047-0.005-0.084-0.003-0.129
+            C344.168,53.521,344.188,53.488,344.189,53.441z"/>
+        <path style="fill:#DE9464;" d="M340.605,32.289c-4.555-1.873-9.469-3.156-14.362-3.727c-2.244-0.262-6.052-1.078-7.52,1.183
+            c-0.846,1.303-0.546,3.512-0.556,4.926c-0.018,2.647,0.023,5.295,0.11,7.941c0.069,2.102-0.308,3.224,1.208,4.509
+            c3.112,2.635,8.112,3.768,12.054,3.977c1.698,0.09,4.716,0.424,6.063-0.809c1.009-0.923,1.753-3.325,2.344-4.485
+            c1.368-2.683,2.683-5.391,3.935-8.13c0.017-0.038,0.015-0.073,0.026-0.11c0.012-0.024,0.031-0.04,0.04-0.067
+            C345.02,34.51,343.171,33.344,340.605,32.289z"/>               
+                <!-- Potion color -->
+        <circle cx="312" cy="120" r="25" fill="green" />
+        <circle cx="297" cy="123" r="18" fill="green" />
+         <circle cx="324" cy="130" r="18" fill="green" />
+       <!-- Adding animated bubbles -->
+        <g>
+            <!-- Bubble 1 -->
+            <circle cx="315" cy="113" r="5" fill="white" style="animation: bubble-rise 3s infinite;">
+                <animate attributeName="cy" from="120" to="90" dur="3s" repeatCount="indefinite" />
+                <animate attributeName="opacity" from="1" to="0" dur="3s" repeatCount="indefinite" />
+            </circle>
+            <!-- Bubble 2 -->
+            <circle cx="313" cy="115" r="8" fill="white" style="animation: bubble-rise 3s infinite; animation-delay: 1s;">
+                <animate attributeName="cy" from="115" to="85" dur="3s" repeatCount="indefinite" />
+                <animate attributeName="opacity" from="1" to="0" dur="3s" repeatCount="indefinite" />
+            </circle>
+            <!-- Bubble 3 -->
+            <circle cx="317" cy="110" r="10" fill="white" style="animation: bubble-rise 3s infinite; animation-delay: 2s;">
+                <animate attributeName="cy" from="125" to="95" dur="3s" repeatCount="indefinite" />
+                <animate attributeName="opacity" from="1" to="0" dur="3s" repeatCount="indefinite" />
+            </circle>
+        </g>
+  
+    <style>
+        @keyframes bubble-rise {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+        }
+    </style>
+    </svg>`;
+      }
+
+      function c9999(number) {
+        const numberStr = number.toString();
+        return numberStr.includes("9999");
+      }
+
+      function displayPotionMasterBlue(number) {
+        return `
+    <!-- Separate divs for additional SVGs and positioning them outside the main SVG -->
+    <div style="position: absolute; top: -70px; left: -20px;">
+        <svg width="600" height="600" viewBox="0 0 1000 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="m74.7,515.1c-6.8,2.9 -15.5,3.1 -23,0.4c-1.7,-0.6 -3.5,2.8 -4.6,9.3c-1.1,6.3 0.3,19 3.8,36.6c1.6,7.4 2.8,14.6 2.8,16.1c0.1,2.5 0.3,2.3 2.2,-1.9c3.5,-7.3 10.9,-11 21.6,-11c5.7,0 6,-0.1 6.6,-2.5c0.5,-1.3 0.7,-10.8 0.7,-21c0,-17.5 -0.1,-18.9 -2.1,-22.2c-2.8,-5.3 -3.6,-5.7 -8,-3.8l0,0l0,0z" fill="#030303"/>
+            <path d="m55,586.3c0.3,1.4 0.7,5.1 0.9,8c0.6,5.4 1.5,13.8 5.7,52.3c1.3,11.7 3,29.1 3.7,38.5c1.8,21.9 3.4,32 7.5,48.5c3.5,14.4 7.3,34.8 8.8,48.3c1.5,12.7 1.2,21.4 -0.8,32.7c-3,16.3 -2.6,21 4.3,48.2c2.9,11.5 3.7,13.6 6.2,15.8c2.7,2.4 2.9,2.5 4.6,1c2.3,-1.9 2.2,-3.8 -0.7,-12.3c-2.2,-6.6 -2.3,-7.4 -1.1,-12.4c0.8,-3.6 1.2,-12.2 1.2,-26.6c0,-17.7 0.3,-22.6 1.8,-29.1c2.1,-8.8 1.8,-11.5 -2.6,-30.7c-6.7,-29.3 -9.6,-85 -7,-132.9c0.7,-11 0.8,-21.4 0.5,-23.1c-0.6,-3 -0.9,-3.4 -6.7,-5.1c-11.5,-3.5 -19.8,-10.1 -24.3,-19c-2,-3.7 -2.4,-4.1 -2,-2.1l0,0l0,0z" fill="#030303"/>
+        </svg>
+    </div>
+    <div style="position: absolute; top: 240px; left:65px;">
+        <svg width="36" height="54" viewBox="0 0 36 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="10" height="18" fill="#030303"/>
+            <rect y="36" width="9" height="15" fill="#030303"/>
+        </svg>
+    </div>
+</div>
+<div style="position: absolute; top: 125px; left: 11px;">
+    <svg width="100px" height="100px" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- magic stone -->
+        <ellipse cx="50" cy="45" rx="40" ry="40" fill="#000000">
+            <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="translate"
+                values="0,0; 0,-3; 0,0"  
+                keyTimes="0; 0.5; 1"     
+                dur="2s"
+                repeatCount="indefinite"/>
+        </ellipse>       
+    </svg>
+</div>
+    
+    <div style="width: 350px; height: 350px; position: absolute; top: 124px; left: -110px; z-index: 10;">
+    <svg width="100%" height="100%" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <!-- Potion Bottle Path -->
+        <g>
+            <path style="fill:#E5F8FF;" d="M344.017,134.667c0.429-9.641-3.354-18.218-8.014-26.382c-2.374-4.16-5.083-8.635-5.277-13.551
+                c-0.096-2.449,0.386-4.964,0.776-7.37c2.08-12.851,5.074-25.819,8.855-38.281c0.2-0.659-0.323-1.197-0.882-1.401
+                c-3.503-1.281-6.882-2.891-10.526-3.72c-3.644-0.829-7.386-0.841-11.099-1.202c-0.594-0.058-1.295,0.193-1.401,0.882
+                c-1.438,9.325-3.565,18.594-5.791,27.757c-1.139,4.689-2.298,9.407-3.856,13.978c-1.924,5.645-5.788,9.127-10.61,12.519
+                c-9.993,7.028-23.398,17.229-21.377,31.21c0.864,5.975,5.162,9.954,10.525,12.208c7.267,3.054,15.377,4.72,23.06,6.363
+                c7.494,1.602,16.768,4.45,24.426,2.317c6.866-1.912,10.459-8.275,11.163-15.014c0.155-1.48-2.126-2.017-2.283-0.52
+                c-0.856,8.199-5.963,13.901-14.496,13.835c-7.271-0.056-14.867-2.081-21.922-3.711c-7.01-1.619-15.209-2.991-21.503-6.615
+                c-7.545-4.345-8.215-12.937-4.453-20.167c3.257-6.26,8.551-11.297,14.273-15.275c4.43-3.08,9.44-6.043,12.628-10.518
+                c4.043-5.674,5.225-13.939,6.822-20.551c2.176-9.014,4.265-18.127,5.679-27.296c-0.467,0.294-0.934,0.588-1.401,0.882
+                c3.707,0.361,7.461,0.374,11.099,1.202c3.637,0.828,7.028,2.441,10.526,3.72c-0.294-0.467-0.588-0.934-0.882-1.401
+                c-3.851,12.692-6.94,25.927-8.975,39.031c-0.96,6.179-0.677,11.067,2.158,16.845c2.021,4.119,4.629,7.927,6.593,12.074
+                c2.631,5.555,4.1,12.129,3.827,18.259C341.611,136.275,343.951,136.164,344.017,134.667z"/>
+        </g>
+        <path style="fill:#E5F8FF;" d="M344.189,53.441c0.07-6.885-8.521-8.404-13.861-9.658c-4.185-0.983-15.486-3.97-18.091,1.22
+            c-3.548,7.069,7.695,10.405,12.309,11.631c4.844,1.287,18.268,4.769,19.62-2.94c0.008-0.047-0.005-0.084-0.003-0.129
+            C344.168,53.521,344.188,53.488,344.189,53.441z"/>
+        <path style="fill:#DE9464;" d="M340.605,32.289c-4.555-1.873-9.469-3.156-14.362-3.727c-2.244-0.262-6.052-1.078-7.52,1.183
+            c-0.846,1.303-0.546,3.512-0.556,4.926c-0.018,2.647,0.023,5.295,0.11,7.941c0.069,2.102-0.308,3.224,1.208,4.509
+            c3.112,2.635,8.112,3.768,12.054,3.977c1.698,0.09,4.716,0.424,6.063-0.809c1.009-0.923,1.753-3.325,2.344-4.485
+            c1.368-2.683,2.683-5.391,3.935-8.13c0.017-0.038,0.015-0.073,0.026-0.11c0.012-0.024,0.031-0.04,0.04-0.067
+            C345.02,34.51,343.171,33.344,340.605,32.289z"/>               
+                <!-- Potion color -->
+        <circle cx="312" cy="120" r="25" fill="#0000FF" />
+        <circle cx="297" cy="123" r="18" fill="#0000FF" />
+         <circle cx="324" cy="130" r="18" fill="#0000FF" />
+       <!-- Adding animated bubbles -->
+        <g>
+            <!-- Bubble 1 -->
+            <circle cx="315" cy="113" r="5" fill="white" style="animation: bubble-rise 3s infinite;">
+                <animate attributeName="cy" from="120" to="90" dur="3s" repeatCount="indefinite" />
+                <animate attributeName="opacity" from="1" to="0" dur="3s" repeatCount="indefinite" />
+            </circle>
+            <!-- Bubble 2 -->
+            <circle cx="313" cy="115" r="8" fill="white" style="animation: bubble-rise 3s infinite; animation-delay: 1s;">
+                <animate attributeName="cy" from="115" to="85" dur="3s" repeatCount="indefinite" />
+                <animate attributeName="opacity" from="1" to="0" dur="3s" repeatCount="indefinite" />
+            </circle>
+            <!-- Bubble 3 -->
+            <circle cx="317" cy="110" r="10" fill="white" style="animation: bubble-rise 3s infinite; animation-delay: 2s;">
+                <animate attributeName="cy" from="125" to="95" dur="3s" repeatCount="indefinite" />
+                <animate attributeName="opacity" from="1" to="0" dur="3s" repeatCount="indefinite" />
+            </circle>
+        </g>
+  
+    <style>
+        @keyframes bubble-rise {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+        }
+    </style>
+    </svg>
+</div>`;
+      }
+
+      function cs5(number) {
+        const numberStr = number.toString();
+        for (let i = 0; i < numberStr.length - 4; i++) {
+          // Ensure there are at least 3 characters to check
+          const substring = numberStr.substring(i, i + 5); // Get the substring of 3 characters
+          if (!substring.startsWith("0")) {
+            // Exclude substrings starting with '0'
+            const subNum = parseInt(substring, 10);
+            const s = Math.sqrt(subNum);
+            if (s === Math.floor(s)) {
+              // Check if s is a perfect square
+              return "cs5d"; // Return a different identifier for 3-digit perfect squares
+            }
+          }
+        }
+        return null;
+      }
+
+      function displayWhiteStaff(number) {
+        return `<div style="position: absolute; top: -70px; left: -20px;">
+    <svg width="600" height="600" viewBox="0 0 1000 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path id="Sceptum_up "d="m74.7,515.1c-6.8,2.9 -15.5,3.1 -23,0.4c-1.7,-0.6 -3.5,2.8 -4.6,9.3c-1.1,6.3 0.3,19 3.8,36.6c1.6,7.4 2.8,14.6 2.8,16.1c0.1,2.5 0.3,2.3 2.2,-1.9c3.5,-7.3 10.9,-11 21.6,-11c5.7,0 6,-0.1 6.6,-2.5c0.5,-1.3 0.7,-10.8 0.7,-21c0,-17.5 -0.1,-18.9 -2.1,-22.2c-2.8,-5.3 -3.6,-5.7 -8,-3.8l0,0l0,0z" fill="#FFFBEB"/>
+        <path id="Sceptum_down " d="m55,586.3c0.3,1.4 0.7,5.1 0.9,8c0.6,5.4 1.5,13.8 5.7,52.3c1.3,11.7 3,29.1 3.7,38.5c1.8,21.9 3.4,32 7.5,48.5c3.5,14.4 7.3,34.8 8.8,48.3c1.5,12.7 1.2,21.4 -0.8,32.7c-3,16.3 -2.6,21 4.3,48.2c2.9,11.5 3.7,13.6 6.2,15.8c2.7,2.4 2.9,2.5 4.6,1c2.3,-1.9 2.2,-3.8 -0.7,-12.3c-2.2,-6.6 -2.3,-7.4 -1.1,-12.4c0.8,-3.6 1.2,-12.2 1.2,-26.6c0,-17.7 0.3,-22.6 1.8,-29.1c2.1,-8.8 1.8,-11.5 -2.6,-30.7c-6.7,-29.3 -9.6,-85 -7,-132.9c0.7,-11 0.8,-21.4 0.5,-23.1c-0.6,-3 -0.9,-3.4 -6.7,-5.1c-11.5,-3.5 -19.8,-10.1 -24.3,-19c-2,-3.7 -2.4,-4.1 -2,-2.1l0,0l0,0z" fill="#FFFBEB"/>
+    </svg>
+</div>
+<div style="position: absolute; top: 240px; left:65px;">
+                <svg width="36" height="54" viewBox="0 0 36 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="10" height="18" fill="#ffd700"/>
+                <rect y="36" width="9" height="15" fill="#ffd700"/>
+                </svg>
+            </div>
+`;
+      }
+
+      // Function to check if a number contains a 4-digit square as a substring
+      function containsFourDigitSquare(number) {
+        const numberStr = number.toString();
+        for (let i = 0; i <= numberStr.length - 4; i++) {
+          const substring = numberStr.substring(i, i + 4);
+          const num = parseInt(substring, 10);
+          if (Math.sqrt(num) % 1 === 0) {
+            return true;
+          }
+        }
+        return false;
+      }
+
+      // Determine the range for the magic based on the last four digits
+      function getMagic(lastFourDigits) {
+        if (lastFourDigits < 4800) {
+          return "magic_right";
+        } else if (lastFourDigits >= 4800 && lastFourDigits <= 5200) {
+          return "magic_crossed";
+        } else {
+          return "magic_left";
+        }
+      }
+
+      // Function to generate SVG for magic based on direction
+      function displayMagicWand(eyeDirection) {
+        let svgHTML = "";
+        switch (eyeDirection) {
+          case "magic_left":
+            svgHTML = `<div style="position: absolute; top: -40px; left: 245px; width: 800px; height: 300px;">
+    <svg width="120px" height="120px" viewBox="450 60 250 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Wave 1 -->
+        <g id="Wave_1">
+            <path fill="#1E90FF" d="M620,140 Q625,130 645,135 Q655,125 670,135 Q660,140 680,145 Q690,130 700,140 Q690,150 680,145 Q660,150 645,140 Z">
+                <animateTransform attributeName="transform"
+                                  type="translate"
+                                  begin="0s"
+                                  dur="2s"
+                                  values="0,5; 0,-10; 0,5"
+                                  keyTimes="0; 0.5; 1"
+                                  repeatCount="indefinite"/>
+            </path>
+        </g>
+        <!-- Wave 2 -->
+        <g id="Wave_2">
+            <path fill="#1E90FF" d="M520,110 Q530,100 550,105 Q560,95 575,105 Q565,110 585,115 Q595,100 605,110 Q595,120 585,115 Q565,120 550,110 Z">
+                <animateTransform attributeName="transform"
+                                  type="translate"
+                                  begin="0s"
+                                  dur="1.5s"
+                                  values="0,0; 0,-5; 0,0"
+                                  keyTimes="0; 0.5; 1"
+                                  repeatCount="indefinite"/>
+            </path>
+        </g>
+        <!-- Wave 3 -->
+        <g id="Wave_3">
+            <path fill="#1E90FF" d="M480,230 Q490,220 510,225 Q520,215 535,225 Q525,230 545,235 Q555,220 565,230 Q555,240 545,235 Q525,240 510,230 Z">
+                <animateTransform attributeName="transform"
+                                  type="translate"
+                                  begin="0s"
+                                  dur="2.5s"
+                                  values="0,0; 0,-15; 0,0"
+                                  keyTimes="0; 0.5; 1"
+                                  repeatCount="indefinite"/>
+            </path>
+        </g>
+    </svg>
+</div>
+`;
+            break;
+          case "magic_right":
+            svgHTML = `<div style="position: absolute; top: -25px; left: 255px; width: 800px; height: 300px;">
+    <svg width="120px" height="120px" viewBox="450 60 250 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Flame 1 -->
+        <g id="Flame_1">
+            <path fill="#FF4500" d="M627.3,143.2 Q626,130 600.5,133.5 Q610,120 600.8,105.5 Q620,110 627.8,97.9 Q635,110 630,113.6 Q640,120 644.2,121.2 Q640,130 629.8,127.6 Z">
+                <animateTransform attributeName="transform"
+                                  type="scale"
+                                  begin="0s"
+                                  dur="1s"
+                                  values="1; 1.1; 1.05; 1.1; 1"
+                                  keyTimes="0; 0.25; 0.5; 0.75; 1"
+                                  repeatCount="indefinite"/>
+                <animate attributeName="opacity"
+                         values="0.2; 1; 0.8"
+                         dur="1s"
+                         repeatCount="indefinite"/>
+            </path>
+        </g>
+        <!-- Flame 2 -->
+        <g id="Flame_2">
+            <path fill="#FF4500" d="M526.1,105.9 Q520,95 499.3,96.2 Q510,85 506.9,82.5 Q515,75 499.6,68.2 Q520,70 526.6,60.6 Q535,75 528.7,76.3 Q540,85 543,83.9 Q535,95 528.6,90.3 Z">
+                <animateTransform attributeName="transform"
+                                  type="scale"
+                                  begin="0s"
+                                  dur="1.5s"
+                                  values="1; 1.05; 1; 1.05; 1"
+                                  keyTimes="0; 0.25; 0.5; 0.75; 1"
+                                  repeatCount="indefinite"/>
+                <animate attributeName="opacity"
+                         values="0.2; 1; 0.9"
+                         dur="1.5s"
+                         repeatCount="indefinite"/>
+            </path>
+        </g>
+        <!-- Flame 3 -->
+        <g id="Flame_3">
+            <path fill="#FF4500" d="M483.9,233.3 Q480,220 457,223.6 Q470,210 464.6,209.9 Q470,200 457.4,195.6 Q475,200 484.4,188 Q490,205 486.5,203.7 Q500,210 500.8,211.2 Q495,225 486.3,217.7 Z">
+                <animateTransform attributeName="transform"
+                                  type="scale"
+                                  begin="0s"
+                                  dur="2s"
+                                  values="1; 1.1; 1.05; 1.1; 1"
+                                  keyTimes="0; 0.25; 0.5; 0.75; 1"
+                                  repeatCount="indefinite"/>
+                <animate attributeName="opacity"
+                         values="0.1; 1; 0.85"
+                         dur="2s"
+                         repeatCount="indefinite"/>
+            </path>
+        </g>
+    </svg>
+</div>
+`;
+            break;
+          case "magic_crossed":
+            svgHTML = `<div style="position: absolute; top: -25px; left: 265px; width: 800px; height: 300px;">
+    <svg width="120px" height="120px" viewBox="450 60 250 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g id="Spark_1">
+            <polygon class="st12" points="627.3,143.2 616.3,131.5 600.5,133.5 608.1,119.8 600.8,105.5 616.6,108.8 627.8,97.9 630,113.6 644.2,121.2 629.8,127.6" fill="#F6FF3F" stroke="#000000" stroke-miterlimit="10">
+                <animateTransform attributeName="transform"
+                                  attributeType="XML"
+                                  type="translate"
+                                  values="0,0; 10,0; 0,0"
+                                  keyTimes="0; 0.5; 1"
+                                  dur="1s"
+                                  repeatCount="indefinite"/>
+            </polygon>
+        </g>
+        <g id="Spark_2">
+            <polygon class="st12" points="526.1,105.9 515.1,94.1 499.3,96.2 506.9,82.5 499.6,68.2 515.3,71.5 526.6,60.6 528.7,76.3 543,83.9 528.6,90.3" fill="#F6FF3F" stroke="#000000" stroke-miterlimit="10">
+                <animateTransform attributeName="transform"
+                                  attributeType="XML"
+                                  type="translate"
+                                  values="0,0; 10,0; 0,0"
+                                  keyTimes="0; 0.5; 1"
+                                  dur="1s"
+                                  repeatCount="indefinite"/>
+            </polygon>
+        </g>
+        <g id="Spark_3">
+            <polygon class="st12" points="483.9,233.3 472.8,221.5 457,223.6 464.6,209.9 457.4,195.6 473.1,198.9 484.4,188 486.5,203.7 500.8,211.2 486.3,217.7" fill="#F6FF3F" stroke="#000000" stroke-miterlimit="10">
+                <animateTransform attributeName="transform"
+                                  attributeType="XML"
+                                  type="translate"
+                                  values="0,0; 10,0; 0,0"
+                                  keyTimes="0; 0.5; 1"
+                                  dur="1s"
+                                  repeatCount="indefinite"/>
+            </polygon>
+        </g>
+    </svg>
+</div>
+`;
+            break;
+        }
+        return svgHTML;
+      }
+
+      function cs6(number) {
+        const numberStr = number.toString();
+        for (let i = 0; i < numberStr.length - 5; i++) {
+          // Ensure there are at least 3 characters to check
+          const substring = numberStr.substring(i, i + 6); // Get the substring of 3 characters
+          if (!substring.startsWith("0")) {
+            // Exclude substrings starting with '0'
+            const subNum = parseInt(substring, 10);
+            const s = Math.sqrt(subNum);
+            if (s === Math.floor(s)) {
+              // Check if s is a perfect square
+              return "cs3d"; // Return a different identifier for 3-digit perfect squares
+            }
+          }
+        }
+        return null;
+      }
+
+      function displayGoldGlasses(number) {
+        return `<div style="position: absolute; top: 151px; left: 156px; transform: rotate(7deg);">
+    <svg width="60" height="50" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+        <!-- Left lens transformed into a square -->
+        <rect x="20" y="20" width="60" height="41" stroke="black" stroke-width="5" fill="#adbce6"/>
+        <!-- Right lens transformed into a square -->
+        <rect x="120" y="20" width="60" height="41" stroke="black" stroke-width="5" fill="#adbce6"/>
+        <!-- Bridge -->
+        <rect x="80" y="25" width="40" height="6" fill="#ffd700"/>
+    </svg>
+</div>`;
+      }
+
+      function cf3(number) {
+        let numberStr = number.toString();
+        let a = 0,
+          b = 1;
+        let fibNumbers = new Set();
+
+        // Generate 3-digit Fibonacci numbers
+        while (b < 1000) {
+          // 1000 is the smallest 4-digit number
+          if (b >= 100) {
+            // 100 is the smallest 3-digit number
+            fibNumbers.add(b.toString());
+          }
+          [a, b] = [b, a + b]; // Update the Fibonacci sequence
+        }
+
+        // Check for 3-digit Fibonacci patterns
+        for (let i = 0; i <= numberStr.length - 3; i++) {
+          // Loop through the number string
+          let substring = numberStr.substring(i, i + 3);
+          if (fibNumbers.has(substring)) {
+            return "cf3";
+          }
+        }
+
+        return null;
+      }
+
+      function displaySilverGlasses(number) {
+        return `<div style="position: absolute; top: 151px; left: 156px; transform: rotate(7deg);">
+    <svg width="60" height="50" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+        <!-- Left lens transformed into a square -->
+        <rect x="20" y="20" width="60" height="41" stroke="black" stroke-width="5" fill="#adbce6"/>
+        <!-- Right lens transformed into a square -->
+        <rect x="120" y="20" width="60" height="41" stroke="black" stroke-width="5" fill="#adbce6"/>
+        <!-- Bridge -->
+        <rect x="80" y="25" width="40" height="6" fill="#a6a9ad"/>
+    </svg>
+</div>`;
+      }
+
+      function cf4(number) {
+        let numberStr = number.toString();
+        let a = 0,
+          b = 1;
+        let fibNumbers = new Set();
+
+        // Generate 4-digit Fibonacci numbers
+        while (b < 10000) {
+          // 10000 is the smallest 5-digit number
+          if (b >= 1000) {
+            // 1000 is the smallest 4-digit number
+            fibNumbers.add(b.toString());
+          }
+          [a, b] = [b, a + b]; // Update the Fibonacci sequence
+        }
+
+        // Check for 4-digit Fibonacci patterns
+        for (let i = 0; i <= numberStr.length - 4; i++) {
+          // Loop through the number string
+          let substring = numberStr.substring(i, i + 4);
+          if (fibNumbers.has(substring)) {
+            return "cf4"; // Return identifier for 4-digit Fibonacci numbers
+          }
+        }
+
+        return null;
+      }
+
+      function displayThunder(number) {
+        return `<div style="position: absolute; top: -05px; left: 265px; width: 800px; height: 300px;">
+    <svg width="120px" height="120px" viewBox="450 60 250 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Thunderbolt 1 -->
+        <g id="Thunderbolt_1">
+            <path d="M620,140 L635,110 L615,110 L640,70" fill="yellow"/>
+            <animateTransform attributeName="transform"
+                              type="translate"
+                              begin="0s"
+                              dur="1s"
+                              values="0,5; 0,-5; 0,5"
+                              keyTimes="0; 0.5; 1"
+                              repeatCount="indefinite"/>
+        </g>
+        <!-- Thunderbolt 2 -->
+        <g id="Thunderbolt_2">
+            <path d="M550,110 L565,80 L545,80 L570,40" fill="yellow"/>
+            <animateTransform attributeName="transform"
+                              type="translate"
+                              begin="0.2s"
+                              dur="1.5s"
+                              values="0,5; 0,-5; 0,5"
+                              keyTimes="0; 0.5; 1"
+                              repeatCount="indefinite"/>
+        </g>
+        <!-- Thunderbolt 3 -->
+        <g id="Thunderbolt_3">
+            <path d="M480,180 L495,150 L475,150 L500,110" fill="yellow"/>
+            <animateTransform attributeName="transform"
+                              type="translate"
+                              begin="0.4s"
+                              dur="2s"
+                              values="0,5; 0,-5; 0,5"
+                              keyTimes="0; 0.5; 1"
+                              repeatCount="indefinite"/>
+        </g>
+    </svg>
+</div>
+`;
+      }
+
+      function cf5(number) {
+        let numberStr = number.toString();
+        let a = 0,
+          b = 1;
+        let fibNumbers = new Set();
+
+        // Generate 5-digit Fibonacci numbers
+        while (b < 100000) {
+          // 100000 is the smallest 6-digit number
+          if (b >= 10000) {
+            // 10000 is the smallest 5-digit number
+            fibNumbers.add(b.toString());
+          }
+          [a, b] = [b, a + b]; // Update the Fibonacci sequence
+        }
+
+        // Check for 5-digit Fibonacci patterns
+        for (let i = 0; i <= numberStr.length - 5; i++) {
+          // Loop through the number string
+          let substring = numberStr.substring(i, i + 5);
+          if (fibNumbers.has(substring)) {
+            return "cf5";
+          }
+        }
+
+        return null;
+      }
+
+      function displayMagicRing(number) {
+        return `<div style="position: absolute; top: 211px; left: 61px;">
+    <svg width="12" height="12" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="18" height="18" stroke="black" stroke-width="1" fill="#FFB800">
+            <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="rotate"
+                from="0 9 9"
+                to="360 9 9"
+                dur="5s"
+                repeatCount="indefinite"/>
+        </rect>
+    </svg>
+</div>
+`;
+      }
+
+      function cf6(number) {
+        let numberStr = number.toString();
+        let a = 0,
+          b = 1;
+        let fibNumbers = new Set();
+
+        // Generate 6-digit Fibonacci numbers
+        while (b < 1000000) {
+          // 1000000 is the smallest 7-digit number
+          if (b >= 100000) {
+            // 100000 is the smallest 6-digit number
+            fibNumbers.add(b.toString());
+          }
+          [a, b] = [b, a + b]; // Update the Fibonacci sequence
+        }
+
+        // Check for 6-digit Fibonacci patterns
+        for (let i = 0; i <= numberStr.length - 6; i++) {
+          // Loop through the number string
+          let substring = numberStr.substring(i, i + 6);
+          if (fibNumbers.has(substring)) {
+            return "cf6";
+          }
+        }
+
+        return null;
+      }
+
+      function displayDiamondMagicRing(number) {
+        return `<div style="position: absolute; top: 211px; left: 61px;">
+    <svg width="12" height="12" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="18" height="18" stroke="black" stroke-width="1" fill="#49efef">
+            <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="rotate"
+                from="0 9 9"
+                to="360 9 9"
+                dur="5s"
+                repeatCount="indefinite"/>
+        </rect>
+        <text x="50%" y="50%" text-anchor="middle" alignment-baseline="middle" fill="black">ᚨ</text>
+    </svg>
+</div>`;
+      }
+
+      function cf7(number) {
+        let numberStr = number.toString();
+        let a = 0,
+          b = 1;
+        let fibNumbers = new Set();
+
+        // Generate 6-digit Fibonacci numbers
+        while (b < 10000000) {
+          // 10000000 is the smallest 8-digit number
+          if (b >= 1000000) {
+            // 1000000 is the smallest 7-digit number
+            fibNumbers.add(b.toString());
+          }
+          [a, b] = [b, a + b]; // Update the Fibonacci sequence
+        }
+
+        // Check for 6-digit Fibonacci patterns
+        for (let i = 0; i <= numberStr.length - 7; i++) {
+          // Loop through the number string
+          let substring = numberStr.substring(i, i + 7);
+          if (fibNumbers.has(substring)) {
+            return "cf7";
+          }
+        }
+
+        return null;
+      }
+
+      function displayRedMagicRing(number) {
+        return `<div style="position: absolute; top: 211px; left: 61px;">
+    <svg width="12" height="12" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="18" height="18" stroke="black" stroke-width="1" fill="#fa1505">
+            <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="rotate"
+                from="0 9 9"
+                to="360 9 9"
+                dur="5s"
+                repeatCount="indefinite"/>
+        </rect>
+        <text x="50%" y="50%" text-anchor="middle" alignment-baseline="middle" fill="black">ᚱ</text>
+    </svg>
+</div>`;
+      }
+
+      function m12(number) {
+        return number % 12 === 0;
+      }
+
+      function displayRedGemBucle(number) {
+        return `<div style="position: absolute; top: 300px; left: 178px; z-index: 10; transform:rotate(0deg);">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="18" height="18" stroke="black" stroke-width="1" fill="#fa1505">
+            <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="rotate"
+                from="0 9 9"
+                to="360 9 9"
+                dur="5s"
+                repeatCount="indefinite"/>
+        </rect>
+        <text x="50%" y="50%" text-anchor="middle" alignment-baseline="middle" fill="black">ᚺ</text>
+    </svg>
+</div> `;
+      }
+
+      function m13(number) {
+        return number % 13 === 0;
+      }
+
+      function displaySilverKey(number) {
+        return `<div style="position: absolute; top: 260px; left: 160px; z-index: 10;">
+    <svg width="100px" height="100px" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <g transform="rotate(97, 150, 150)"> <!-- rotation -->
+            <!-- Key head (the round part of the key) -->
+            <circle cx="150" cy="150" r="20" stroke="black" stroke-width="2" fill="none"/>
+
+            <!-- Key shaft -->
+            <rect x="140" y="145" width="150" height="10" fill="#a6a9ad" /> 
+
+            <!-- Key teeth -->
+            <rect x="230" y="155" width="20" height="20" fill="#a6a9ad" />
+            <!-- Additional teeth with space between the sets -->
+            
+            <rect x="270" y="155" width="20" height="20" fill="#a6a9ad"/>
+        </g>
+    </svg>
+</div>`;
+      }
+
+      function m14(number) {
+        return number % 14 === 0;
+      }
+
+      function displayGoldKey(number) {
+        return `<div style="position: absolute; top: 260px; left: 160px; z-index: 10;">
+    <svg width="100px" height="100px" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <g transform="rotate(97, 150, 150)"> <!-- rotation -->
+            <!-- Key head (the round part of the key) -->
+            <circle cx="150" cy="150" r="20" stroke="black" stroke-width="2" fill="none"/>
+
+            <!-- Key shaft -->
+            <rect x="140" y="145" width="150" height="10" fill="#ffd700"/> 
+
+            <!-- Key teeth -->
+            <rect x="230" y="155" width="20" height="20" fill="#ffd700"/>
+            <!-- Additional teeth with space between the sets -->
+            
+            <rect x="270" y="155" width="20" height="20" fill="#ffd700"/>
+        </g>
+    </svg>
+</div>`;
+      }
+
+      function m15(number) {
+        return number % 15 === 0;
+      }
+
+      function displayBlueGemBucle(number) {
+        return `<div style="position: absolute; top: 300px; left: 178px; z-index: 10; transform:rotate(0deg);">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="18" height="18" stroke="black" stroke-width="1" fill="#0000FF">
+            <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="rotate"
+                from="0 9 9"
+                to="360 9 9"
+                dur="5s"
+                repeatCount="indefinite"/>
+        </rect>
+        <text x="50%" y="50%" text-anchor="middle" alignment-baseline="middle" fill="black">ᚦ</text>
+    </svg>
+</div>`;
+      }
+
+      function m16(number) {
+        return number % 16 === 0;
+      }
+
+      function displayBlackGemBucle(number) {
+        return `<div style="position: absolute; top: 300px; left: 178px; z-index: 10; transform:rotate(0deg);">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="18" height="18" stroke="black" stroke-width="1" fill="#484c51">
+            <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="rotate"
+                from="0 9 9"
+                to="360 9 9"
+                dur="5s"
+                repeatCount="indefinite"/>
+        </rect>
+        <text x="50%" y="50%" text-anchor="middle" alignment-baseline="middle" fill="black">ᚠ</text>
+    </svg>
+</div>`;
+      }
+
+      function m69(number) {
+        return number % 69 === 0;
+      }
+
+      function displayDiamondKey(number) {
+        return `<div style="position: absolute; top: 260px; left: 160px; z-index: 10;">
+    <svg width="100px" height="100px" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <g transform="rotate(97, 150, 150)"> <!-- rotation -->
+            <!-- Key head (the round part of the key) -->
+            <circle cx="150" cy="150" r="20" stroke="black" stroke-width="2" fill="none"/>
+
+            <!-- Key shaft -->
+            <rect x="140" y="145" width="150" height="10" fill="#49efef"/> <!-- Extended width to accommodate extra teeth with spacing -->
+
+            <!-- Key teeth -->
+            <rect x="230" y="155" width="20" height="20" fill="#49efef"/>
+            <!-- Additional teeth with space between the sets -->
+            
+            <rect x="270" y="155" width="20" height="20" fill="#49efef"/>
+        </g>
+    </svg>
+</div>`;
+      }
+
+      function m11(number) {
+        return number % 11 === 0;
+      }
+
+      function displayGrimoire(number) {
+        return `<div style="position: absolute; top: 280px; left: 290px; width: 60px; height: 30px; transform: rotate(-10deg);">
+  <svg viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+    <!-- Cover -->
+    <rect x="20" y="20" rx="10" ry="10" width="170" height="260" fill="#f44336"/>
+    
+    <!-- Spine -->
+    <rect x="20" y="20" width="20" height="260" fill="#b71c1c"/>
+
+    <!-- Pages (right side of the book) -->
+    <rect x="171" y="20" width="18" height="260" fill="#fff"/>
+
+    <!-- Page lines (representing the edge of pages) -->
+    <g fill="none" stroke="black" stroke-width="1">
+      <!-- The space between lines is adjusted to create the illusion of separate pages -->
+      <line x1="174" y1="20" x2="174" y2="280" />
+      <line x1="176" y1="20" x2="176" y2="280" />
+      <line x1="178" y1="20" x2="178" y2="280" />
+      <line x1="180" y1="20" x2="180" y2="280" />
+      <line x1="182" y1="20" x2="182" y2="280" />
+      <line x1="184" y1="20" x2="184" y2="280" />
+      <line x1="186" y1="20" x2="186" y2="280" />
+      <line x1="188" y1="20" x2="188" y2="280" />
+    </g>
+
+    <!-- Front cover rectangle -->
+    <rect x="50" y="70" width="100" height="50" fill="#6d4c41"/>
+    
+    <!-- Book title -->
+    <text x="100" y="100" fill="#ffc107" font-size="12" font-family="Verdana" text-anchor="middle">ᚷ GRIMOIRE ᚷ</text>
+
+    <!-- Spine stripes -->
+    <rect x="20" y="50" width="20" height="5" fill="#ffc107"/>
+    <rect x="20" y="245" width="20" height="5" fill="#ffc107"/>
+  </svg>
+</div>
+`;
+      }
+
+      function m888(number) {
+        return number % 888 === 0;
+      }
+
+      function displaySpellBracelet(number) {
+        return `<div style="position: absolute; top: 135px; left: 308px; transform: rotate(10deg); z-index: 10;">
+  <svg width="40" height="40" viewBox="0 0 400 40" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 20 Q5 0 20 0 L40 0 Q55 0 60 20 Q55 40 40 40 L20 40 Q5 40 0 20 M60 20 Q65 0 80 0 L100 0 Q115 0 120 20 Q115 40 100 40 L80 40 Q65 40 60 20 M120 20 Q125 0 140 0 L160 0 Q175 0 180 20 Q175 40 160 40 L140 40 Q125 40 120 20 M180 20 Q185 0 200 0 L220 0 Q235 0 240 20 Q235 40 220 40 L200 40 Q185 40 180 20 M240 20 Q245 0 260 0 L280 0 Q295 0 300 20 Q295 40 280 40 L260 40 Q245 40 240 20 M300 20" fill="#ffd700" stroke="#000" stroke-width="1"/>
+  </svg>
+</div>
+`;
+      }
+
+      function ce7(number) {
+        let numberStr = number.toString();
+        let exponent = 7;
+        let power = 1;
+        while (true) {
+          let exponentStr = Math.pow(exponent, power).toString();
+          if (numberStr.includes(exponentStr)) {
+            return true;
+          }
+          if (Math.pow(exponent, power) > number) break; // Stop if the exponent value exceeds the number
+          power++;
+        }
+        return false;
+      }
+
+      function displaySword() {
+        return `<div style="width: 550px; height: 550px; position: absolute; top: -95px; left: -1px; ">
+    <svg width="100%" height="100%" viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Sword -->
+        <g id="Sword">
+            <path d="M537.5,157.3c0.4,1.4,3.4,15,6.6,30.1c3.3,15.1,8.1,37.2,10.7,49.2c2.6,12,5.4,24.5,6.1,27.9c0.7,3.4,3.3,15,5.6,25.7c2.3,10.7,9.1,42,15,69.6c6,27.6,11.4,50.6,12,51.2c2,1.9,7.6,1.7,10,-0.4l2,-1.9l-6.6,-24.6c-3.6,-13.6,-10.3,-38.2,-14.6,-54.8c-4.5,-16.6,-11.1,-41.7,-14.9,-55.8c-3.8,-14.2,-12.4,-46.4,-19.1,-71.8c-6.8,-25.3,-12.5,-46.2,-12.8,-46.5c-0.2,0.7,-0.4,0.6,0,2.1l0,0l0,0z" fill="#b0b0b0"/>
+        </g>
+        
+        <!-- Sword Holder -->
+        <rect x="562" y="370" width="60" height="20" fill="#363534" transform="translate(585 380) rotate(-13) translate(-585 -380)" style="z-index: 10"/>
+        <rect x="582" y="380" width="20" height="55" fill="#363534" transform="translate(585 380) rotate(-13) translate(-585 -380)" style="z-index: 10"/>
+    </svg>
+</div>`;
+      }
+
+      //fixed elements
+      function generateHtmlBasedOnBlockNumber(blockNumber) {
+        const lookDir = getLook(blockNumber);
+        const lookHtml = generateLookSvg(lookDir);
+        let glasses = c420(blockNumber) ? displayglasses() : "";
+        let fireball = c4a0(blockNumber) ? displayfireball() : "";
+        let beltbroncehat = c0(blockNumber) ? displayBronceBeltHat() : "";
+        let beltsilverhat = c00(blockNumber) ? displaySilverBeltHat() : "";
+        let beltgoldhat = c000(blockNumber) ? displayGoldenBeltHat() : "";
+        let beltdiamondhat = c0000(blockNumber) ? displayDiamondBeltHat() : "";
+        let iceball = c00000(blockNumber) ? displayIceBall() : "";
+        let phoenix = c11(blockNumber) ? displayPhoenix() : "";
+        let cristalball = c111(blockNumber) ? displayCristalBall() : "";
+        let airmagic = c1111(blockNumber) ? displayAirMagic() : "";
+        let magicenergyball = c11111(blockNumber)
+          ? displayMagicEnergyBall()
+          : "";
+        let philstone = c8a8(blockNumber) ? displayPhilStone() : "";
+        let masterelements = c88(blockNumber) ? displayMasterElements() : "";
+        let firewand = c888(blockNumber) ? displayFireWand() : "";
+        let silverwand = c8888(blockNumber) ? displaySilverWand() : "";
+        let goldenwand = c88888(blockNumber) ? displayGoldenWand() : "";
+        let diamondwand = cp6(blockNumber) ? displayDiamondWand() : "";
+        let whitestaff = cs5(blockNumber) ? displayWhiteStaff() : "";
+        let goldglasses = cs6(blockNumber) ? displayGoldGlasses() : "";
+        let tinypotion = c9a9(blockNumber) ? displayTinyPotion() : "";
+        let tinypotionred = c99(blockNumber) ? displayTinyPotionRed() : "";
+        let potionmastergreen = c999(blockNumber)
+          ? displayPotionMasterGreen()
+          : "";
+        let potionmasterblue = c9999(blockNumber)
+          ? displayPotionMasterBlue()
+          : "";
+        let silverglasses = cf3(blockNumber) ? displaySilverGlasses() : "";
+        let magicring = cf4(blockNumber) ? displayMagicRing() : "";
+        let thunder = cf5(blockNumber) ? displayThunder() : "";
+        let diamondmagicring = cf6(blockNumber)
+          ? displayDiamondMagicRing()
+          : "";
+        let redmagicring = cf7(blockNumber) ? displayRedMagicRing() : "";
+        let grimoire = m11(blockNumber) ? displayGrimoire() : "";
+        let spellbracelet = m888(blockNumber) ? displaySpellBracelet() : "";
+        let sword = ce7(blockNumber) ? displaySword() : "";
+        let redgembucle = m12(blockNumber) ? displayRedGemBucle() : "";
+        let silverkey = m13(blockNumber) ? displaySilverKey() : "";
+        let goldkey = m14(blockNumber) ? displayGoldKey() : "";
+        let bluegembucle = m15(blockNumber) ? displayBlueGemBucle() : "";
+        let blackgembucle = m16(blockNumber) ? displayBlackGemBucle() : "";
+        let diamondkey = m69(blockNumber) ? displayDiamondKey() : "";
+        const containsSquare = containsFourDigitSquare(blockNumber);
+        const eyeDirection = getMagic(
+          parseInt(blockNumber.toString().slice(-4))
+        );
+        const magicwand = containsSquare ? displayMagicWand(eyeDirection) : "";
+        const svgsForDigits = generateSvgForDigits(blockNumber);
+        const svgsForDigits2 = generateSvgForDigits2(blockNumber);
+
+        //background face
+        const background = `<div style="position: absolute; top: -120px; left: 30px;">
+    <svg width="300" height="400" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+        
+        <path id="Right_Hair" d="m218.7,427.6l-0.4,1.4l-3.5,9.4l-4.4,18.7l-2.1,20.8l1.8,18l3.2,5.8l10.4,0c0,0 0.2,-15.1 1,-15.2c0.8,-0.1 5.6,-15.1 5.8,-15.4c0.2,-0.3 6,-9.6 6,-9.6l19.5,-20.5l0.9,-0.5" fill="#A0A5A1"/>
+        <path id="Left_Hair" d="m384.3,463.4l1.1,3.4l5.2,16.6l2.1,13l1.2,7.8l0.1,6.1l-1.4,5.1c0,0 2.6,2.5 6.1,2.3c3.6,-0.2 8.6,-2.2 8.6,-2.2l14.5,-7.9l14,-11.9c0,0 12,-14.5 11.7,-14.8c-0.3,-0.3 3.2,-7.5 3.2,-7.5l-64.3,-13.4" fill="#A0A5A1" stroke="#000000" stroke-miterlimit="10"/>
+        <path id="Close_right_face" d="m223.3,502.6l4.2,5.8l-4.2,-5.8z" fill="none"/>
+        <path id="Face" d="m227.5,515.3l-3.3,-8l-0.4,-5.5l1,-15.2l4.7,-12.2l1.1,-3.2l6.1,-9.6l5.9,-6.2l13.8,-14.5l13.4,2.6l11.3,2.5l105.9,15l-0.2,3.1l2.5,2.4l5.9,6.6l8.2,8.7l5.1,8.8l7.7,11.7l2.5,5.3l1.1,5.3l0.8,2.2l-3,9.5l-4.1,6.8" fill="#FFCBAA" stroke="#000000" stroke-miterlimit="10"/>
+    <!-- Eyes -->
+    <!-- Left Eye -->
+    <ellipse cx="290" cy="485" rx="11" ry="11" fill="black"/>
+    <!-- Right Eye -->
+    <ellipse cx="340" cy="488" rx="11" ry="11" fill="black"/>
+        </svg>
+    </div>
+    <div style="position: absolute; top: 125px; left: 11px;">
+    <svg width="100px" height="100px" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- magic stone -->
+        <ellipse cx="50" cy="45" rx="12" ry="11" fill="#C0C0C0">
+            <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="translate"
+                values="0,0; 0,-3; 0,0"  
+                keyTimes="0; 0.5; 1"     
+                dur="2s"
+                repeatCount="indefinite"/>
+        </ellipse>       
+    </svg>
+</div>`;
+
+        //mouth
+        const mouth = `<div style="position: absolute; top: -70px; left: -19px;">
+        <!-- Right Hand -->
+        <svg width="600" height="600" viewBox="0 0 1000 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="m335.9,533.5l-12.3,-4l-21.1,-8.3l-30.8,9l17.6,18.4l13.2,8.9l3.4,0l10.8,-2.8l18.9,-8.6l17.5,-10l-17.2,-2.6l0,0z" fill="#FFCBAA" stroke="#000000" stroke-miterlimit="10"/>
+        <polygon id="Mouth" class="st8" points="287.6,533.5 328.2,535.7 326.4,540.8 319.2,545.3 305.8,545.3 294.6,541.7  " fill="#FF152F" stroke="#000000" stroke-miterlimit="10"/>
+        </svg>
+        </div>`;
+
+        //Right Hand
+        const eyes = `<div style="position: absolute; top: -69px; left: -20px;">
+    <svg width="600" height="600" viewBox="0 0 1000 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <polyline id="Right_Hand" points="571.3,425.1 574.3,415.4 576.2,409.6 576.9,407.6 578.3,404 579.9,401 582.8,396.8 584.8,394.4 587,392.2 589.6,390 592.8,387.9 596,386.2 597.6,385.1 603.8,383.9 606,385 609.1,386.2 611.5,387.5 614.3,389.9    616.2,391.9 617.4,394.1 618.8,397.4 619.4,399.5 620.1,402.9 620.3,405.6 620.6,409.1 617.2,426.4 610.4,440.7  " fill="#FFCBAA"/>
+    <path id="Wand" d="m537.5,157.3c0.4,1.4 3.4,15 6.6,30.1c3.3,15.1 8.1,37.2 10.7,49.2c2.6,12 5.4,24.5 6.1,27.9c0.7,3.4 3.3,15 5.6,25.7c2.3,10.7 9.1,42 15,69.6c6,27.6 11.4,50.6 12,51.2c2,1.9 7.6,1.7 10,-0.4l2,-1.9l-6.6,-24.6c-3.6,-13.6 -10.3,-38.2 -14.6,-54.8c-4.5,-16.6 -11.1,-41.7 -14.9,-55.8c-3.8,-14.2 -12.4,-46.4 -19.1,-71.8c-6.8,-25.3 -12.5,-46.2 -12.8,-46.5s-0.4,0.6 0,2.1l0,0l0,0z" fill="#9F5500"/>
+    </svg>
+    </div>`;
+
+        //Left Hand
+        const teeth = `<div style="position: absolute; top: -70px; left: -20px;">
+    <svg width="600" height="600" viewBox="0 0 1000 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <polyline id="Left_Hand" class="st9" points="95.5,612.1 85.5,608.8 79.5,606.7 77.4,605.9 73.7,604.3 70.6,602.7 66.3,599.7    64,597.7 61.8,595.5 59.6,592.8 57.6,589.8 55.9,586.6 54.9,585 54,579.1 55.2,577 56.7,574.2 58.2,572 60.8,569.4 63,567.8    65.4,566.7 69,565.6 71.3,565.1 74.8,564.7 77.7,564.6 81.3,564.5 99.3,568.7 114,576  " fill="#FFCBAA"/>    </svg>
+    </div>`;
+        //construction
+        const htmlContent =
+          background +
+          beltbroncehat +
+          beltgoldhat +
+          beltsilverhat +
+          beltdiamondhat +
+          eyes +
+          sword +
+          lookHtml +
+          teeth +
+          svgsForDigits2 +
+          mouth +
+          svgsForDigits +
+          fireball +
+          glasses +
+          phoenix +
+          cristalball +
+          airmagic +
+          bluegembucle +
+          blackgembucle +
+          masterelements +
+          philstone +
+          firewand +
+          redgembucle +
+          goldkey +
+          diamondkey +
+          silverkey +
+          silverwand +
+          goldenwand +
+          tinypotion +
+          tinypotionred +
+          potionmastergreen +
+          potionmasterblue +
+          whitestaff +
+          goldglasses +
+          thunder +
+          silverglasses +
+          diamondmagicring +
+          redmagicring +
+          grimoire +
+          magicring +
+          spellbracelet +
+          diamondwand +
+          iceball +
+          magicenergyball +
+          magicwand;
+        document.getElementById("natimatedwizards").innerHTML = htmlContent;
+      }
+    </script>
+    <!-- All rights reserved ZM LABS -->
+  </body>
+</html>
