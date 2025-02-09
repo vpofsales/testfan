@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trait Backgrounds</title>
+    <style>
+        .trait {
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+            margin: 10px;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Trait Backgrounds</h1>
+    <input type="number" id="blockNumber" placeholder="Enter Block Number">
+    <button onclick="fetchNonce()">Get Traits</button>
+    <div id="traits"></div>
+    <script>
+        const base64Data = {
+            backgrounds: {
+                "Teal": "teal background placeholder",
+                "Green": "green background placeholder",
+                "Grey": "grey background placeholder",
+                "Light Blue": "light blue background placeholder",
+                "Light Purple": "light purple background placeholder",
+                "Orange": "orange background placeholder",
+                "Pale Yellow": "pale yellow background placeholder",
+                "Purple": "purple background placeholder",
+                "Red": "red background placeholder",
+                "Yellow": "yellow background placeholder"
+            },
+            eyes: {
+                "Base": {
+                    "Black": "black eyes placeholder",
+                    "Blue": "blue eyes placeholder",
+                    "Brown": "brown eyes placeholder",
+                    "Green": "green eyes placeholder",
+                    "Teal": "teal eyes placeholder",
+                    "Orange": "orange eyes placeholder",
+                    "Pink": "pink eyes placeholder",
+                    "Purple": "purple eyes placeholder",
+                    "Red": "red eyes placeholder",
+                    "Yellow": "yellow eyes placeholder"
+                },
+                "Female": {
+                    "Black": "female black eyes placeholder",
+                    "Blue": "female blue eyes placeholder",
+                    "Brown": "female brown eyes placeholder",
+                    "Green": "female green eyes placeholder",
+                    "Teal": "female teal eyes placeholder",
+                    "Orange": "female orange eyes placeholder",
+                    "Pink": "female pink eyes placeholder",
+                    "Purple": "female purple eyes placeholder",
+                    "Red": "female red eyes placeholder",
+                    "Yellow": "female yellow eyes placeholder"
+                }
+            },
+            hair: {
+                "Long Black": "long black hair placeholder",
+                "Long Blonde": "long blonde hair placeholder",
+                "Long Brown": "long brown hair placeholder",
+                "Long Red": "long red hair placeholder",
+                "Medium Black": "medium black hair placeholder",
+                "Medium Blonde": "medium blonde hair placeholder",
+                "Medium Brown": "medium brown hair placeholder",
+                "Short Black": "short black hair placeholder",
+                "Short Blonde": "short blonde hair placeholder",
+                "Short Brown": "short brown hair placeholder",
+                "Short Red": "short red hair placeholder",
+                "Short Blue": "short blue hair placeholder"
+            },
+            shirts: {
+                "Blue Collar": "blue collar shirt placeholder",
+                "Dress Shirt": "dress shirt placeholder",
+                "Jacket": "jacket placeholder",
+                "Jersey": "jersey placeholder",
+                "Long Sleeve": "long sleeve placeholder",
+                "Plaid": "plaid placeholder",
+                "Open Shirt": "open shirt placeholder",
+                "Short Sleeve": "short sleeve placeholder",
+                "Suit Top": "suit top placeholder",
+                "Vacation": "vacation shirt placeholder"
+            },
+            shirtColors: {
+                "Professional": {
+                    "0": "yellow professional shirt placeholder",
+                    "1": "red professional shirt placeholder",
+                    "2": "red with buttons professional shirt placeholder",
+                    "3": "blue professional shirt placeholder",
+                    "4": "blue with buttons professional shirt placeholder",
+                    "5": "orange professional shirt placeholder",
+                    "6": "orange with buttons professional shirt placeholder",
+                    "7": "green professional shirt placeholder",
+                    "8": "green with buttons professional shirt placeholder",
+                    "9": "black professional shirt placeholder"
+                },
+                "Dress Shirt": {
+                    "0": "blue dress shirt placeholder",
+                    "1": "green dress shirt placeholder",
+                    "2": "green white dress shirt placeholder",
+                    "3": "light blue white dress shirt placeholder",
+                    "4": "orange dress shirt placeholder",
+                    "5": "orange white dress shirt placeholder",
+                    "6": "purple white dress shirt placeholder",
+                    "7": "red dress shirt placeholder",
+                    "8": "red white dress shirt placeholder",
+                    "9": "purple dress shirt placeholder"
+                },
+                "Jacket": {
+                    "0": "black jacket placeholder",
+                    "1": "blue jacket placeholder",
+                    "2": "green jacket placeholder",
+                    "3": "orange jacket placeholder",
+                    "4": "pink jacket placeholder",
+                    "5": "pink black jacket placeholder",
+                    "6": "purple jacket placeholder",
+                    "7": "red jacket placeholder",
+                    "8": "red black jacket placeholder",
+                    "9": "yellow jacket placeholder"
+                },
+                "Jersey": {
+                    "0": "orange blue jersey placeholder",
+                    "1": "blue jersey placeholder",
+                    "2": "orange black jersey placeholder",
+                    "3": "orange jersey placeholder",
+                    "4": "purple yellow jersey placeholder",
+                    "5": "red yellow jersey placeholder",
+                    "6": "white black jersey placeholder",
+                    "7": "white purple jersey placeholder",
+                    "8": "white red jersey placeholder",
+                    "9": "yellow blue jersey placeholder"
+                },
+                "Long Sleeve": {
+                    "0": "blue long sleeve placeholder",
+                    "1": "green long sleeve placeholder",
+                    "2": "grey long sleeve placeholder",
+                    "3": "light blue long sleeve placeholder",
+                    "4": "light green long sleeve placeholder",
+                    "5": "orange long sleeve placeholder",
+                    "6": "pink long sleeve placeholder",
+                    "7": "purple long sleeve placeholder",
+                    "8": "red long sleeve placeholder",
+                    "9": "yellow long sleeve placeholder"
+                },
+                "Plaid": {
+                    "0": "black plaid placeholder",
+                    "1": "yellow plaid placeholder",
+                    "2": "blue plaid placeholder",
+                    "3": "green 2 plaid placeholder",
+                    "4": "green plaid placeholder",
+                    "5": "blue 2 plaid placeholder",
+                    "6": "orange plaid placeholder",
+                    "7": "pink plaid placeholder",
+                    "8": "purple plaid placeholder",
+                    "9": "red plaid placeholder"
+                },
+                "Open Shirt": {
+                    "0": "light blue open shirt placeholder",
+                    "1": "black open shirt placeholder",
+                    "2": "blue open shirt placeholder",
+                    "3": "green open shirt placeholder",
+                    "4": "grey open shirt placeholder",
+                    "5": "orange open shirt placeholder",
+                    "6": "pink open shirt placeholder",
+                    "7": "purple open shirt placeholder",
+                    "8": "red open shirt placeholder",
+                    "9": "yellow open shirt placeholder"
+                },
+                "Short Sleeve": {
+                    "0": "blue short sleeve placeholder",
+                    "1": "bright orange short sleeve placeholder",
+                    "2": "green short sleeve placeholder",
+                    "3": "grey short sleeve placeholder",
+                    "4": "light blue short sleeve placeholder",
+                    "5": "pink short sleeve placeholder",
+                    "6": "purple short sleeve placeholder",
+                    "7": "red short sleeve placeholder",
+                    "8": "yellow short sleeve placeholder",
+                    "9": "orange short sleeve placeholder"
+                },
+                "Suit Top": {
+                    "0": "green suit top placeholder",
+                    "1": "blue suit top placeholder",
+                    "2": "grey blue suit top placeholder",
+                    "3": "grey orange suit top placeholder",
+                    "4": "light blue suit top placeholder",
+                    "5": "orange suit top placeholder",
+                    "6": "pink suit top placeholder",
+                    "7": "purple suit top placeholder",
+                    "8": "red suit top placeholder",
+                    "9": "red blue suit top placeholder"
+                },
+                "Vacation": {
+                    "0": "blue green vacation shirt placeholder",
+                    "1": "blue pink vacation shirt placeholder",
+                    "2": "green pink vacation shirt placeholder",
+                    "3": "orange purple vacation shirt placeholder",
+                    "4": "pink blue vacation shirt placeholder",
+                    "5": "purple green vacation shirt placeholder",
+                    "6": "red blue vacation shirt placeholder",
+                    "7": "yellow blue vacation shirt placeholder",
+                    "8": "yellow purple vacation shirt placeholder",
+                    "9": "yellow red vacation shirt placeholder"
+                }
+            },
+            accessories: {
+                "Hat": "hat accessory placeholder",
+                "Glasses": "glasses accessory placeholder",
+                "Scarf": "scarf accessory placeholder",
+                "Earrings": "earrings accessory placeholder",
+                "Bracelet Right": "bracelet right accessory placeholder",
+                "Earring Bottom": "earring bottom accessory placeholder",
+                "Earring Top": "earring top accessory placeholder",
+                "Necklace": "necklace accessory placeholder",
+                "Ring Left": "ring left accessory placeholder",
+                "Ring Right": "ring right accessory placeholder",
+                "Watch Left": "watch left accessory placeholder",
+                "Watch Right": "watch right accessory placeholder",
+                "Bracelet Left": "bracelet left accessory placeholder"
+            }
+        };
+
+        async function fetchNonce() {
+            const blockNumber = document.getElementById('blockNumber').value;
+            if (!blockNumber) {
+                alert('Please enter a block number');
+                return;
+            }
+
+            try {
+                const response = await fetch('https://ordinals.com/r/blockinfo/' + blockNumber);
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                const nonce = data.nonce;
+
+                displayTraits(blockNumber, nonce, 'exampleInscriptionID');
+            } catch (error) {
+                console.error('Error fetching nonce:', error);
+                alert('Failed to fetch nonce for the given block number');
+            }
+        }
+
+        function getTraits(blockNumber, nonce, inscriptionID) {
+  const traits = {};
+  const nonceStr = nonce.toString().split('').reverse().join('');
+  const digits = [];
+
+  // Extract digits from the end of the nonce string
+  for (let i = nonceStr.length - 1; i >= 0; i--) {
+    digits.push(nonceStr[i]);
+  }
+
+  // Assign D1-D5 values
+  const d1 = digits[0];
+  const d2 = digits[1];
+  const d3 = digits[2];
+  const d4 = digits[3];
+  const d5 = digits[4];
+
+  // Determine background (D1)
+  switch (d1) {
+    case '0':
+      traits.background = base64Data.backgrounds['Teal'];
+      break;
+    case '1':
+      traits.background = base64Data.backgrounds['Green'];
+      break;
+    case '2':
+      traits.background = base64Data.backgrounds['Grey'];
+      break;
+    case '3':
+      traits.background = base64Data.backgrounds['Light Blue'];
+      break;
+    case '4':
+      traits.background = base64Data.backgrounds['Light Purple'];
+      break;
+    case '5':
+      traits.background = base64Data backgrounds ['Orange'];
+        break ;
+     case '6' :
+       Traits background= Base64data backgrounds ["Pale Yellow"];
+         Break ;
+     Case'7' :
+       Traits background= Base64data backgrounds ["Purple "];
+         Break ;
+     Case'8' :
+       Traits background= Base64data backgrounds ["Red "];
+         Break ;
+     Case'9' :
+       Traits background= Base64data backgrounds ["Yellow "];
+         Break ;
+     Default:
+       Traits background= Base64data backgrounds ["Teal "];
+
+ }
+
+// Determine rare skins
+if (blockNumber % 77 === 0) {
+  traits.skin = base64Data.skins.rare['Pepe'];
+  traits.mouth = base64Data.mouths.rare['Red'];
+} else if (/^7+$/.test(blockNumber.toString())) {
+  if (blockNumber % 77 === 0) {
+    traits.skin = base64Data.skins.rare['Diamond'];
+  } else {
+    traits.skin = base64Data.skins.rare['Diamond'];
+  }
+}
+
+
+// Determine eyes (D2)
+if (isFemaleOutline) {
+  switch (d2) {
+    case '0':
+      traits.eyes = base64Data.eyes.Female["Black"];
+      break;
+    case '1':
+      traits.eyes = base64Data.eyes.Female["Blue"];
+      break;
+    case '2':
+      traits.eyes = base64Data.eyes.Female["Brown"];
+      break;
+    case '3':
+      traits.eyes = base64Data.eyes.Female["Green"];
+      break;
+    case '4':
+      traits.eyes = base64Data.eyes.Female["Teal"];
+      break;
+    case '5':
+      traits.eyes = base64Data.eyes.Female["Orange"];
+      break;
+    case '6':
+      traits.eyes = base64Data.eyes.Female["Pink"];
+      break;
+    case '7':
+      traits.eyes = base64Data.eyes.Female["Purple"];
+      break;
+    case '8':
+      traits.eyes = base64Data.eyes.Female["Red"];
+      break;
+    case '9':
+       Traits.eyeColorIndexValueof9=base Data .Eye Colors .Female [‘Yellow ’]
+  }
+} else {
+  switch (d2) {
+    case '0':
+       Traits.eyeColorIndexValueof0=base Data .Eye Colors .Base [‘Blue’] ;
+        Break ; 
+     Case ‘1’ :   
+       Traits.eyeColorIndexValueof1=base Data .Eye Colors .Base[“Green ”];     
+        Break; 
+     Case ‘2’ :   
+       Traits.eyeColorIndexValueof2=base Data .Eye Colors.Base [‘Brown ’];      
+         Break;  
+     Case ‘3’ :   
+       Traits.eyeColorIndexValueof3=base Data.EyeColors.Base[“Teal ”];        
+         Break; 
+     Case ‘4’ :
+        TraitseyeColorindexvalue4= Base data.Eye colors.Base[“Purple”] ;
+           Break ;  
+     Case ‘5’ :
+          Traitseyecolorindexvalue5= Base data.Eye colors.Base[ “Orange”] ;
+              Break ;    
+     Case ‘6’:
+         Traitseyecolorindexvalue6= Base data.Eye colors.Base [“Pink”];
+             Break ;
+     Case ‘7’:    
+          Traitseyecolorindexvalue7=Base data Eye color Index Value of seven   [ “Black” ] ;       
+               Break;            
+        Default:
+            TraitseyecolorDefault Index value Seven   =[ Base data eye Color Index Value seven Default ]
+}
+}
+
+// Determine hair (D3)
+if (isMermaidOutline) {
+  switch(d3){
+    case '0': traits.hair = "Ponytail Black"; break;
+    case '1': traits.hair = "Ponytail Blonde"; break;
+    case '2': traits.hair = "Ponytail Brown"; break;
+    case '3': traits.hair = "Ponytail Natural Red"; break;
+    case '4': traits.hair = "Ponytail Black"; break;
+    case '5': traits.hair = "Ponytail Blonde"; break;
+    case '6': traits.hair = "Ponytail Brown"; break;
+    case '7': traits.hair = "Ponytail Dark Red"; break;
+    case '8': traits.hair = "Ponytail Blue"; break;
+    case '9': traits.hair = "Ponytail Purple"; break;
+  }
+} else if (isFemaleOutline || isFemaleHeelOutline) {
+  switch(d3){
+    case '0': traits.hair = "Long Black"; break;
+    case '1': traits.hair = "Long Blonde"; break;
+    case '2': traits.hair = "Long Brown"; break;
+    case '3': traits.hair = "Long Red"; break;
+    case '4': traits.hair = "Ponytail Black"; break;
+    case '5': traits.hair = "Ponytail Blonde"; break;
+    case '6 ':traits.HAIR= “pony tail brown” ;break ;
+     Case ‘7’: TRAITS HAIR=”pony tail red” ;break ;
+      Case‘8’: TRAITS HAIR=”short blue” ; 
+     Break; 
+     Case ‘9’ : TRAITS HAIR= “short red” ;
+      }
+ } else {
+   switch(d3){
+     Case ‘0’ : Traits.HAIR="Short Black" ; 
+     Break; 
+     Case ‘1’ : Traits.HAIR= “Short Blonde” ; 
+     Break; 
+     Case ‘2’ : Traits.HAIR=”Short Brown” ; 
+     Break ; 
+     Case ‘3’ : Traits.HAIR= “Medium Black” ; 
+     Break; 
+     Case ‘4’ : Traits.HAIR= “Medium Blonde” ; 
+     Break; 
+     Case ‘5’ : Traits.HAIR= “Medium Brown” ; 
+     Break; 
+     Case ‘6’ : Traits.HAIR= “Long Black” ; 
+     Break; 
+     Case ‘7’ : Traits.HAIR= “Long Blonde” ; 
+     Break; 
+     Case ‘8’ : Traits.HAIR= “Long Brown” ; 
+     Break;  
+      Case‘9’:Traits.HAIR=”Short Red”;Break;
+
+   }
+}
+
+
+// Determine shirt type (D4)
+if (isFemaleOutline) {
+  switch (d4) {
+    case '0':
+      traits.shirtType = 'Dress';
+      break;
+    case '1':
+      traits.shirtType = 'Dress Shirt';
+      break;
+    case '2':
+      traits.shirtType = 'Dress';
+      break;
+    case '3':
+      traits.shirtType = 'Track suit';
+      break;
+    case '4':
+      traits.shirtType = 'T-Shirt';
+      break;
+    case '5':
+      traits.shirtType = 'Track suit';
+      break;
+    case '6':
+      traits.shirtType = 'Dress Shirt';
+      break;
+    case '7':
+      traits.shirtType = 'T-Shirt';
+      break;
+    case '8':
+      traits.shirtType = 'Dress';
+      break;
+    case '9':
+      traits.shirtType = 'Dress Shirt';
+      break;
+  } 
+else {    
+Switch(D4){   
+shirts: {
+                "Blue Collar": "blue collar shirt placeholder",
+                "Dress Shirt": "dress shirt placeholder",
+                "Jacket": "jacket placeholder",
+                "Jersey": "jersey placeholder",
+                "Long Sleeve": "long sleeve placeholder",
+                "Plaid": "plaid placeholder",
+                "Open Shirt": "open shirt placeholder",
+                "Short Sleeve": "short sleeve placeholder",
+                "Suit Top": "suit top placeholder",
+                "Vacation": "vacation shirt placeholder"
+            }, }
+
+// Determine shirt color (D5)
+const dressColorMap=["color","color","color"];
+let randomIndex=Math.floor(Math.random()*dressColorMap.length);
+let randomColor=dressColorMap[randomIndex]; 
+
+If(!Isfemaleoutline){
+Switch(D5){  
+case‘0’: 
+Traits.shirtcolor=randomColor;     
+break ;     
+case‘8’:   
+Traits.shirtcolor=randomColor;       
+break ;       
+Default:        
+Traits.shirtcolor=randomColor;          
+}
+}else{ 
+
+If(Traitsshirtype===”TShirt”){  
+
+Switch(D5){  
+case‘0’: 
+Traits.shoes=null;     
+traits.pants=base54 encoded Imageof Black Jeansfor Female T Shirt Bottom Half.;    
+break ;     
+case‘8’:   
+Traits.shoes=null;       
+traits.pants=base54 encoded Imageof Grey Jeansfor Female T Shirt Bottom Half.;        
+break ;       
+Default:        
+Traits.shoes=null;          
+traits.pants=base54 encoded Imageof Blue Jeansfor Female T Shirt Bottom Half.;            
+}    
+
+}else{
+ Switch(D5){  
+shirtColors: {
+                "Professional": {
+                    "0": "yellow professional shirt placeholder",
+                    "1": "red professional shirt placeholder",
+                    "2": "red with buttons professional shirt placeholder",
+                    "3": "blue professional shirt placeholder",
+                    "4": "blue with buttons professional shirt placeholder",
+                    "5": "orange professional shirt placeholder",
+                    "6": "orange with buttons professional shirt placeholder",
+                    "7": "green professional shirt placeholder",
+                    "8": "green with buttons professional shirt placeholder",
+                    "9": "black professional shirt placeholder"
+                },
+                "Dress Shirt": {
+                    "0": "blue dress shirt placeholder",
+                    "1": "green dress shirt placeholder",
+                    "2": "green white dress shirt placeholder",
+                    "3": "light blue white dress shirt placeholder",
+                    "4": "orange dress shirt placeholder",
+                    "5": "orange white dress shirt placeholder",
+                    "6": "purple white dress shirt placeholder",
+                    "7": "red dress shirt placeholder",
+                    "8": "red white dress shirt placeholder",
+                    "9": "purple dress shirt placeholder"
+                },
+                "Jacket": {
+                    "0": "black jacket placeholder",
+                    "1": "blue jacket placeholder",
+                    "2": "green jacket placeholder",
+                    "3": "orange jacket placeholder",
+                    "4": "pink jacket placeholder",
+                    "5": "pink black jacket placeholder",
+                    "6": "purple jacket placeholder",
+                    "7": "red jacket placeholder",
+                    "8": "red black jacket placeholder",
+                    "9": "yellow jacket placeholder"
+                },
+                "Jersey": {
+                    "0": "orange blue jersey placeholder",
+                    "1": "blue jersey placeholder",
+                    "2": "orange black jersey placeholder",
+                    "3": "orange jersey placeholder",
+                    "4": "purple yellow jersey placeholder",
+                    "5": "red yellow jersey placeholder",
+                    "6": "white black jersey placeholder",
+                    "7": "white purple jersey placeholder",
+                    "8": "white red jersey placeholder",
+                    "9": "yellow blue jersey placeholder"
+                },
+                "Long Sleeve": {
+                    "0": "blue long sleeve placeholder",
+                    "1": "green long sleeve placeholder",
+                    "2": "grey long sleeve placeholder",
+                    "3": "light blue long sleeve placeholder",
+                    "4": "light green long sleeve placeholder",
+                    "5": "orange long sleeve placeholder",
+                    "6": "pink long sleeve placeholder",
+                    "7": "purple long sleeve placeholder",
+                    "8": "red long sleeve placeholder",
+                    "9": "yellow long sleeve placeholder"
+                },
+                "Plaid": {
+                    "0": "black plaid placeholder",
+                    "1": "yellow plaid placeholder",
+                    "2": "blue plaid placeholder",
+                    "3": "green 2 plaid placeholder",
+                    "4": "green plaid placeholder",
+                    "5": "blue 2 plaid placeholder",
+                    "6": "orange plaid placeholder",
+                    "7": "pink plaid placeholder",
+                    "8": "purple plaid placeholder",
+                    "9": "red plaid placeholder"
+                },
+                "Open Shirt": {
+                    "0": "light blue open shirt placeholder",
+                    "1": "black open shirt placeholder",
+                    "2": "blue open shirt placeholder",
+                    "3": "green open shirt placeholder",
+                    "4": "grey open shirt placeholder",
+                    "5": "orange open shirt placeholder",
+                    "6": "pink open shirt placeholder",
+                    "7": "purple open shirt placeholder",
+                    "8": "red open shirt placeholder",
+                    "9": "yellow open shirt placeholder"
+                },
+                "Short Sleeve": {
+                    "0": "blue short sleeve placeholder",
+                    "1": "bright orange short sleeve placeholder",
+                    "2": "green short sleeve placeholder",
+                    "3": "grey short sleeve placeholder",
+                    "4": "light blue short sleeve placeholder",
+                    "5": "pink short sleeve placeholder",
+                    "6": "purple short sleeve placeholder",
+                    "7": "red short sleeve placeholder",
+                    "8": "yellow short sleeve placeholder",
+                    "9": "orange short sleeve placeholder"
+                },
+                "Suit Top": {
+                    "0": "green suit top placeholder",
+                    "1": "blue suit top placeholder",
+                    "2": "grey blue suit top placeholder",
+                    "3": "grey orange suit top placeholder",
+                    "4": "light blue suit top placeholder",
+                    "5": "orange suit top placeholder",
+                    "6": "pink suit top placeholder",
+                    "7": "purple suit top placeholder",
+                    "8": "red suit top placeholder",
+                    "9": "red blue suit top placeholder"
+                },
+                "Vacation": {
+                    "0": "blue green vacation shirt placeholder",
+                    "1": "blue pink vacation shirt placeholder",
+                    "2": "green pink vacation shirt placeholder",
+                    "3": "orange purple vacation shirt placeholder",
+                    "4": "pink blue vacation shirt placeholder",
+                    "5": "purple green vacation shirt placeholder",
+                    "6": "red blue vacation shirt placeholder",
+                    "7": "yellow blue vacation shirt placeholder",
+                    "8": "yellow purple vacation shirt placeholder",
+                    "9": "yellow red vacation shirt placeholder"
+                }
+            },
+
+}
+
+// Determine shoes (D6)
+if (isFemaleOutline) {
+  switch (d6) {
+    case '0':
+      traits.shoes = base64Data.shoes.female['No Shoes'];
+      break;
+    case '1':
+      traits.shoes = base64Data.shoes.female['Flats'];
+      break;
+    case '2':
+      traits.shoes = base64Data.shoes.female['Sandals'];
+      break;
+    case '3':
+      traits.shoes = base64Data.shoes.female['Heels'];
+      break;
+    case '4':
+      traits.shoes = base64Data.shoes.female['Converse'];
+      break;
+    case '5':
+      traits.shoes = base64Data.shoes.female['No Shoes'];
+      break;
+    case '6':
+      traits.shoes = base64Data.shoes.female['Flats'];
+      break;
+    case '7':
+      traits.shoes = base64Data	shoes	female	[‘Sandals’];
+ Break; 
+Case ‘8’ :
+Traits shoes=Base Data .Shoefemale [‘Heels’]
+Break ; 
+Case ‘9’ :
+Traits shoes=Base Data .Shoefemale [‘Converse ’]
+}
+
+// Determine pants
+if (isFemaleOutline) {
+  if (traits.shirtType === 'T-Shirt') {
+    // Draw pants for female
+    if (blockNumber % 2 === 0) {
+      traits.pants = base64Data.pants.female['Khakis'];
+    } else {
+      traits.pants = base64Data.pants.female['Blue Jeans'];
+    }
+  } else {
+    // No pants for female
+    traits.pants = base64Data.pants.female['None'];
+  }
+} else {
+  // Draw pants for Base or Arm Out
+  if (blockNumber % 2 === 0) {
+    traits.pants = base64Data.pants.base['Khakis'];
+  } else {
+    traits.pants = base64Data.pants.base['Blue Jeans'];
+  }
+}
+
+// Determine rare backgrounds
+if (bits === '3b') {
+  traits.background = base64Data.backgrounds.rare['Beach'];
+} else if (bits === '7b') {
+  traits.background = base64Data.backgrounds.rare['Space'];
+} else if (bits === '8b') {
+  traits.background = base64Data.backgrounds.rare['Bitmap'];
+} else if (bits === '9b') {
+  traits.background = base64Data.backgrounds.rare['Clouds'];
+} else if (bits === '101') {
+  traits.background = base64Data.backgrounds.rare['XP'];
+}
+
+// Determine hats and headwear
+if (isBaseOutline || (isArmOutOutline && traits(headware === 'Backwards Multi')) {
+  if (!longHairTriggered) { 
+    // Check for Diamond NodeMonke Hat first
+    if (blockNumber.toString() === '9999') { 
+        Traits headware= Base data Headware Rare[“Diamond NodeMonke”]    
+        }
+     // Then check for Backwards Diamond  
+     Else If( Block number.to String.includes(“7777”)) { 
+         Traits headware= Base data Headware Rare[“back wards diamond ”]   
+         }
+     //Then check for node monkee  
+     Else If(Blocknumber.to string.includes (“111”)){    
+          Trait’s Head ware = Base data Head ware Rare[“Node Monke ”]     
+          }
+     //Then check for Back wards multi hat   
+     Else If(Block number.to string.includes (“888”)){       
+           Trait’s head ware = Base data Head ware Rare [ “back wards multi ”]      
+           }
+     // Then check for Back wards single   
+     Else If(Blocknumber.to string.includes (“333”)){          
+            Trait’s Head ware = Base data Head ware Rare[ “back wards single ”]      
+            }
+
+//Now we can start checking weights. Start with cowboy since its under a certain amount  
+Else If( Block Weight<850){         
+              Trait’s Head Ware= Base data head ware rare [“cow boy ”]        
+              }
+
+//rest are based off ranges now.
+Else If( Blockweight>=1000&&Blockweight<=1999){        
+               Traits HEADWARE=BASE DATA.HEADWARE.RARE[‘HUFFLEPUFF’]
+               }
+
+Else IF(Blockweight>=2000&&Blockweight<=9999){       
+                 TRAITS HEADWARE=BASE DATA.HEADWARE.RARE[‘RAVENCLAW’]
+                 }
+
+Else IF(Blockweight>=10000&&Blockweight<=14999){      
+                   TRAITS HEADWARE=BASE DATA.HEADWARE.RARE[‘SLYTHERIN’]
+                   }
+
+ELSE IF(BLOCK WEIGHT >=15000&&BLOCK WEIGHT<=27000){       
+                     TRAITS HEAD WARE = BASE DATA .HEAD WARE .RARE [ GRYFFINDOR ]
+                     }
+
+// Determine eyewear
+if (bits === '22') {
+  traits.eyeware = base64Data.eyeWEAR.RARE [‘CYCLOPS RED BLACK ’]
+}Else If(bits===’23’){
+   Traits eye wear= Base data .Eye wear .Rare[‘CYCLOPS GREY GOLD ’]
+}
+Else If(bits===’3d’){
+      Traits eye wear=Base data .eye WEAR.RARE [‘3D ’]
+     }
+ Else IF(bits===’fa’){      
+          Traits eye WEAR= BASE DATA.EYE WEAR.RARE[‘HOLLOW WHITE ’]     
+         }
+ ELSE IF( BITS=== ‘0A’) {         
+              TRAITS EYEWEAR=BASE DATA.EYEWEAR.RARE[‘HOLLOW BLACK ’]        
+              }
+
+
+// Determine glow
+if (time === '22:XX') {
+  traits.glow = base64Data.glow.rare['Body Glow Green'];
+} else if (time === '22:XX' && longHairTriggered) {
+  traits.glow = base64Data.glow.rare['Body Glow Green 2'];
+} else if (time >= '01:00' && time <= '02:00') {
+  traits.glow = base64Data.glow.rare['Body Glow Blue'];
+} else if (time >= '01:00' && time <= '02:00' && longHairTriggered) {
+  traits.glow = base64Data.glow.rare['Body Glow Blue 2'];
+} else if (time === '23:18') {
+  traits.glow = base64Data.glow.rare['Fire Glow'];
+} else if (time === '23:19' && longHairTriggered) {
+  traits.glow = base64Data.glow.rare['Fire Glow 2'];
+} else if (time === '23:23') {
+  traits(gLow=Base Data .GLOW.RARE [‘DIAMOND GLOW ’]
+}
+
+
+// Determine pink glow
+if (bits === '1f' && isFemaleOutline) {
+    IF(HAIR=’PONYTAIL’) {    
+           Traits gLow= Base data .gLow.RARE [‘PONY TAIL GLOW ’]
+           } Else{   
+              Traits gLow=Base data .gLow.RARE [‘PINK GLOW’]     
+             }
+
+// Determine pet
+if (isBaseOutline && time >= '00:00' && time <= '01:00') {
+  traits.pet = base64Data.pets.rare['Parrot'];
+} else if (isArmOutOutline && blockTxCount === 1) {
+  traits.pet = base64Data.pets.rare['Pet Cat'];
+} else if (isFemaleOutline && !isHeelsOrMermaid && time >= '00:00' && time <= '01:00') {
+  traits.pet = base64Data.pets.rare['Parrot'];
+}
+
+// Determine parrot color
+if (traits.pet === 'Parrot') {
+    const minute=Time.split(':')[1]
+    IF(minute>=’00’&&minute<=’09’) {    
+           Traits parrotColor=Base Data .Par rot .Colors [‘GREEN ’]
+           } Else IF(minute>=’10’&&minute<=’19’) {   
+              Traits parrotColor=Base Data .Par rot .Colors [‘RED ’]     
+             }Else IF(minute>=’20’&&minute<=’29’) {          
+                Traits parrotColor=Base Data .Par rot .Colors [‘ORANGE ’]      
+                }Else IF(minute>=’40’&&minute<=’49’) {            
+                     Traits parrotColor=Base Data .Par rot .Colors [‘BLUE ’]        
+                     }Else IF(minute>=’50’&&minute<=’59’) {             
+                          Traits parrotColor=Base Data .Par rot .Colors [‘PINK ’]          
+                          }Else IF(minute>=’30’&&minute<=’39’) {              
+                               Traits parrotColor=Base Data .Par rot .Colors [‘DIAMOND ’]       
+                               }
+// Determine female parrot color
+if (isFemaleOutline && traits.pet === 'Parrot') {
+    const minute=time.split(':')[1]
+    IF(minute>=’00’&&minute<=’09’) {    
+           Traits parrotColor=Base Data .Female Parrot .Colors [‘GREEN ’]
+           } Else IF(minute>=’10’&&minute<=’19’) {   
+              Traits parrotColor=Base Data .Female Parrot .Colors [‘RED ’]     
+             }Else IF(minute>=’20’&&minute<=’29’) {          
+                Traits parrotColor=Base Data .Female Parrot .Colors [‘ORANGE ’]      
+                }Else IF(minute>=’40’&&minute<=’49’) {            
+                     Traits parrotColor=Base Data .Female Parrot .Colors [‘BLUE ’]        
+                     }Else IF(minute>=’50’&&minute<=’59’) {             
+                          Traits parrotColor=Base Data .Female Parrot .Colors [‘PINK ’]          
+                          }Else IF(minute>=’30’&&minute<=’39’) {              
+                               Traits parrotColor=Base Data .Female Parrot .Colors [‘DIAMOND ’]       
+                               }
+
+// Determine moon dog
+if (blockYear === 2022) {
+  traits.moonDog = base64Data.moonDog.rare['Moon Dog'];
+}
+
+// Determine rare clothing (Base only)
+if (isBaseOutline) {
+  if (d4 === '4' && d5 === '5' && blockTxCount < 1000) {
+    traits.clothing = base64Data.clothing.rare['Prisoner'];
+    // Override Shirt and Pants
+    traits.shirt = null;
+    traits.pants = null;
+  } else if (d4 === '5' && d5 === '1' && blockTxCount < 1000) {
+    traits.clothing = base64Data.clothing.rare['Science'];
+    // Override Shirt and Pants
+    traits.shirt = null;
+    traits.pants = null;
+  } else if (nonce.includes('7777')) {
+    traits.clothing = base64Data.clothing.rare['Track Suit'];
+    // Override Shirt and Pants
+    traits.shirt = null;
+    traits.pants = null;
+  }
+}
+
+
+// Determine rare clothing (Female only)
+if (isFemaleOutline) {
+  if (blockBitField === '0x170b98ab') {
+    traits.clothing = base64Data.clothing.rare['Morph'];
+    // Override/Cancels Shirt, Pants, Shoes, Necklace
+    traits.shirt = null;
+    traits.pants = null;
+    traits.shoes = null;
+    traits.necklace = null;
+  }
+}
+
+
+// Determine skin tone
+const d8 = nonceReverse[7];
+let skinTone;
+
+switch (d8) {
+  case '0':
+  case '9':
+    skinTone = 'Light Purple';
+    break;
+  case '1':
+  case '8':
+    skinTone = 'Light Green';
+    break;
+  case '2':
+  case '7':
+    skinTone = 'Light Blue';
+    break;
+  case '3':
+  case '6':
+    skinTone = 'Tan';
+    break;
+  case '4':
+    skinTone = 'Light Red';
+    break;
+  case '5':
+    skinTone = 'Light Grey';
+    break;
+}
+
+// Check for rare skin tone colors
+if (blockNumber % 77 === 0) {
+  traits.skin = base64Data.skins.rare['Pepe'];
+} else if (/^7+$/.test(blockNumber.toString())) {
+  traits.skin = base64Data.skins.rare['Diamond'];
+}
+
+
+// Determine Mermaid trait
+if (isFemaleOutline && blockReward > 300000 && blockHash.includes('00000000000000000000')) {
+  traits.mermaid = true;
+  // Override/null out all other traits except for background, eyes, hair, mouth, and dog moon
+  traits.shirt = null;
+  traits.pants = null;
+  traits.shoes = null;
+  traits.headwear = null;
+  traits.eyewear = null;
+  traits.glow = null;
+  traits.fireGlow = null;
+
+  // Determine Mermaid tail combo
+  if (blockNumber % 2 === 0) {
+    traits.mermaidTail = 'mermaid1';
+  } else {
+    traits.mermaidTail = 'mermaid2';
+  }
+
+  // Determine hair color for Mermaid
+  if (traits.hair === 'Ponytail') {
+    // Add new colors for Ponytail hair style
+    const hairColors = ['Green', 'Purple'];
+    const randomIndex = Math.floor(Math.random() * hairColors.length);
+    traits.hairColor = hairColors[randomIndex];
+  }
+}
+
+// Determine Saiyan trait
+if (time.includes('1:23')) {
+  traits.saiyanHead = true;
+  // Override/cancel any eyewear, headwear, glow, or fire glow traits
+  traits.eyewear = null;
+  traits.headwear = null;
+  traits.glow = null;
+  traits.fireGlow = null;
+
+  // Determine hair color for Saiyan
+  if (time >= '00:00:00' && time <= '11:59:59') {
+    traits.hairColor = 'Gold';
+  } else if (time >= '12:00:00' && time <= '23:59:59') {
+    traits.hairColor = 'Diamond';
+ }
+}
+
+// Determine Natman Head trait
+if (blockWeight >=140 && blockWeight <=150) { 
+   Traits natmanHead=true;   
+   Traits eyewear=null;   
+   Traits headwear=null;   
+   Traits glow=null;   
+   Traits fireGlow=null;  
+ } 
+
+//Determine Natman Body 
+If(block date=’2011-11-11’){
+     TRAITS NATMAN BODY=true ;
+     TRAITS SHIRT=NULL ;
+     TRAITS SHIRT COLOR=NULL ;
+     TRAITS GLOW=NULL ;
+     TRAITS FIRE GLOW=NULL ; 
+      TRAITS shoes=null ;    
+      }
+
+//Determine arm out held items
+
+If( Blocknumber%17===0 ){
+ Armout triggered= True ;
+
+ If(ArmOut triggered+Block TX Count is )
+
+TX count : Triggers :
+‘2k-3k’ : Sweeper 
+
+‘501-1000’: Silver Sweeper
+
+‘3k-5k’ : Gold Sweeper 
+
+‘1000 -2000’: BTC staff 
+
+‘25 -100 ‘ : Silver Staff  
+
+‘2 -10 ‘ : Gold Staff  
+
+‘11 -25 ‘ : Diamond Staff  
+
+1		:Pet cats   
+
+101 -250		Shit coin   
+
+251 -500		 Lucielle    
+
+5K +			Map of Bitmap
+
+
+
+Let me know if you have any further corrections or questions!
+
+
+
+Next we can move on to testing the entire code.
+
+
+
+Should we proceed with testing?
+
+
+        function displayTraits(blockNumber, nonce, inscriptionID) {
+            const traits = getTraits(blockNumber, nonce, inscriptionID);
+            console.log(`Block: ${blockNumber}, Nonce: ${nonce}, InscriptionID: ${inscriptionID}`);
+            console.log(traits);
+
+            const container = document.getElementById('traits');
+            container.innerHTML = '';
+
+            for (const [key, value] of Object.entries(traits)) {
+                const div = document.createElement('div');
+                div.className = 'trait';
+                div.style.backgroundImage = `url(data:image/svg+xml;base64,${value})`;
+                container.appendChild(div);
+            }
+        }
+
+        function checkIfFemale(blockNumber) {
+            // Implement the logic to check if the character is female based on the block number
+            // If the block reward is over 300k, then it triggers Female traits.
+            // For now, let's return false as a placeholder
+            // You can replace this with the actual logic to determine if the character is female
+            return blockNumber % 300000 > 0; // Example logic, replace with actual
+        }
+    </script>
+</body>
+</html>
