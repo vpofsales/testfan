@@ -1,0 +1,786 @@
+Core Traits are decided by each blocks' nonce, read in reverse. So the last digit of the nonce, is actually considered Digit 1 or "D1"
+The next to last digit would be "D2"
+Each core trait has 10 possibilities, based off the integers 0-9.
+
+
+It is very important to remember this as I will refer to it several times in the guide:
+When I say base/arm out/female/ female heel / mermaid, it is referring to their base image and/or outline. 
+Base and arm out share many similar core traits like hair, shoes, eyes, but they dont share all traits. 
+The same thing goes for female/female heel/mermaid. 
+
+So as an example, lets say we have two different block numbers, 17771 and 27772. 
+If 17771 triggers "base" outline and 27772 triggers "arm out" outline, and they both trigger "Short Brown" hair, they would pull the exact same base64 code for "Short Brown" hair. But their shirts would pull different base64 code, due to the rules in place. 
+
+
+
+
+
+
+D1 is for Backgrounds:
+
+Every type (base/arm out/female) gets the same triggers and backgrounds 
+background trigger is the nonce from that specific block number, read in reverse. 
+
+Background Color Map= 
+Teal: #5c969a 
+Green: #90e67f	
+Grey: #aba0a5	
+Light Blue: #aba0a5	
+Light Purple: #ca90c3	
+Orange: #f79f46	
+Pale Yellow: #d2d597	
+Purple: #bb69cd	
+Red: #e4655b	
+Yellow: #dcd86b
+
+D1:     Triggers:
+0	Blue
+1	Green
+2	Grey
+3	Light Blue
+4	Light Purple
+5	Orange
+6	Pale Yellow
+7	Purple
+8	Red
+9	Yellow
+
+----------------------------------------
+
+The next step is to check the block number to see if it gets Base/Arm Out/Female traits
+If the block number is divisible by 17, then it triggers Arm Out and it's traits.
+If the reward from that block number is over 300k then it triggers Female/female heel traits. 
+If both are triggered, then Arm Out overrides Female, unless its a mermaid. 
+
+Choose Appropriate "Outline" based off info above, then move on to draw the outline with the appropriate skin tone 
+
+
+If its base then draw base outline and fill with  
+
+#9781ac (light purple)
+#89ac81 (light green
+#81a3ac (light blue)
+#a4905f (light orange)
+#ca6d6c (light red)
+#b3b3b3 (light grey)
+#772684 (medium purple) 
+
+
+^unless Diamond or Pepe skin is triggered, which take precedence and override the base colors. 
+
+Pepe Skin: #24bd57 also change default mouth color of black to #d31403
+Diamond Skin: #b9f2ff
+
+
+
+
+MERMAID TRIGGER:
+FEMALE (Block reward over 300k) + Block Hash contains 00000000000000000000 (20 zeroes) 
+
+
+Mermaids will get their base code and then follow the normal trait structure. but only for the following:
+Background (rare included)
+Female Eyes
+Hair (only gets ponytail, but has a couple new colors)
+Mouth 
+
+Mermaid Tail combos:
+
+Green "mermaid 1" (even block numbers)
+Purple "mermaid 2" (odd block numbers)
+
+
+mermaid trait overrides/nulls out all other traits except for those listed above (background, eyes, hair, mouth, and dog moon if applicable)
+
+---------------------------------------------------------
+
+After outline and skin tone filled, next is D2. Eyes.
+
+
+D2 is for Eyes. 
+Base and Arm Out use the same "Core" base64 codes for eyes. 
+Female, female heel, and mermaid will share their own separate base64 code for eyes as well. 
+If any "Eyewear" trait is triggered, then it overrides "Core" eyes. (only applies to "Base" arm out does not receive eyewear)
+
+Eyes Color Map= 
+Yellow: #dcd86b	
+Red: #dcd86b	
+Purple:#dc3bc7	
+Pink: #f5a8b5	
+Orange: #eda221	
+Teal: #22b6c0	
+Green: #3ba034	
+Brown: #4b2c14	
+Blue: #3377cb	
+Black: #000000
+
+D2:     Triggers:
+0	Black
+1	Blue
+2	Brown
+3	Green
+4	Teal
+5	Orange
+6	Pink
+7	Purple
+8	Red
+9	Yellow
+
+ 
+
+-----------------------------------------------------------
+
+****D3 is for Hair
+Base and Arm Out use the same base64 codes for hair. 
+Female, female heel, will share their own separate base64 code for hair as well. 
+Mermaid has their own set of base64 since they will only use ponytails.
+
+
+
+D3:     Trigger:
+0	Long Black 
+1	Long Blonde
+2	Long Brown
+3	Long Red
+4	Medium Black
+5	Medium Blonde
+6	Medium Brown
+7	Short Black
+8	Short Blonde
+9	Short Brown
+
+
+For Females:
+D3:     Triggers:
+0	Long Black
+1	Long Blone
+2	Long Brown
+3	Long Red
+4	Ponytail Black
+5	Ponytail Blonde
+6	Ponytail Brown
+7	Ponytail Red
+8	Short Blue
+9	Short Red
+
+For mermaids ONLY, use this 
+D3:     Triggers:
+0	Ponytail Black 
+1	Ponytail Blonde
+2	Ponytail Brown
+3	Ponytail Natural Red
+4	Ponytail Black
+5	Ponytail Blonde
+6	Ponytail Brown 
+7	Ponytail Dark Red (#711818)
+8	Ponytail Blue (#1f579b)
+9       Ponytail Purple (#710ca4)
+
+
+
+------------------------------------------
+
+****D4 is for Shirt Type (style) 
+
+Base uses 
+0	Blue Collar
+1	Dress Shirt
+2	Jacket
+3	Jersey
+4	Long Sleeve
+5	Plaid
+6	Open Shirt
+7	Short Sleeve
+8	Suit Top
+9	Vacation
+
+
+
+
+**********RARE Clothing (base only)
+
+If base outline + Nonce D4=4 + D5=5 + Block Tx Count is less than 1k, then trigger prisoner. Overrides Shirt and Pants. 
+
+If base outline  + Nonce D4=5 + D5=1 + Block Tx Count is less than 1k, then trigger Science. Overrides Shirt and Pants.
+
+If base outline  + Nonce has "7777" then trigger Track Suit. Overrides Shirt and Pants.
+
+----------
+
+Arm Out is only Long Sleeve Shirts.
+
+----
+
+Females
+D4:     Triggers:
+0	Dress
+1	Dress Shirt
+2	Dress
+3	Track suit
+4	T-Shirt
+5	Track suit
+6	Dress Shirt
+7	T-Shirt
+8	Dress
+9	Dress Shirt
+
+
+
+**********RARE Clothing (female only)
+
+If Blocks bit field is 0x170b98ab, then trigger "Morph" 
+Overrides/cancels Shirt, pants, shoes, necklace,  
+
+--------------------------------------
+D5 is for Shirt Colors
+
+Base:
+
+
+If D4 = 0 then shirt type = Professional
+D5:	then pattern is:
+0	Yellow
+1	Red
+2	Red w/ buttons
+3	Blue
+4	Blue w/ buttons
+5	Orange
+6	Orange w/ buttons
+7	Green
+8	Green W/ Buttons
+9	Black
+
+
+
+
+if d4 = 1 then shirt type = Dress Shirt
+d5: 	then pattern is:
+0	Blue
+1	Green
+2	Green White
+3	Light Blue White
+4	Orange
+5	Orange White
+6	Purple White
+7	Red
+8	Red White
+9	Purple
+
+
+
+
+if d4 = 2  then shirt type = Jacket
+d5: 	then pattern is:
+0	Black
+1	Blue
+2	Green
+3	Orange
+4	Pink
+5	Pink Black
+6	Purple
+7	Red
+8	Red Black
+9	Yellow
+
+
+
+if d4 = 3  then shirt type = Jersey
+d5: 	then pattern is:
+0	Orange Blue
+1	Blue
+2	Orange Black
+3	Orange
+4	Purple Yellow
+5	Red Yellow
+6	White Black
+7	White Purple
+8	White Red
+9	Yellow Blue
+
+
+
+
+if d4 = 4  then shirt type = Long sleeve
+d5: 	then pattern is:
+0	Blue
+1	Green
+2	Grey
+3	Light Blue
+4	Light Green
+5	Orange
+6	Pink
+7	Purple
+8	Red
+9	Yellow
+
+
+
+if d4 = 5  then shirt type = Plaid
+d5: 	then pattern is:
+0	Black
+1	Yellow
+2	Blue
+3	Green 2
+4	Green
+5	Blue 2
+6	Orange
+7	Pink
+8	Purple
+9	Red
+
+
+
+if d4 = 6  then shirt type = Short Open
+d5: 	then pattern is:
+0	Light Blue
+1	Black
+2	Blue
+3	Green
+4	Grey
+5	Orange
+6	Pink
+7	Purple
+8	Red
+9	Yellow
+
+
+
+if d4 = 7  then shirt type = Short Sleeve (T-Shirt)
+d5: 	then pattern is:
+0	Blue
+1	Bright Orange
+2	Green
+3	Grey
+4	Light Blue
+5	Pink
+6	Purple
+7	Red
+8	Yellow
+9	Orange
+
+
+
+if d4 = 8  then shirt type = Suit Top
+d5: 	then pattern is:
+0	Green
+1	Blue
+2	Grey Blue
+3	Grey Orange
+4	Light Blue
+5	Orange
+6	Pink
+7	Purple
+8	Red
+9	Red Blue
+
+
+
+if d4 = 9  then shirt type = Vacation
+d5: 	then pattern is:
+0	Blue Green
+1	Blue Pink
+2	Green Pink
+3	Orange Purple
+4	Pink Blue
+5	Purple Green 
+6	Red Blue
+7	Yellow Blue
+8	Yellow Purple
+9	Yellow Red
+
+
+
+
+*****For D5 Arm Out
+D5:     Triggers:
+0	Long Purple
+1	Long Pink 
+2	Long Orange
+3	Long Light Green
+4	Long Light Blue
+5	Long Grey
+6	Long Green
+7	Long Blue
+8	Long Red
+9	Long Yellow
+
+
+
+
+
+******For D5 Females
+D5:     Triggers:
+0	Random Color from Dress Color Map
+1	Random Color from Dress Shirt Color Map
+2	Random Color from Dress Color Map
+3	Random Color from Track Suit Color Map
+4	Random Color from T-Shirt Color Map
+5	Random Color from Track Suit Color Map
+6	Random Color from Dress Shirt Color Map
+7	Random Color from T-Shirt Color Map
+8	Random Color from Dress Color Map
+9	Random Color from Dress Shirt Color Map
+
+
+Rare Shirt Designs 
+Pup T-Shirt & BTC Machine, Can only be triggered by Base/Arm Out/ and Female.
+Base and Arm out Share same base64 codes.
+
+
+Base: 
+BTC Machine Logo: D4 = 4 + Block TX Count under 1k / or D4 = 7 + Block TX Count Under 1k
+Pup Shirt: D4 = 4 + Block TX Count under 1k-2k / or D4 = 7 + Block TX Count 1k-2k
+
+Arm Out:
+BTC Machine Logo: Block TX Count Under 1k
+Pup Shirt: Block TX Count 1k-2k
+
+-------------------------------------------
+
+
+D6 is for Shoes
+
+
+Base and arm out use same base64 codes for shoes. So if a base outline triggers converse, and an arm out outline triggers converse, they should both point to the same base64 code for the male version of converse.
+
+D6:     Triggers:
+0	No shoes
+1	Black & White
+2	Black on Top
+3	All Black
+4	Converse
+5	All Grey
+6	House Shoes
+7	Red Converse
+8	All Red
+9	Slides
+
+
+Female Shoes
+D6:     Triggers:
+0	No shoes
+1	Flats 
+2	Sandals
+3	Heels
+4	Converse
+5	No Shoes
+6	Flats
+7	Sandals
+8	Heels
+9	Converse
+
+**IMPORTANT 
+If Heels Are Triggered, then it has to be a version of "Female Heel Outline" used. 
+ 
+
+
+
+----------------------------------
+
+D7 is for accessories 
+
+only BASE outlines will receive these.
+
+D7:     Triggers:
+0	none
+1	Bracelet Right
+2	Earring Bottom
+3	Earring Top
+4	Necklace
+5	Ring Left
+6	Ring Right
+7	Watch Left
+8	Watch Right
+9	Bracelet Left
+
+
+  
+
+Back Bling (Base Outline Only)
+
+If Base Outline + Block TX Count = 10, then trigger Back Bling
+Cancels glows and fire glows/diamond glow
+--------------------------------
+
+
+
+
+Pants 
+
+Base and arm out use same base64 codes for pants. 
+
+
+Odd block numbers draw Blue Jean #5dadec 
+Even block numbers draw Khakis #c4b289
+
+
+For Females
+
+Same rules for Blue Jeans and Khakis, just different base64 codes to pull from
+
+Also for females, Pants are only drawn when T-SHIRT is triggered, otherwise no pants are drawn. 
+
+--------------------------------
+
+
+--------------------------------
+
+
+
+
+
+
+***Rare Traits***
+
+
+Hats/Headwear:
+
+Only Base outlines can have headwear, except for the "backwards multi" hat, it can go on arm out outline. 
+if Long hair is triggered on base or arm out, then no backwards hats can be used though. 
+
+
+Triggers:       IF       Block Weight:
+Gryffindor	         15k-27k
+Slytherin	         10k-15k
+Ravenclaw	         2k-10k
+Hufflepuff	         1k-2k
+Cowboy	                 under 850
+Backwards Diamond	 has "777"
+backwards multi	         Has "888"
+backwards single	 has "333"
+NodeMonke Hat	         has "111"
+Diamond NodeMonke Hat	 has 9999
+
+Order to be used if multiple are triggered:
+Diamond NodeMonke > Backwards Diamond > NodeMonke > Backwards Multi > Cowboy > Backwards Single > All others
+--------------------------------------
+
+
+Eyewear (Base Only)
+
+If Bits has:     Triggers:
+bits fa	         Hollow White
+bits 0a          Hollow Black
+bits 24	         Cyclops Red grey
+bits 23	         Cyclops Grey Gold
+bits 22	         Cyclops Red black
+bits 3d          3D
+
+
+Order to be used if multiple are triggered:
+Cyclops Red Black > Cyclops Grey Gold > 3D > Hollow White > Hollow Black
+
+
+-------------------------------------
+
+
+Glow (blue, green, fire, diamond, only for base males)
+
+If Time:        Triggers:
+time 22:XX	Body Glow Green
+time 22:XX	Body Glow Green 2 For (long hair)
+1am-2am	        body glow blue
+1am-2am	        body glow blue 2 for (long hair)
+time 23:18	Fire Glow
+time 23:19	fire glow 2 for (long hair)
+time 23:23	Diamond glow (fill all fire glow with #b9f2ff)
+
+
+If Bits:        Triggers:
+1f              Pink Glow (Females Only)
+
+unless
+
+1f and Hair = Ponytail, then use "Pony Tail Glow" 
+
+
+
+
+----------------
+
+
+
+------------------------------------------
+
+
+Rare Backgrounds 
+Used for any outlines (Base, Arm Out, and Female)
+
+If Bits has:     Triggers:
+bits 3b	         Beach
+bits 7b          Space
+bits 8b	         Bitmap
+bits 9b	         Clouds
+bits 101	 XP
+
+
+
+-----------------------------
+
+
+Rare Skins
+
+
+
+Pepe
+If Block is divisible by 77, trigger Pepe Skin. 
+Change Mouth from Black to Red
+
+
+Diamond 
+If Block Numbers contain only the number 7, then trigger diamond skin.
+If Block number has only 7's, and is divisible by 77, then diamond skin is used.
+
+
+
+----------------------------------------
+
+
+Pets: 
+
+
+**If Base Outline
++
+Block Time is from 00:00 to 01:00, then trigger Parrot 
+For Parrot Color 
+
+Parrot:
+Green = minutes are from 00 to 09
+Red = minutes are from 10 to 19
+Orange = minutes are from 20 to 29
+Blue = minutes are from 40 to 49
+Pink = minutes are from 50 to 59
+Diamond = minutes are from 30 to 39
+
+
+
+
+**If Arm Out outline 
++
+Block TX Count = 1, then trigger Pet Cat
+For Cat Color use block date month
+
+Orange: month = 01 or 02
+Gold: month = 03 or 04
+Blue: month = 05 or 06
+Red: month = 07 or 08
+Pink: month = 09 or 10
+Diamond month = 11 or 12
+
+
+**If outline is female (not heels or mermaid)
++
+Block Time is from 00:00 to 01:00, then trigger Parrot 
+For Parrot Color 
+
+Parrot:
+Green = minutes are from 00 to 09
+Red = minutes are from 10 to 19
+Orange = minutes are from 20 to 29
+Blue = minutes are from 40 to 49
+Pink = minutes are from 50 to 59
+Diamond = minutes are from 30 to 39
+
+
+Moon Dog (can be used by any outline) 
+
+If block year = 2011, then trigger Moon Dog
+
+
+---------------------------------------
+
+
+Mouth 
+
+
+Base and arm out use same svg vectors for mouth. Fill is always black unless Pepe skin or Natman Head.
+
+
+Female Outline uses "Smile" or  "regular mouth"
+When block reward is over 300k + block starts with "777" then draw smile, otherwise draw regular mouth.
+
+
+
+Mouth Rare (base Only) 
+
+Blunt:
+If Block Date is 04-20, then trigger Blunt.
+
+Cig:
+If Block Date any other month + day = 20, then trigger cig. (i.e. 2011-03-20, 2022-07-20, etc)
+
+
+
+
+
+----------------------------------
+
+
+
+
+
+
+Rare Head
+
+Saiyan:
+If the Blocks Time has "1:23" then trigger Saiyan head. 
+
+For Saiyan hair color:
+If time is between midnight and noon (00:00:00 - 11:59:59) then hair = gold
+If time is between noon and midnight (12:00:00 - 23:59:59) then hair = diamond
+
+
+Natman Head:
+If block weight is between 140-150, then trigger natman head
+
+Natman Body:
+If Block date is 2011-11-11 trigger natman body.
+
+
+Saiyan overrides/cancels any eyewear, headwear, glow, or fire glow traits.
+
+natman head overrides/cancels any eyewear, headwear, glow, fire glow traits.
+
+natman body overrides/cancels any shirt, shirt color, glow, fire glow, or shoe traits 
+
+--------------------------------------
+
+
+arm out held items
+
+
+IF block number is divisible by 17, then trigger arm out outline.
+
+If arm out triggered + Block tx count is 
+
+TX Count:  Triggers:
+2k-3k	   Sweeper 
+501-1k	   Silver Sweeper
+3k-5k	   Gold Sweeper
+1k-2k	   btc staff 
+25-100	   Silver Staff
+2-10	   Gold Staff
+11-25	   Diamond Staff
+1	   Pet Cats
+101-250	   Shit Coin
+251-500	   lucielle 
+5k+	   Map of Bitmap
+
+--------------------------------
+
+
+
+
+Female Rare Traits:
+(can go on base/heel/ and mermaid)
+
+If block reward is over 300K, then trigger female outline.
+
+Reward:          Triggers:
+350k - 400k      Silver Earring
+400k+            Gold Earring
+300k - 350k      Diamond Earring
+
+
+ 
+
