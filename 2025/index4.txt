@@ -303,6 +303,38 @@
                     "Diamond Glow": "diamond glow placeholder"
                 }
             },
+               accessories: {
+        "none": "no accessories placeholder",
+        "Bracelet Right": "bracelet right placeholder",
+        "Earring Bottom": "earring bottom placeholder",
+        "Earring Top": "earring top placeholder",
+        "Necklace": "necklace placeholder",
+        "Ring Left": "ring left placeholder",
+        "Ring Right": "ring right placeholder",
+        "Watch Left": "watch left placeholder",
+        "Watch Right": "watch right placeholder",
+        "Bracelet Left": "bracelet left placeholder",
+        "Back Bling": "back bling placeholder"
+    },
+    rareClothing: {
+        "Prisoner": "prisoner outfit placeholder",
+        "Science": "science outfit placeholder",
+        "Track Suit": "track suit placeholder",
+        "Morph": "morph outfit placeholder"
+    },
+    heldItems: {
+        "Sweeper": "sweeper placeholder",
+        "Silver Sweeper": "silver sweeper placeholder",
+        "Gold Sweeper": "gold sweeper placeholder",
+        "BTC Staff": "btc staff placeholder",
+        "Silver Staff": "silver staff placeholder",
+        "Gold Staff": "gold staff placeholder",
+        "Diamond Staff": "diamond staff placeholder",
+        "Shit Coin": "shit coin placeholder",
+        "Lucielle": "lucielle placeholder",
+        "Map of Bitmap": "map placeholder"
+    }
+};
             skins: {
                 "rare": {
                     "Pepe": "pepe skin placeholder",
@@ -312,25 +344,25 @@
         };
 
         async function fetchNonce() {
-            const blockNumber = document.getElementById('blockNumber').value;
-            if (!blockNumber) {
-                alert('Please enter a block number');
-                return;
-            }
+    const blockNumber = document.getElementById('blockNumber').value;
+    if (!blockNumber) {
+        alert('Please enter a block number');
+        return;
+    }
 
-            try {
-                const response = await fetch('https://ordinals.com/r/blockinfo/' + blockNumber);
-                if (!response.ok) throw new Error('Network response was not ok');
-                const data = await response.json();
-                const nonce = data.nonce;
+    try {
+        const response = await fetch('https://ordinals.com/r/blockinfo/' + blockNumber);
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        const nonce = data.nonce;
+        const txCount = data.txCount || 500; // Add this line
 
-                displayTraits(blockNumber, nonce, 'exampleInscriptionID');
-            } catch (error) {
-                console.error('Error fetching nonce:', error);
-                alert('Failed to fetch nonce for the given block number');
-            }
-        }
-
+        displayTraits(blockNumber, nonce, 'exampleInscriptionID', txCount); // Modified to include txCount
+    } catch (error) {
+        console.error('Error fetching nonce:', error);
+        alert('Failed to fetch nonce for the given block number');
+    }
+}
         function determineCharacterType(blockNumber, blockReward, blockHash) {
     const isArmOut = blockNumber % 17 === 0;
     const isFemale = blockReward > 300000;
@@ -353,6 +385,8 @@
         function getTraits(blockNumber, nonce) {
             const traits = determineCharacterType(blockNumber, nonce);
             const nonceStr = nonce.toString().split('').reverse().join('');
+            const thirdLastDigit = nonceStr.length >= 3 ? nonceStr[nonceStr.length - 3] : undefined;
+            const fourthLastDigit = nonceStr.length >= 4 ? nonceStr[nonceStr.length - 4] : undefined;
             const fifthLastDigit = nonceStr.length >= 5 ? nonceStr[nonceStr.length - 5] : undefined;
             const sixthLastDigit = nonceStr.length >= 6 ? nonceStr[nonceStr.length - 6] : undefined;
             const seventhLastDigit = nonceStr.length >= 7 ? nonceStr[nonceStr.length - 7] : undefined;
@@ -399,6 +433,16 @@
             // Determine pets
             const pets = determinePets(blockNumber, '00:15', traits.type === 'Female', traits.type === 'ArmOut');
             Object.assign(traits, pets);
+
+            // Add accessories
+            traits.accessories = determineAccessories(fourthLastDigit, traits.type);
+
+            // Add rare clothing
+            const txCount = 500; // You'll need to get this from your API
+            traits.rareClothing = determineRareClothing(blockNumber, txCount, nonce);
+
+            // Add held items
+            traits.heldItems = determineHeldItems(txCount);
 
             console.log(`Selected traits: ${JSON.stringify(traits)}`);
             return traits;
@@ -720,9 +764,61 @@
             }
             return traits;
         }
+            function determineAccessories(digit, characterType) {
+    if (characterType !== 'Base') return null;
+    
+    switch (digit) {
+        case '0': return null;
+        case '1': return base64Data.accessories["Bracelet Right"];
+        case '2': return base64Data.accessories["Earring Bottom"];
+        case '3': return base64Data.accessories["Earring Top"];
+        case '4': return base64Data.accessories["Necklace"];
+        case '5': return base64Data.accessories["Ring Left"];
+        case '6': return base64Data.accessories["Ring Right"];
+        case '7': return base64Data.accessories["Watch Left"];
+        case '8': return base64Data.accessories["Watch Right"];
+        case '9': return base64Data.accessories["Bracelet Left"];
+        default: return null;
+    }
+}
 
-        function displayTraits(blockNumber, nonce, inscriptionID) {
-            const traits = getTraits(blockNumber, nonce);
+function determineRareClothing(blockNumber, txCount, nonce) {
+    const d4 = nonce.toString().split('').reverse()[3] || '0';
+    const d5 = nonce.toString().split('').reverse()[4] || '0';
+    
+    if (d4 === '4' && d5 === '5' && txCount < 1000) {
+        return base64Data.rareClothing["Prisoner"];
+    }
+    if (d4 === '5' && d5 === '1' && txCount < 1000) {
+        return base64Data.rareClothing["Science"];
+    }
+    if (nonce.toString().includes('7777')) {
+        return base64Data.rareClothing["Track Suit"];
+    }
+    
+    if (blockNumber > 300000 && bits === '0x170b98ab') {
+        return base64Data.rareClothing["Morph"];
+    }
+    
+    return null;
+}
+
+function determineHeldItems(txCount) {
+    if (txCount > 5000) return base64Data.heldItems["Map of Bitmap"];
+    if (txCount >= 3000 && txCount <= 5000) return base64Data.heldItems["Gold Sweeper"];
+    if (txCount >= 2000 && txCount <= 3000) return base64Data.heldItems["Sweeper"];
+    if (txCount >= 1000 && txCount <= 2000) return base64Data.heldItems["BTC Staff"];
+    if (txCount >= 501 && txCount <= 1000) return base64Data.heldItems["Silver Sweeper"];
+    if (txCount >= 251 && txCount <= 500) return base64Data.heldItems["Lucielle"];
+    if (txCount >= 101 && txCount <= 250) return base64Data.heldItems["Shit Coin"];
+    if (txCount >= 25 && txCount <= 100) return base64Data.heldItems["Silver Staff"];
+    if (txCount >= 11 && txCount <= 25) return base64Data.heldItems["Diamond Staff"];
+    if (txCount >= 2 && txCount <= 10) return base64Data.heldItems["Gold Staff"];
+    return null;
+}
+
+        function displayTraits(blockNumber, nonce, inscriptionID, txCount) {
+    const traits = getTraits(blockNumber, nonce, txCount);
             console.log(`Block: ${blockNumber}, Nonce: ${nonce}, InscriptionID: ${inscriptionID}`);
             console.log(traits);
 
