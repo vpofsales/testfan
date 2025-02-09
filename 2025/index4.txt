@@ -60,19 +60,34 @@
                 }
             },
             hair: {
-                "Long Black": "long black hair placeholder",
-                "Long Blonde": "long blonde hair placeholder",
-                "Long Brown": "long brown hair placeholder",
-                "Long Red": "long red hair placeholder",
-                "Medium Black": "medium black hair placeholder",
-                "Medium Blonde": "medium blonde hair placeholder",
-                "Medium Brown": "medium brown hair placeholder",
-                "Short Black": "short black hair placeholder",
-                "Short Blonde": "short blonde hair placeholder",
-                "Short Brown": "short brown hair placeholder",
-                "Short Red": "short red hair placeholder",
-                "Short Blue": "short blue hair placeholder"
+                "Base": {
+                    "Long Black": "long black hair placeholder",
+                    "Long Blonde": "long blonde hair placeholder",
+                    "Long Brown": "long brown hair placeholder",
+                    "Long Red": "long red hair placeholder",
+                    "Medium Black": "medium black hair placeholder",
+                    "Medium Blonde": "medium blonde hair placeholder",
+                    "Medium Brown": "medium brown hair placeholder",
+                    "Short Black": "short black hair placeholder",
+                    "Short Blonde": "short blonde hair placeholder",
+                    "Short Brown": "short brown hair placeholder",
+                    "Short Red": "short red hair placeholder",
+                    "Short Blue": "short blue hair placeholder"
             },
+            'Female': {
+              '0': 'Long Black',
+              '1': 'Long Blonde',
+              '2': 'Long Brown',
+              '3': 'Long Red',
+              '4': 'Ponytail Black',
+              '5': 'Ponytail Blonde',
+              '6': 'Ponytail Brown',
+              '7': 'Short Blue',
+              '8': 'Short Red',
+              '9': 'Ponytail Dark Red'
+            },
+            
+
             shirts: {
                 "Blue Collar": "blue collar shirt placeholder",
                 "Dress Shirt": "dress shirt placeholder",
@@ -316,21 +331,21 @@
             }
         }
 
-        function determineCharacterType(blockNumber, nonce) {
-            const traits = {};
-            const isFemale = blockNumber % 300000 > 0; // Example logic, replace with actual
-            const isArmOut = blockNumber % 17 === 0;
-            const isMermaid = isFemale && nonce.toString().includes('00000000000000000000');
+        function determineCharacterType(blockNumber, blockReward, blockHash) {
+    const isArmOut = blockNumber % 17 === 0;
+    const isFemale = blockReward > 300000;
+    const isMermaid = isFemale && blockHash.includes('00000000000000000000');
 
-            if (isMermaid) {
-                traits.type = 'Mermaid';
-            } else if (isArmOut) {
-                traits.type = 'ArmOut';
-            } else if (isFemale) {
-                traits.type = 'Female';
-            } else {
-                traits.type = 'Base';
-            }
+    if (isMermaid) {
+        return 'Mermaid';
+    } else if (isArmOut) {
+        return 'Arm Out';
+    } else if (isFemale) {
+        return 'Female';
+    } else {
+        return 'Base';
+    }
+}
 
             return traits;
         }
@@ -405,22 +420,74 @@
             }
         }
 
-        function getEyesByDigit(digit, type) {
-            const eyeType = type === 'Female' || type === 'Mermaid' ? 'Female' : 'Base';
-            switch (digit) {
-                case '0': return base64Data.eyes[eyeType]["Black"];
-                case '1': return base64Data.eyes[eyeType]["Blue"];
-                case '2': return base64Data.eyes[eyeType]["Brown"];
-                case '3': return base64Data.eyes[eyeType]["Green"];
-                case '4': return base64Data.eyes[eyeType]["Teal"];
-                case '5': return base64Data.eyes[eyeType]["Orange"];
-                case '6': return base64Data.eyes[eyeType]["Pink"];
-                case '7': return base64Data.eyes[eyeType]["Purple"];
-                case '8': return base64Data.eyes[eyeType]["Red"];
-                case '9': return base64Data.eyes[eyeType]["Yellow"];
-                default: return base64Data.eyes[eyeType]["Black"];
-            }
+        function getEyesByDigit(digit, characterType) {
+    const eyeColors = {
+        "Base": {
+            "Black": "base_black_eyes_placeholder",
+            "Blue": "base_blue_eyes_placeholder",
+            "Brown": "base_brown_eyes_placeholder",
+            "Green": "base_green_eyes_placeholder",
+            "Teal": "base_teal_eyes_placeholder",
+            "Orange": "base_orange_eyes_placeholder",
+            "Pink": "base_pink_eyes_placeholder",
+            "Purple": "base_purple_eyes_placeholder",
+            "Red": "base_red_eyes_placeholder",
+            "Yellow": "base_yellow_eyes_placeholder"
+        },
+        "Female": {
+            // same colors as above, but with female-specific base64 codes
+            // note: mermaid and female heel will use these same codes
+            // unless otherwise specified in the trait guide
         }
+    };
+
+    eyeColors["Female"] = {
+        'Black': 'female_black_eyes_placement',
+        'Blue': 'female_blue_eye_placement',
+        'Brown': 'female_brown_eye_placement',
+        'Green': 'female_green_eye_placement',
+        'Teal':  'female_teal_eye_placements', 
+         'Orange':'female_orange_eye_placements',  
+         'Pink':'female_pink_eye_placements',   
+         'Purple':'female_purple_eye_placements',  
+          'Red':'female_red_eye_placements',   
+           'Yellow':'yellow_female_place_holder'
+    }
+
+    let eyes;
+    if (characterType === ("Base" || characterType === ("Arm Out"))) {
+        switch (digit) {
+            case '0': eyes = eyeColors["Base"]["Black"]; break;
+            case '1': eyes = eyeColors["Base"]["Blue"]; break;
+            case '2': eyes = eyeColors["Base"]["Brown"]; break;
+            case '3': eyes = eyeColors["Base"]["Green"]; break;
+            case '4': eyes = eyeColors["Base"]["Teal"]; break;
+            case '5': eyes = eyeColors["Base"]["Orange"]; break;
+            case '6': eyes = eyeColors["Base"]["Pink"]; break;
+            case'7' :  eyes=eye Colors [" Base "] [" Purple "] ;break ;
+            case'8' :  eyes=eye Colors [" Base "] [" Red "] ;break ;
+            case'9' :  eyes=eye Colors [" Base "] [" Yellow "] ;break ;
+             default: eyes=eye Colors [“ Base”] [“ Black ”] ;break;
+
+       }
+     } else {
+    switch (digit) {
+        case '0': eyes = eyeColors["Female"]["Black"]; break;
+        case '1': eyes = eyeColors["Female"]["Blue"]; break;
+        case '2': eyes = eyeColors["Female"]["Brown"]; break;
+        case '3': eyes = eyeColors["Female"]["Green"]; break;
+        case '4': eyes = eyeColors["Female"]["Teal"]; break;
+        case '5': eyes = eyeColors["Female"]["Orange"]; break;
+        case '6': eyes = eyeColors["Female"]["Pink"]; break;
+        case '7': eyes = eyeColors["Female"]["Purple"]; break;
+        case '8': eyes = eyeColors["Female"]["Red"]; break;
+        case '9': eyes = eyeColors["Female"]["Yellow"]; break;
+        default: eyes = eyeColors[" Female "]["Black "]; 
+    }
+}
+ return  eyes;
+
+}
 
         function getHairByDigit(digit, type) {
             if (type === 'Mermaid') {
@@ -441,6 +508,20 @@
                 default: return base64Data.hair[hairType]["Long Black"];
             }
         }
+
+        switch (digit) {
+  case '0': return hairStyles["Female"]["0"];
+  case '1': return hairStyles["Female"]["1"];
+  case '2': return hairStyles["Female"]["2"];
+  case '3': return hairStyles["Female"]["3"];
+  case '4': return hairStyles["Female"]["4"];
+  case '5': return hairStyles["Female"]["5"];
+  case '6': return hairStyles["Female"]["6"];
+  case '7': return hairStyles["Female"]["7"];
+  case '8': return hairStyles["Female"]["8"];
+  case '9': return hairStyles["Female"]["9"];
+  default: return hairStyles["Female"]["0"];
+}
 
         function getMermaidHairByDigit(digit) {
             switch (digit) {
