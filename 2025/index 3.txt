@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trait Backgrounds</title>
+    <style>
+        .trait {
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+            margin: 10px;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Trait Backgrounds</h1>
+    <input type="number" id="blockNumber" placeholder="Enter Block Number">
+    <button onclick="fetchNonce()">Get Traits</button>
+    <div id="traits"></div>
+    <script>
+        const base64Data = {
+            backgrounds: {
+                "Teal": "teal background placeholder",
+                "Green": "green background placeholder",
+                "Grey": "grey background placeholder",
+                "Light Blue": "light blue background placeholder",
+                "Light Purple": "light purple background placeholder",
+                "Orange": "orange background placeholder",
+                "Pale Yellow": "pale yellow background placeholder",
+                "Purple": "purple background placeholder",
+                "Red": "red background placeholder",
+                "Yellow": "yellow background placeholder"
+            },
+            eyes: {
+                "Base": {
+                    "Black": "black eyes placeholder",
+                    "Blue": "blue eyes placeholder",
+                    "Brown": "brown eyes placeholder",
+                    "Green": "green eyes placeholder",
+                    "Teal": "teal eyes placeholder",
+                    "Orange": "orange eyes placeholder",
+                    "Pink": "pink eyes placeholder",
+                    "Purple": "purple eyes placeholder",
+                    "Red": "red eyes placeholder",
+                    "Yellow": "yellow eyes placeholder"
+                },
+                "Female": {
+                    "Black": "female black eyes placeholder",
+                    "Blue": "female blue eyes placeholder",
+                    "Brown": "female brown eyes placeholder",
+                    "Green": "female green eyes placeholder",
+                    "Teal": "female teal eyes placeholder",
+                    "Orange": "female orange eyes placeholder",
+                    "Pink": "female pink eyes placeholder",
+                    "Purple": "female purple eyes placeholder",
+                    "Red": "female red eyes placeholder",
+                    "Yellow": "female yellow eyes placeholder"
+                }
+            },
+            hair: {
+                "Long Black": "long black hair placeholder",
+                "Long Blonde": "long blonde hair placeholder",
+                "Long Brown": "long brown hair placeholder",
+                "Long Red": "long red hair placeholder",
+                "Medium Black": "medium black hair placeholder",
+                "Medium Blonde": "medium blonde hair placeholder",
+                "Medium Brown": "medium brown hair placeholder",
+                "Short Black": "short black hair placeholder",
+                "Short Blonde": "short blonde hair placeholder",
+                "Short Brown": "short brown hair placeholder",
+                "Short Red": "short red hair placeholder",
+                "Short Blue": "short blue hair placeholder"
+            },
+            shirts: {
+                "Blue Collar": "blue collar shirt placeholder",
+                "Dress Shirt": "dress shirt placeholder",
+                "Jacket": "jacket placeholder",
+                "Jersey": "jersey placeholder",
+                "Long Sleeve": "long sleeve placeholder",
+                "Plaid": "plaid placeholder",
+                "Open Shirt": "open shirt placeholder",
+                "Short Sleeve": "short sleeve placeholder",
+                "Suit Top": "suit top placeholder",
+                "Vacation": "vacation shirt placeholder"
+            },
+            shirtColors: {
+                "Professional": {
+                    "0": "yellow professional shirt placeholder",
+                    "1": "red professional shirt placeholder",
+                    "2": "red with buttons professional shirt placeholder",
+                    "3": "blue professional shirt placeholder",
+                    "4": "blue with buttons professional shirt placeholder",
+                    "5": "orange professional shirt placeholder",
+                    "6": "orange with buttons professional shirt placeholder",
+                    "7": "green professional shirt placeholder",
+                    "8": "green with buttons professional shirt placeholder",
+                    "9": "black professional shirt placeholder"
+                },
+                "Dress Shirt": {
+                    "0": "blue dress shirt placeholder",
+                    "1": "green dress shirt placeholder",
+                    "2": "green white dress shirt placeholder",
+                    "3": "light blue white dress shirt placeholder",
+                    "4": "orange dress shirt placeholder",
+                    "5": "orange white dress shirt placeholder",
+                    "6": "purple white dress shirt placeholder",
+                    "7": "red dress shirt placeholder",
+                    "8": "red white dress shirt placeholder",
+                    "9": "purple dress shirt placeholder"
+                },
+                "Jacket": {
+                    "0": "black jacket placeholder",
+                    "1": "blue jacket placeholder",
+                    "2": "green jacket placeholder",
+                    "3": "orange jacket placeholder",
+                    "4": "pink jacket placeholder",
+                    "5": "pink black jacket placeholder",
+                    "6": "purple jacket placeholder",
+                    "7": "red jacket placeholder",
+                    "8": "red black jacket placeholder",
+                    "9": "yellow jacket placeholder"
+                },
+                "Jersey": {
+                    "0": "orange blue jersey placeholder",
+                    "1": "blue jersey placeholder",
+                    "2": "orange black jersey placeholder",
+                    "3": "orange jersey placeholder",
+                    "4": "purple yellow jersey placeholder",
+                    "5": "red yellow jersey placeholder",
+                    "6": "white black jersey placeholder",
+                    "7": "white purple jersey placeholder",
+                    "8": "white red jersey placeholder",
+                    "9": "yellow blue jersey placeholder"
+                },
+                "Long Sleeve": {
+                    "0": "blue long sleeve placeholder",
+                    "1": "green long sleeve placeholder",
+                    "2": "grey long sleeve placeholder",
+                    "3": "light blue long sleeve placeholder",
+                    "4": "light green long sleeve placeholder",
+                    "5": "orange long sleeve placeholder",
+                    "6": "pink long sleeve placeholder",
+                    "7": "purple long sleeve placeholder",
+                    "8": "red long sleeve placeholder",
+                    "9": "yellow long sleeve placeholder"
+                },
+                "Plaid": {
+                    "0": "black plaid placeholder",
+                    "1": "yellow plaid placeholder",
+                    "2": "blue plaid placeholder",
+                    "3": "green 2 plaid placeholder",
+                    "4": "green plaid placeholder",
+                    "5": "blue 2 plaid placeholder",
+                    "6": "orange plaid placeholder",
+                    "7": "pink plaid placeholder",
+                    "8": "purple plaid placeholder",
+                    "9": "red plaid placeholder"
+                },
+                "Open Shirt": {
+                    "0": "light blue open shirt placeholder",
+                    "1": "black open shirt placeholder",
+                    "2": "blue open shirt placeholder",
+                    "3": "green open shirt placeholder",
+                    "4": "grey open shirt placeholder",
+                    "5": "orange open shirt placeholder",
+                    "6": "pink open shirt placeholder",
+                    "7": "purple open shirt placeholder",
+                    "8": "red open shirt placeholder",
+                    "9": "yellow open shirt placeholder"
+                },
+                "Short Sleeve": {
+                    "0": "blue short sleeve placeholder",
+                    "1": "bright orange short sleeve placeholder",
+                    "2": "green short sleeve placeholder",
+                    "3": "grey short sleeve placeholder",
+                    "4": "light blue short sleeve placeholder",
+                    "5": "pink short sleeve placeholder",
+                    "6": "purple short sleeve placeholder",
+                    "7": "red short sleeve placeholder",
+                    "8": "yellow short sleeve placeholder",
+                    "9": "orange short sleeve placeholder"
+                },
+                "Suit Top": {
+                    "0": "green suit top placeholder",
+                    "1": "blue suit top placeholder",
+                    "2": "grey blue suit top placeholder",
+                    "3": "grey orange suit top placeholder",
+                    "4": "light blue suit top placeholder",
+                    "5": "orange suit top placeholder",
+                    "6": "pink suit top placeholder",
+                    "7": "purple suit top placeholder",
+                    "8": "red suit top placeholder",
+                    "9": "red blue suit top placeholder"
+                },
+                "Vacation": {
+                    "0": "blue green vacation shirt placeholder",
+                    "1": "blue pink vacation shirt placeholder",
+                    "2": "green pink vacation shirt placeholder",
+                    "3": "orange purple vacation shirt placeholder",
+                    "4": "pink blue vacation shirt placeholder",
+                    "5": "purple green vacation shirt placeholder",
+                    "6": "red blue vacation shirt placeholder",
+                    "7": "yellow blue vacation shirt placeholder",
+                    "8": "yellow purple vacation shirt placeholder",
+                    "9": "yellow red vacation shirt placeholder"
+                }
+            },
+            shoes: {
+                "base": {
+                    "No Shoes": "base no shoes placeholder",
+                    "Black & White": "base black & white shoes placeholder",
+                    "Black on Top": "base black on top shoes placeholder",
+                    "All Black": "base all black shoes placeholder",
+                    "Converse": "base converse shoes placeholder",
+                    "All Grey": "base all grey shoes placeholder",
+                    "House Shoes": "base house shoes placeholder",
+                    "Red Converse": "base red converse shoes placeholder",
+                    "All Red": "base all red shoes placeholder",
+                    "Slides": "base slides shoes placeholder"
+                },
+                "female": {
+                    "No Shoes": "female no shoes placeholder",
+                    "Flats": "female flats shoes placeholder",
+                    "Sandals": "female sandals shoes placeholder",
+                    "Heels": "female heels shoes placeholder",
+                    "Converse": "female converse shoes placeholder"
+                }
+            },
+            pants: {
+                "base": {
+                    "Khakis": "base khakis placeholder",
+                    "Blue Jeans": "base blue jeans placeholder"
+                },
+                "female": {
+                    "Khakis": "female khakis placeholder",
+                    "Blue Jeans": "female blue jeans placeholder",
+                    "None": "female no pants placeholder"
+                }
+            },
+            pets: {
+                "rare": {
+                    "Parrot": "parrot placeholder",
+                    "Pet Cat": "pet cat placeholder",
+                    "Moon Dog": "moon dog placeholder"
+                }
+            },
+            petColors: {
+                "Green": "green parrot placeholder",
+                "Red": "red parrot placeholder",
+                "Orange": "orange parrot placeholder",
+                "Diamond": "diamond parrot placeholder",
+                "Blue": "blue parrot placeholder",
+                "Pink": "pink parrot placeholder"
+            },
+            headwear: {
+                "rare": {
+                    "Diamond NodeMonke": "diamond nodemonke hat placeholder",
+                    "Backwards Diamond": "backwards diamond hat placeholder",
+                    "NodeMonke": "nodemonke hat placeholder",
+                    "Backwards Multi": "backwards multi hat placeholder",
+                    "Backwards Single": "backwards single hat placeholder",
+                    "Cowboy": "cowboy hat placeholder",
+                    "Hufflepuff": "hufflepuff hat placeholder",
+                    "Ravenclaw": "ravenclaw hat placeholder",
+                    "Slytherin": "slytherin hat placeholder",
+                    "Gryffindor": "gryffindor hat placeholder"
+                }
+            },
+            eyewear: {
+                "rare": {
+                    "Cyclops Red Black": "cyclops red black placeholder",
+                    "Cyclops Grey Gold": "cyclops grey gold placeholder",
+                    "3D": "3d placeholder",
+                    "Hollow White": "hollow white placeholder",
+                    "Hollow Black": "hollow black placeholder"
+                }
+            },
+            glow: {
+                "rare": {
+                    "Body Glow Green": "body glow green placeholder",
+                    "Body Glow Green 2": "body glow green 2 placeholder",
+                    "Body Glow Blue": "body glow blue placeholder",
+                    "Body Glow Blue 2": "body glow blue 2 placeholder",
+                    "Fire Glow": "fire glow placeholder",
+                    "Fire Glow 2": "fire glow 2 placeholder",
+                    "Diamond Glow": "diamond glow placeholder"
+                }
+            },
+            skins: {
+                "rare": {
+                    "Pepe": "pepe skin placeholder",
+                    "Diamond": "diamond skin placeholder"
+                }
+            }
+        };
+
+        async function fetchNonce() {
+            const blockNumber = document.getElementById('blockNumber').value;
+            if (!blockNumber) {
+                alert('Please enter a block number');
+                return;
+            }
+
+            try {
+                const response = await fetch('https://ordinals.com/r/blockinfo/' + blockNumber);
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                const nonce = data.nonce;
+
+                displayTraits(blockNumber, nonce, 'exampleInscriptionID');
+            } catch (error) {
+                console.error('Error fetching nonce:', error);
+                alert('Failed to fetch nonce for the given block number');
+            }
+        }
+
+        function determineCharacterType(blockNumber, nonce) {
+            const traits = {};
+            const isFemale = blockNumber % 300000 > 0; // Example logic, replace with actual
+            const isArmOut = blockNumber % 17 === 0;
+            const isMermaid = isFemale && nonce.toString().includes('00000000000000000000');
+
+            if (isMermaid) {
+                traits.type = 'Mermaid';
+            } else if (isArmOut) {
+                traits.type = 'ArmOut';
+            } else if (isFemale) {
+                traits.type = 'Female';
+            } else {
+                traits.type = 'Base';
+            }
+
+            return traits;
+        }
+
+        function getTraits(blockNumber, nonce, inscriptionID) {
+            const traits = determineCharacterType(blockNumber, nonce);
+            const nonceStr = nonce.toString().split('').reverse().join('');
+            const fifthLastDigit = nonceStr.length >= 5 ? nonceStr[nonceStr.length - 5] : undefined;
+            const sixthLastDigit = nonceStr.length >= 6 ? nonceStr[nonceStr.length - 6] : undefined;
+            const seventhLastDigit = nonceStr.length >= 7 ? nonceStr[nonceStr.length - 7] : undefined;
+            const eighthLastDigit = nonceStr.length >= 8 ? nonceStr[nonceStr.length - 8] : undefined;
+            const ninthLastDigit = nonceStr.length >= 9 ? nonceStr[nonceStr.length - 9] : undefined;
+
+            // Determine background (D1)
+            switch (fifthLastDigit) {
+                case '0':
+                    traits.background = base64Data.backgrounds["Teal"];
+                    break;
+                case '1':
+                    traits.background = base64Data.backgrounds["Green"];
+                    break;
+                case '2':
+                    traits.background = base64Data.backgrounds["Grey"];
+                    break;
+                case '3':
+                    traits.background = base64Data.backgrounds["Light Blue"];
+                    break;
+                case '4':
+                    traits.background = base64Data.backgrounds["Light Purple"];
+                    break;
+                case '5':
+                    traits.background = base64Data.backgrounds["Orange"];
+                    break;
+                case '6':
+                    traits.background = base64Data.backgrounds["Pale Yellow"];
+                    break;
+                case '7':
+                    traits.background = base64Data.backgrounds["Purple"];
+                    break;
+                case '8':
+                    traits.background = base64Data.backgrounds["Red"];
+                    break;
+                case '9':
+                    traits.background = base64Data.backgrounds["Yellow"];
+                    break;
+                default:
+                    traits.background = base64Data.backgrounds["Teal"];
+            }
+
+            // Determine eyes (D2)
+            const eyeType = traits.type === 'Female' || traits.type === 'Mermaid' ? 'Female' : 'Base';
+            switch (sixthLastDigit) {
+                case '0':
+                    traits.eyes = base64Data.eyes[eyeType]["Black"];
+                    break;
+                case '1':
+                    traits.eyes = base64Data.eyes[eyeType]["Blue"];
+                    break;
+                case '2':
+                    traits.eyes = base64Data.eyes[eyeType]["Brown"];
+                    break;
+                case '3':
+                    traits.eyes = base64Data.eyes[eyeType]["Green"];
+                    break;
+                case '4':
+                    traits.eyes = base64Data.eyes[eyeType]["Teal"];
+                    break;
+                case '5':
+                    traits.eyes = base64Data.eyes[eyeType]["Orange"];
+                    break;
+                case '6':
+                    traits.eyes = base64Data.eyes[eyeType]["Pink"];
+                    break;
+                case '7':
+                    traits.eyes = base64Data.eyes[eyeType]["Purple"];
+                    break;
+                case '8':
+                    traits.eyes = base64Data.eyes[eyeType]["Red"];
+                    break;
+                case '9':
+                    traits.eyes = base64Data.eyes[eyeType]["Yellow"];
+                    break;
+                default:
+                    traits.eyes = base64Data.eyes[eyeType]["Black"];
+            }
+
+            // Determine hair (D3)
+            switch (seventhLastDigit) {
+                case '0':
+                    traits.hair = base64Data.hair["Long Black"];
+                    break;
+                case '1':
+                    traits.hair = base64Data.hair["Long Blonde"];
+                    break;
+                case '2':
+                    traits.hair = base64Data.hair["Long Brown"];
+                    break;
+                case '3':
+                    traits.hair = base64Data.hair["Long Red"];
+                    break;
+                case '4':
+                    traits.hair = base64Data.hair["Medium Black"];
+                    break;
+                case '5':
+                    traits.hair = base64Data.hair["Medium Blonde"];
+                    break;
+                case '6':
+                    traits.hair = base64Data.hair["Medium Brown"];
+                    break;
+                case '7':
+                    traits.hair = base64Data.hair["Short Black"];
+                    break;
+                case '8':
+                    traits.hair = base64Data.hair["Short Blonde"];
+                    break;
+                case '9':
+                    traits.hair = base64Data.hair["Short Brown"];
+                    break;
+                default:
+                    traits.hair = base64Data.hair["Long Black"];
+            }
+
+            // Determine shirt type (D4)
+            switch (eighthLastDigit) {
+                case '0':
+                    traits.shirt = base64Data.shirts["Blue Collar"];
+                    break;
+                case '1':
+                    traits.shirt = base64Data.shirts["Dress Shirt"];
+                    break;
+                case '2':
+                    traits.shirt = base64Data.shirts["Jacket"];
+                    break;
+                case '3':
+                    traits.shirt = base64Data.shirts["Jersey"];
+                    break;
+                case '4':
+                    traits.shirt = base64Data.shirts["Long Sleeve"];
+                    break;
+                case '5':
+                    traits.shirt = base64Data.shirts["Plaid"];
+                    break;
+                case '6':
+                    traits.shirt = base64Data.shirts["Open Shirt"];
+                    break;
+                case '7':
+                    traits.shirt = base64Data.shirts["Short Sleeve"];
+                    break;
+                                case '8':
+                    traits.shirt = base64Data.shirts["Suit Top"];
+                    break;
+                case '9':
+                    traits.shirt = base64Data.shirts["Vacation"];
+                    break;
+                default:
+                    traits.shirt = base64Data.shirts["Blue Collar"];
+            }
+
+            // Determine shirt color (D5 based on D4)
+            const shirtType = traits.shirt;
+            switch (shirtType) {
+                case "Blue Collar":
+                    traits.shirtColor = base64Data.shirtColors.Professional[ninthLastDigit];
+                    break;
+                case "Dress Shirt":
+                    traits.shirtColor = base64Data.shirtColors["Dress Shirt"][ninthLastDigit];
+                    break;
+                case "Jacket":
+                    traits.shirtColor = base64Data.shirtColors.Jacket[ninthLastDigit];
+                    break;
+                case "Jersey":
+                    traits.shirtColor = base64Data.shirtColors.Jersey[ninthLastDigit];
+                    break;
+                case "Long Sleeve":
+                    traits.shirtColor = base64Data.shirtColors["Long Sleeve"][ninthLastDigit];
+                    break;
+                case "Plaid":
+                    traits.shirtColor = base64Data.shirtColors.Plaid[ninthLastDigit];
+                    break;
+                case "Open Shirt":
+                    traits.shirtColor = base64Data.shirtColors["Open Shirt"][ninthLastDigit];
+                    break;
+                case "Short Sleeve":
+                    traits.shirtColor = base64Data.shirtColors["Short Sleeve"][ninthLastDigit];
+                    break;
+                case "Suit Top":
+                    traits.shirtColor = base64Data.shirtColors["Suit Top"][ninthLastDigit];
+                    break;
+                case "Vacation":
+                    traits.shirtColor = base64Data.shirtColors.Vacation[ninthLastDigit];
+                    break;
+                default:
+                    traits.shirtColor = base64Data.shirtColors.Professional[ninthLastDigit];
+            }
+
+            // Determine shoes (D6)
+            traits.shoes = determineShoes(ninthLastDigit, traits.type === 'Female');
+
+            // Determine pants
+            traits.pants = determinePants(blockNumber, traits.shirt, traits.type === 'Female');
+
+            // Determine rare backgrounds
+            const rareBackground = determineRareBackgrounds(ninthLastDigit);
+            if (rareBackground) {
+                traits.background = rareBackground;
+            }
+
+            // Determine headwear
+            const longHairTriggered = ['Long Black', 'Long Blonde', 'Long Brown', 'Long Red'].includes(traits.hair);
+            traits.headwear = determineHeadwear(blockNumber, 15000, longHairTriggered);
+
+            // Determine eyewear
+            traits.eyewear = determineEyewear(ninthLastDigit);
+
+            // Determine glow
+            traits.glow = determineGlow('23:18', longHairTriggered);
+
+            // Determine pets
+            const pets = determinePets(blockNumber, '00:15', traits.type === 'Female', traits.type === 'ArmOut');
+            Object.assign(traits, pets);
+
+            console.log(`Selected traits: ${JSON.stringify(traits)}`);
+            return traits;
+        }
+
+        function displayTraits(blockNumber, nonce, inscriptionID) {
+            const traits = getTraits(blockNumber, nonce, inscriptionID);
+            console.log(`Block: ${blockNumber}, Nonce: ${nonce}, InscriptionID: ${inscriptionID}`);
+            console.log(traits);
+
+            const container = document.getElementById('traits');
+            container.innerHTML = '';
+
+            for (const [key, value] of Object.entries(traits)) {
+                const div = document.createElement('div');
+                div.className = 'trait';
+                div.style.backgroundImage = `url(data:image/svg+xml;base64,${value})`;
+                container.appendChild(div);
+            }
+        }
+
+        function checkIfFemale(blockNumber) {
+            // Implement the logic to check if the character is female based on the block number
+            // If the block reward is over 300k, then it triggers Female traits.
+            // For now, let's return false as a placeholder
+            // You can replace this with the actual logic to determine if the character is female
+            return blockNumber % 300000 > 0; // Example logic, replace with actual
+        }
+
+        // Determine shoes (D6)
+        function determineShoes(d6, isFemale) {
+            if (isFemale) {
+                switch (d6) {
+                    case '0':
+                        return base64Data.shoes.female['No Shoes'];
+                    case '1':
+                        return base64Data.shoes.female['Flats'];
+                    case '2':
+                        return base64Data.shoes.female['Sandals'];
+                    case '3':
+                        return base64Data.shoes.female['Heels'];
+                    case '4':
+                        return base64Data.shoes.female['Converse'];
+                    case '5':
+                        return base64Data.shoes.female['No Shoes'];
+                    case '6':
+                        return base64Data.shoes.female['Flats'];
+                    case '7':
+                        return base64Data.shoes.female['Sandals'];
+                    case '8':
+                        return base64Data.shoes.female['Heels'];
+                    case '9':
+                        return base64Data.shoes.female['Converse'];
+                    default:
+                        return base64Data.shoes.female['No Shoes'];
+                }
+            } else {
+                switch (d6) {
+                    case '0':
+                        return base64Data.shoes.base['No Shoes'];
+                    case '1':
+                        return base64Data.shoes.base['Black & White'];
+                    case '2':
+                        return base64Data.shoes.base['Black on Top'];
+                    case '3':
+                        return base64Data.shoes.base['All Black'];
+                    case '4':
+                        return base64Data.shoes.base['Converse'];
+                    case '5':
+                        return base64Data.shoes.base['All Grey'];
+                    case '6':
+                        return base64Data.shoes.base['House Shoes'];
+                    case '7':
+                        return base64Data.shoes.base['Red Converse'];
+                    case '8':
+                        return base64Data.shoes.base['All Red'];
+                    case '9':
+                        return base64Data.shoes.base['Slides'];
+                    default:
+                        return base64Data.shoes.base['No Shoes'];
+                }
+            }
+        }
+
+        // Determine pants
+        function determinePants(blockNumber, shirtType, isFemale) {
+            if (isFemale) {
+                if (shirtType === 'T-Shirt') {
+                    // Draw pants for female
+                    return blockNumber % 2 === 0 ? base64Data.pants.female['Khakis'] : base64Data.pants.female['Blue Jeans'];
+                } else {
+                    // No pants for female
+                    return base64Data.pants.female['None'];
+                }
+            } else {
+                // Draw pants for Base or Arm Out
+                return blockNumber % 2 === 0 ? base64Data.pants.base['Khakis'] : base64Data.pants.base['Blue Jeans'];
+            }
+        }
+
+        // Determine rare backgrounds
+        function determineRareBackgrounds(bits) {
+            switch (bits) {
+                case '3b':
+                    return base64Data.backgrounds.rare['Beach'];
+                case '7b':
+                    return base64Data.backgrounds.rare['Space'];
+                case '8b':
+                    return base64Data.backgrounds.rare['Bitmap'];
+                case '9b':
+                    return base64Data.backgrounds.rare['Clouds'];
+                case '101':
+                    return base64Data.backgrounds.rare['XP'];
+                default:
+                    return null;
+            }
+        }
+
+        // Determine hats and headwear
+        function determineHeadwear(blockNumber, blockWeight, longHairTriggered) {
+            if (longHairTriggered) {
+                return null;
+            }
+            if (blockNumber.toString() === '9999') {
+                return base64Data.headwear.rare['Diamond NodeMonke'];
+            }
+            if (blockNumber.toString().includes('7777')) {
+                return base64Data.headwear.rare['Backwards Diamond'];
+            }
+            if (blockNumber.toString().includes('111')) {
+                return base64Data.headwear.rare['NodeMonke'];
+            }
+            if (blockNumber.toString().includes('888')) {
+                return base64Data.headwear.rare['Backwards Multi'];
+            }
+            if (blockNumber.toString().includes('333')) {
+                return base64Data.headwear.rare['Backwards Single'];
+            }
+            if (blockWeight < 850) {
+                return base64Data.headwear.rare['Cowboy'];
+            }
+            if (blockWeight >= 1000 && blockWeight <= 1999) {
+                return base64Data.headwear.rare['Hufflepuff'];
+            }
+            if (blockWeight >= 2000 && blockWeight <= 9999) {
+                return base64Data.headwear.rare['Ravenclaw'];
+            }
+            if (blockWeight >= 10000 && blockWeight <= 14999) {
+                return base64Data.headwear.rare['Slytherin'];
+            }
+            if (blockWeight >= 15000 && blockWeight <= 27000) {
+                return base64Data.headwear.rare['Gryffindor'];
+            }
+            return null;
+        }
+
+        // Determine eyewear
+        function determineEyewear(bits) {
+            switch (bits) {
+                case '22':
+                    return base64Data.eyewear.rare['Cyclops Red Black'];
+                case '23':
+                    return base64Data.eyewear.rare['Cyclops Grey Gold'];
+                case '3d':
+                    return base64Data.eyewear.rare['3D'];
+                case 'fa':
+                    return base64Data.eyewear.rare['Hollow White'];
+                case '0a':
+                    return base64Data.eyewear.rare['Hollow Black'];
+                default:
+                    return null;
+            }
+        }
+
+        // Determine glow
+        function determineGlow(time, longHairTriggered) {
+            if (time === '22:XX') {
+                return base64Data.glow.rare['Body Glow Green'];
+            }
+            if (time === '22:XX' && longHairTriggered) {
+                return base64Data.glow.rare['Body Glow Green 2'];
+            }
+            if (time >= '01:00' && time <= '02:00') {
+                return base64Data.glow.rare['Body Glow Blue'];
+            }
+            if (time >= '01:00' && time <= '02:00' && longHairTriggered) {
+                return base64Data.glow.rare['Body Glow Blue 2'];
+            }
+            if (time === '23:18') {
+                return base64Data.glow.rare['Fire Glow'];
+            }
+            if (time === '23:19' && longHairTriggered) {
+                return base64Data.glow.rare['Fire Glow 2'];
+            }
+            if (time === '23:23') {
+                return base64Data.glow.rare['Diamond Glow'];
+            }
+            return null;
+        }
+
+        // Determine pets
+        function determinePets(blockNumber, time, isFemale, isArmOut) {
+            const traits = {};
+            if (isFemale && time >= '00:00' && time <= '01:00') {
+                traits.pet = base64Data.pets.rare['Parrot'];
+                const minute = parseInt(time.split(':')[1]);
+                if (minute >= 0 && minute <= 9) {
+                    traits.petColor = base64Data.petColors['Green'];
+                } else if (minute >= 10 && minute <= 19) {
+                    traits.petColor = base64Data.petColors['Red'];
+                } else if (minute >= 20 && minute <= 29) {
+                    traits.petColor = base64Data.petColors['Orange'];
+                } else if (minute >= 30 && minute <= 39) {
+                    traits.petColor = base64Data.petColors['Diamond'];
+                } else if (minute >= 40 && minute <= 49) {
+                    traits.petColor = base64Data.petColors['Blue'];
+                } else if (minute >= 50 && minute <= 59) {
+                    traits.petColor = base64Data.petColors['Pink'];
+                }
+            } else if (isArmOut && blockNumber % 1 === 0) {
+                traits.pet = base64Data.pets.rare['Pet Cat'];
+                const month = new Date().getMonth() + 1;
+                if (month === 1 || month === 2) {
+                    traits.petColor = base64Data.petColors['Orange'];
+                } else if (month === 3 || month === 4) {
+                    traits.petColor = base64Data.petColors['Gold'];
+                } else if (month === 5 || month === 6) {
+                    traits.petColor = base64Data.petColors['Blue'];
+                } else if (month === 7 || month === 8) {
+                    traits.petColor = base64Data.petColors['Red'];
+                } else if (month === 9 || month === 10) {
+                    traits.petColor = base64Data.petColors['Pink'];
+                } else if (month === 11 || month === 12) {
+                    traits.petColor = base64Data.petColors['Diamond'];
+                }
+            } else if (time >= '00:00' && time <= '01:00') {
+                traits.pet = base64Data.pets.rare['Parrot'];
+                const minute = parseInt(time.split(':')[1]);
+                if (minute >= 0 && minute <= 9) {
+                    traits.petColor = base64Data.petColors['Green'];
+                } else if (minute >= 10 && minute <= 19) {
+                    traits.petColor = base64Data.petColors['Red'];
+                } else if (minute >= 20 && minute <= 29) {
+                    traits.petColor = base64Data.petColors['Orange'];
+                } else if (minute >= 30 && minute <= 39) {
+                    traits.petColor = base64Data.petColors['Diamond'];
+                } else if (minute >= 40 && minute <= 49) {
+                    traits.petColor = base64Data.petColors['Blue'];
+                } else if (minute >= 50 && minute <= 59) {
+                    traits.petColor = base64Data.petColors['Pink'];
+                }
+            } else if (new Date().getFullYear() === 2011) {
+                traits.pet = base64Data.pets.rare['Moon Dog'];
+            }
+            return traits;
+        }
+
+        function determineMermaidTraits(blockNumber, blockReward, blockHash) {
+            if (blockReward > 300000 && blockHash.includes('00000000000000000000')) {
+                const traits = { mermaid: true };
+                if (blockNumber % 2 === 0) {
+                    traits.mermaidTail = 'Green';
+                } else {
+                    traits.mermaidTail = 'Purple';
+                }
+
+                // Mermaid hair colors
+                const hairColors = {
+                    '0': 'Ponytail Black',
+                    '1': 'Ponytail Blonde',
+                    '2': 'Ponytail Brown',
+                    '3': 'Ponytail Natural Red',
+                    '4': 'Ponytail Black',
+                    '5': 'Ponytail Blonde',
+                    '6': 'Ponytail Brown',
+                    '7': 'Ponytail Dark Red',
+                    '8': 'Ponytail Blue',
+                    '9': 'Ponytail Purple'
+                };
+                const d3 = blockNumber.toString().split('').reverse()[2];
+                traits.hair = hairColors[d3];
+                return traits;
+            }
+            return null;
+        }
+
+        function determineSaiyanTraits(time) {
+            if (time.includes('1:23')) {
+                const traits = { saiyanHead: true };
+                traits.hairColor = (time >= '00:00:00' && time <= '11:59:59') ? 'Gold' : 'Diamond';
+                return traits;
+            }
+            return null;
+        }
+
+        function determineNatmanTraits(blockWeight, blockDate) {
+            const traits = {};
+            if (blockWeight >= 140 && blockWeight <= 150) {
+                traits.natmanHead = true;
+            }
+            if (blockDate === '2011-11-11') {
+                traits.natmanBody = true;
+            }
+            return traits;
+        }
+
+        function determineArmOutItems(blockNumber, blockTxCount) {
+            if (blockNumber % 17 === 0) {
+                const items = {};
+                if (blockTxCount >= 2000 && blockTxCount < 3000) {
+                    items.item = 'Sweeper';
+                } else if (blockTxCount >= 501 && blockTxCount < 1000) {
+                    items.item = 'Silver Sweeper';
+                } else if (blockTxCount >= 3000 && blockTxCount < 5000) {
+                    items.item = 'Gold Sweeper';
+                } else if (blockTxCount >= 1000 && blockTxCount < 2000) {
+                    items.item = 'BTC Staff';
+                } else if (blockTxCount >= 25 && blockTxCount < 100) {
+                    items.item = 'Silver Staff';
+                } else if (blockTxCount >= 2 && blockTxCount < 10) {
+                    items.item = 'Gold Staff';
+                } else if (blockTxCount >= 10 && blockTxCount < 25) {
+                    items.item = 'Diamond Staff';
+                } else if (blockTxCount === 1) {
+                    items.item = 'Pet Cats';
+                } else if (blockTxCount >= 101 && blockTxCount < 250) {
+                    items.item = 'Shit Coin';
+                } else if (blockTxCount >= 251 && blockTxCount < 500) {
+                    items.item = 'Lucille';
+                } else if (blockTxCount >= 5000) {
+                    items.item = 'Map of Bitmap';
+                }
+                return items;
+            }
+            return null;
+        }
+
+        function determineFemaleRareTraits(blockReward) {
+            if (blockReward > 300000) {
+                if (blockReward >= 350000 && blockReward < 400000) {
+                    return { earring: 'Silver' };
+                } else if (blockReward >= 400000) {
+                    return { earring: 'Gold' };
+                } else if (blockReward >= 300000 && blockReward < 350000) {
+                    return { earring: 'Diamond' };
+                }
+            }
+            return null;
+        }
+
+        function getTraits(blockNumber, nonce, inscriptionID, blockReward, blockHash, time, blockWeight, blockDate, blockTxCount, bits) {
+            const traits = determineCharacterType(blockNumber, nonce);
+            const nonceStr = nonce.toString().split('').reverse().join('');
+            const fifthLastDigit = nonceStr.length >= 5 ? nonceStr[nonceStr.length - 5] : undefined;
+            const sixthLastDigit = nonceStr.length >= 6 ? nonceStr[nonceStr.length - 6] : undefined;
+            const seventhLastDigit = nonceStr.length >= 7 ? nonceStr[nonceStr.length - 7] : undefined;
+            
