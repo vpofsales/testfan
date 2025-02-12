@@ -22,7 +22,7 @@ Every type (base/arm out/female) gets the same triggers and backgrounds
 background trigger is the nonce from that specific block number, read in reverse. 
 
 Background Color Map= 
-Teal: #5c969a 
+Teal/greenish: #5c969a 
 Green: #90e67f	
 Grey: #aba0a5	
 Light Blue: #aba0a5	
@@ -55,23 +55,33 @@ If both are triggered, then Arm Out overrides Female, unless its a mermaid.
 Choose Appropriate "Outline" based off info above, then move on to draw the outline with the appropriate skin tone 
 
 
-If its base then draw base outline and fill with  
+these are skin tones for each outline except mermaid.   
 
-#9781ac (light purple)
-#89ac81 (light green
-#81a3ac (light blue)
-#a4905f (light orange)
-#ca6d6c (light red)
-#b3b3b3 (light grey)
-#772684 (medium purple) 
+Nonce reverse D8 for common skin tones.
+'0':   # Light Purple
+'9': 
+
+'1':   # Light Green
+'8': 
+
+'2':   # Light Blue
+'7': 
+
+'3':   # Tan
+'6': 
+
+'4':   # Light Red
+
+'5':   # Light Grey
 
 
-^unless Diamond or Pepe skin is triggered, which take precedence and override the base colors. 
 
-Pepe Skin: #24bd57 also change default mouth color of black to #d31403
-Diamond Skin: #b9f2ff
+Rare Skin Tone Colors: (override skin tones above)
+Pepe Skin: Block divisible by 77. |skin = #24bd57 and mouth changed to red.
+Diamond Skin: Block only contains 7’s (maybe divisible by 77 as well.) | #b9f2ff
 
 
+-------------------------
 
 
 MERMAID TRIGGER:
@@ -180,7 +190,7 @@ D3:     Triggers:
 
 ------------------------------------------
 
-****D4 is for Shirt Type (style) 
+****D4 determines Shirt Type (style) Doesnt draw anything. Uses D4+D5 to determine which shirt color to draw from the style chosen in d4.
 
 Base uses 
 0	Blue Collar
@@ -408,18 +418,8 @@ D5:     Triggers:
 
 
 
-******For D5 Females
-D5:     Triggers:
-0	Random Color from Dress Color Map
-1	Random Color from Dress Shirt Color Map
-2	Random Color from Dress Color Map
-3	Random Color from Track Suit Color Map
-4	Random Color from T-Shirt Color Map
-5	Random Color from Track Suit Color Map
-6	Random Color from Dress Shirt Color Map
-7	Random Color from T-Shirt Color Map
-8	Random Color from Dress Color Map
-9	Random Color from Dress Shirt Color Map
+**Females do not trigger anything with D5.
+
 
 
 Rare Shirt Designs 
@@ -435,6 +435,8 @@ Arm Out:
 BTC Machine Logo: Block TX Count Under 1k
 Pup Shirt: Block TX Count 1k-2k
 
+
+Female rule for both need to be identified still
 -------------------------------------------
 
 
@@ -498,8 +500,8 @@ D7:     Triggers:
 
 Back Bling (Base Outline Only)
 
-If Base Outline + Block TX Count = 10, then trigger Back Bling
-Cancels glows and fire glows/diamond glow
+If it is base Outline + the Block TX Count = 10, then trigger Back Bling
+Cancels glows and fire glows
 --------------------------------
 
 
@@ -563,12 +565,11 @@ bits fa	         Hollow White
 bits 0a          Hollow Black
 bits 24	         Cyclops Red grey
 bits 23	         Cyclops Grey Gold
-bits 22	         Cyclops Red black
 bits 3d          3D
 
 
 Order to be used if multiple are triggered:
-Cyclops Red Black > Cyclops Grey Gold > 3D > Hollow White > Hollow Black
+Cyclops red grey > Cyclops Grey Gold > 3D > Hollow White > Hollow Black
 
 
 -------------------------------------
@@ -586,12 +587,12 @@ time 23:19	fire glow 2 for (long hair)
 time 23:23	Diamond glow (fill all fire glow with #b9f2ff)
 
 
-If Bits:        Triggers:
+If Bits has:        Triggers:
 1f              Pink Glow (Females Only)
 
 unless
 
-1f and Hair = Ponytail, then use "Pony Tail Glow" 
+If female + bits field contains "1f" and Hair = Ponytail, then use "Pony Tail Glow" 
 
 
 
@@ -619,6 +620,7 @@ bits 101	 XP
 
 
 Rare Skins
+Every outline besides mermaid and arm out can trigger rare skins.
 
 
 
@@ -693,7 +695,7 @@ If block year = 2011, then trigger Moon Dog
 Mouth 
 
 
-Base and arm out use same svg vectors for mouth. Fill is always black unless Pepe skin or Natman Head.
+Base and arm out use same base64 for mouth. Fill is always black unless Pepe skin or Natman Head then it is overridden.
 
 
 Female Outline uses "Smile" or  "regular mouth"
@@ -737,7 +739,7 @@ Natman Body:
 If Block date is 2011-11-11 trigger natman body.
 
 
-Saiyan overrides/cancels any eyewear, headwear, glow, or fire glow traits.
+Saiyan heads overrides/cancels D3, any eyewear, headwear, glow, or fire glow traits.
 
 natman head overrides/cancels any eyewear, headwear, glow, fire glow traits.
 
