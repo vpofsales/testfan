@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Trait Generator</title>
+    <style>
+        .trait { 
+            width: 100px; height: 100px;
+            display: inline-block; margin: 10px;
+            border: 1px solid #000; background-size: contain;
+        }
+    </style>
+</head>
+<body>
+    <h1>Complete Trait Generator</h1>
+    <input type="number" id="blockNumber" placeholder="Enter Block Number">
+    <button onclick="fetchBlockData()">Generate Traits</button>
+    <div id="traits"></div>
+
+    <script>
+        const base64Data = {
+            backgrounds: {
+                "Teal": "iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAWklEQVR4nO3PAQ2AMADAsHNL94UQTHMTT2jIqmC71nO/4wfm1wGnNKJpRNOIphFNI5pGNI1oGtE0omlE04imEU0jmkY0jWga0TSiaUTTiKYRTSOaRjSNaBrRbMXRAo6QsOUsAAAAAElFTkSuQmCC",
+                "Green": "iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAWklEQVR4nO3PAQ2AMADAsHPjt4BKbHATT2jIqmC77me94wfm1wGnNKJpRNOIphFNI5pGNI1oGtE0omlE04imEU0jmkY0jWga0TSiaUTTiKYRTSOaRjSNaBrRbMBuA1geiH1SAAAAAElFTkSuQmCC",
+                "Grey": "iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAW0lEQVR4nO3PwQ2AIADAQGT/Ifj4ckhZgsSL6U3QXs+63/ED8+uAUxrRNKJpRNOIphFNI5pGNI1oGtE0omlE04imEU0jmkY0jWga0TSiaUTTiKYRTSOaRjSNaDb8FANTzkzSpwAAAABJRU5ErkJggg==",
+                "Light Blue": "iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAW0lEQVR4nO3PQQ2AMADAwDH/j/nAGxaYiSVcSE9Be637eccPzK8DTmlE04imEU0jmkY0jWga0TSiaUTTiKYRTSOaRjSNaBrRNKJpRNOIphFNI5pGNI1oGtE0otm5dwOMcKnaVgAAAABJRU5ErkJggg==",
+                "Light Purple": "iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAW0lEQVR4nO3PwQ2AIADAQGT/Bzv5cylZgsSL6U3QXs+63/ED8+uAUxrRNKJpRNOIphFNI5pGNI1oGtE0omlE04imEU0jmkY0jWga0TSiaUTTiKYRTSOaRjSNaDbivgOAa8unyAAAAABJRU5ErkJggg==",
+                "Orange": "iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAWklEQVR4nO3PwQ2AIADAQGQ41nRMn7IEiRfTm6C9nnu94wfm1wGnNKJpRNOIphFNI5pGNI1oGtE0omlE04imEU0jmkY0jWga0TSiaUTTiKYRTSOaRjSNaBrRbOuSAz/7zvzOAAAAAElFTkSuQmCC",
+                "Pale Yellow": "iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAW0lEQVR4nO3PwQmAMADAwNr9/91LcB67RMFDchMk1/2sd/zA/DrglEY0jWga0TSiaUTTiKYRTSOaRjSNaBrRNKJpRNOIphFNI5pGNI1oGtE0omlE04imEU0jmg3yfQOhiaMOzQAAAABJRU5ErkJggg==",
+                "Purple": "Base64: iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAWklEQVR4nO3PAQ2AMADAsHO314gGNHETT2jIqmC77vW84wfm1wGnNKJpRNOIphFNI5pGNI1oGtE0omlE04imEU0jmkY0jWga0TSiaUTTiKYRTSOaRjSNaBrRbCNLA1TRaK2yAAAAAElFTkSuQmCC",
+                "Red": "iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAWklEQVR4nO3PwQ2AIADAQGRN3m7uHrIEiRfTm6C9nnu94wfm1wGnNKJpRNOIphFNI5pGNI1oGtE0omlE04imEU0jmkY0jWga0TSiaUTTiKYRTSOaRjSNaBrRbFTyAwckErKpAAAAAElFTkSuQmCC",
+                "Yellow": "iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAWklEQVR4nO3PwQ2AIADAQGRdFvbhLrIEiRfTm6C9nnu94wfm1wGnNKJpRNOIphFNI5pGNI1oGtE0omlE04imEU0jmkY0jWga0TSiaUTTiKYRTSOaRjSNaBrRbDG3A4KnBx4gAAAAAElFTkSuQmCC",
+
+
+        fetchBlockData: async function() {
+    const blockNumber = document.getElementById('blockNumber').value;
+    if (!blockNumber) return alert('Please enter a block number');
+
+    try {
+        const response = await fetch(`https://ordinals.com/r/blockinfo/${blockNumber}`);
+        if (!response.ok) throw new Error('Failed to fetch block data');
+        const data = await response.json();
+
+        const blockDate = new Date(data.date);
+        const blockTime = data.time?.split(' ')[1]?.substring(0, 5) || '00:00';
+        const isArmOut = blockNumber % 17 === 0;
+        const isMermaid = data.hash?.includes('00000000000000000000') || false;
+
+        const traits = determineAllTraits(
+            blockNumber,
+            data.nonce,
+            data.txCount,
+            data.weight,
+            data.hash,
+            blockDate,
+            blockTime,
+            data.bits,
+            isArmOut,
+            isMermaid
+        );
+
+        displayTraits(traits);
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error fetching block data: ' + error.message);
+    }
+}
+
+function determineAllTraits(blockNumber, nonce, txCount, weight, hash, date, time, bits, isArmOut, isMermaid) {
+    const nonceStr = String(nonce).split('').reverse().join('');
+    const traits = {
+        background: getBackground(nonceStr, bits),
+        skin: getSkinTone(nonceStr, blockNumber),
+        outline: determineOutline(blockNumber, nonce, hash),
+        eyes: determineEyes(nonceStr, isArmOut),
+        hair: determineHair(nonceStr, isMermaid, isArmOut),
+        shirt: determineShirt(nonceStr, txCount, isArmOut),
+        shirtColor: determineShirtColor(nonceStr, txCount),
+        shoes: determineShoes(nonceStr, isArmOut),
+        pants: determinePants(blockNumber, isArmOut),
+        headwear: determineHeadwear(blockNumber, weight, nonceStr),
+        eyewear: determineEyewear(bits),
+        glow: determineGlow(time, nonceStr),
+        pets: determinePets(date, time, txCount),
+        heldItems: determineHeldItems(txCount, isArmOut),
+        accessories: determineAccessories(nonceStr),
+        mouth: determineMouth(date, blockNumber),
+        backBling: determineBackBling(txCount),
+        mermaidTail: isMermaid ? (blockNumber % 2 === 0 ? 'Green' : 'Purple') : null,
+        isFemaleHeel: determineHeels(nonceStr)
+    };
+
+    applyOverrides(traits, { txCount, weight, date, time, bits });
+    return traits;
+}
+
+function getBackground(nonceStr, bits) {
+    const rareBackgrounds = {'3b':'Beach','7b':'Space','8b':'Bitmap','9b':'Clouds','101':'XP'};
+    return base64Data.backgrounds.rare[rareBackgrounds[bits]] || base64Data.backgrounds[Object.keys(base64Data.backgrounds)[parseInt(nonceStr[0])]];
+}
+
+function getSkinTone(nonceStr, blockNumber) {
+    const skinMap = {'0':'#ca90c3','1':'#90e67f','2':'#5c969a','3':'#c4b289','4':'#e4655b','5':'#aba0a5'};
+    const d8 = nonceStr[7] || '0';
+    if (blockNumber % 77 === 0) return base64Data.skins.rare.Pepe;
+    if (/^7+$/.test(blockNumber)) return base64Data.skins.rare.Diamond; 
+    return skinMap[d8];
+}
+
+function determineOutline(blockNumber, nonce, hash) {
+    if (hash.includes('00000000000000000000')) return 'Mermaid';
+    if (blockNumber % 17 === 0) return 'Arm Out';
+    return nonce > 300000 ? 'Female' : 'Base';
+}
+
+function determineEyes(nonceStr, isArmOut) {
+    const d2 = nonceStr[1] || '0';
+    const type = isArmOut ? 'Base' : 'Female';
+    const eyeColors = Object.keys(base64Data.eyes[type]);
+    return base64Data.eyes[type][eyeColors[d2]];
+}
+
+function getMouthVariation(characterType) {
+    if (characterType === "base" || characterType === "arm out") {
+        return mouthVariations["default"];
+    } else if (["female", "female heel", "mermaid"].includes(characterType)) {
+        return mouthVariations["smile"];
+    } else if (characterType === "base") {
+        return Math.random() > 0.5 ? mouthVariations["cig"] : mouthVariations["blunt"];
+    } else {
+        return mouthVariations["default"];
+}
+
+function determineHair(nonceStr, isMermaid, isArmOut) {
+    const d3 = nonceStr[2] || '0';
+    if (isMermaid) {
+        const mermaidStyles = Object.keys(base64Data.hair.Mermaid);
+        return base64Data.hair.Mermaid[mermaidStyles[d3]];
+    }
+    const type = isArmOut ? 'Base' : 'Female';
+    const hairStyles = Object.keys(base64Data.hair[type]);
+    return base64Data.hair[type][hairStyles[d3]];
+}
+
+function determineShirt(nonceStr, txCount, isArmOut) {
+    const d4 = nonceStr[3] || '0';
+    if (isArmOut) return base64Data.shirts["Long Sleeve"];
+    if (txCount < 1000 && (d4 === '4' || d4 === '7')) return base64Data.shirts["BTC Machine"];
+    if (txCount >= 1000 && txCount <= 2000 && (d4 === '4' || d4 === '7')) return base64Data.shirts["Pup Shirt"];
+    const shirtTypes = Object.keys(base64Data.shirts).slice(0, 10);
+    return base64Data.shirts[shirtTypes[d4]];
+}
+
+function determineShirtColor(nonceStr, txCount) {
+    const d5 = nonceStr[4] || '0';
+    return txCount < 1000 ? base64Data.shirtColors.Professional[d5] : base64Data.shirtColors["Dress Shirt"][d5];
+}
+
+function determineShoes(nonceStr, isArmOut) {
+    const d6 = nonceStr[5] || '0';
+    const type = isArmOut ? 'base' : 'female';
+    const shoeStyles = Object.keys(base64Data.shoes[type]);
+    return base64Data.shoes[type][shoeStyles[d6]];
+}
+
+function determinePants(blockNumber, isArmOut) {
+    const type = isArmOut ? 'base' : 'female';
+    return blockNumber % 2 === 0 
+        ? base64Data.pants[type]["Khakis"] 
+        : base64Data.pants[type]["Blue Jeans"];
+}
+
+function determineHeadwear(blockNumber, weight, nonceStr) {
+    if (blockNumber.toString() === '9999') return base64Data.headwear.rare["Diamond NodeMonke"];
+    if (blockNumber.toString().includes('7777')) return base64Data.headwear.rare["Backwards Diamond"];
+    if (weight < 850) return base64Data.headwear.rare["Cowboy"];
+    return null;
+}
+
+function determineEyewear(bits) {
+    const eyewearMap = {'fa':'Hollow White','0a':'Hollow Black','22':'Cyclops Red Black','23':'Cyclops Grey Gold','3d':'3D'};
+    return base64Data.eyewear.rare[eyewearMap[bits]] || null;
+}
+
+function determineGlow(time, nonceStr) {
+    const hour = parseInt(time.split(':')[0]);
+    if (hour === 23) return base64Data.glow.rare["Fire Glow"];
+    if (hour >= 1 && hour < 2) return base64Data.glow.rare["Body Glow Blue"];
+    return null;
+}
+
+function determinePets(date, time, txCount) {
+    const minute = parseInt(time.split(':')[1]);
+    const month = date.getMonth() + 1;
+    const pets = {};
+    
+    if (txCount === 1) {
+        const catColors = {1:'Orange',3:'Gold',5:'Blue',7:'Red',9:'Pink',11:'Diamond'};
+        pets.cat = base64Data.pets.rare["Pet Cat"];
+        pets.catColor = catColors[month] || 'Orange';
+    }
+    
+    if (minute <= 59) {
+        const parrotColors = ['Green','Red','Orange','Diamond','Blue','Pink'];
+        pets.parrot = base64Data.pets.rare["Parrot"];
+        pets.parrotColor = parrotColors[Math.floor(minute/10)];
+    }
+    
+    return pets;
+}
+
+function determineHeldItems(txCount, isArmOut) {
+    if (!isArmOut) return null;
+    const items = [
+        [2000, 3000, "Sweeper"],
+        [3000, 5000, "Gold Sweeper"],
+        [5000, Infinity, "Map of Bitmap"]
+    ];
+    const item = items.find(([min, max]) => txCount >= min && txCount <= max);
+    return item ? base64Data.heldItems[item[2]] : null;
+}
+
+function determineAccessories(nonceStr) {
+    const d7 = nonceStr[6] || '0';
+    const accessories = Object.keys(base64Data.accessories);
+    return base64Data.accessories[accessories[d7]];
+}
+
+function determineMouth(date, blockNumber) {
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    if (month === 4 && day === 20) return base64Data.mouthVariations["blunt"];
+    if (day === 20) return base64Data.mouthVariations["cig"];
+    return base64Data.mouthVariations["default"];
+}
+
+function determineBackBling(txCount) {
+    return txCount === 10 ? base64Data.accessories["Back Bling"] : null;
+}
+
+function determineHeels(nonceStr) {
+    const d6 = nonceStr[5] || '0';
+    return ['3','8'].includes(d6);
+}
+
+function applyOverrides(traits, { txCount, weight }) {
+    if (traits.rareClothing) {
+        traits.shirt = null;
+        traits.pants = null;
+    }
+    if (traits.backBling) traits.glow = null;
+}
+
+function displayTraits(traits) {
+    const container = document.getElementById('traits');
+    container.innerHTML = '';
+    
+    for (const [traitName, value] of Object.entries(traits)) {
+        const div = document.createElement('div');
+        div.className = 'trait';
+
+        if (typeof value === 'string' && value.startsWith('data:image')) {
+            div.style.backgroundImage = `url('${value}')`;
+        } else if (typeof value === 'string' && value.startsWith('iVBORw0KGgo')) {
+            div.style.backgroundImage = `url('data:image/png;base64,${value}')`;
+        } else {
+            div.innerHTML = `<strong>${traitName}:</strong><br>${value || 'None'}`;
+        }
+        
+        container.appendChild(div);
+    }
+}
+    </script>
+</body>
+</html>
